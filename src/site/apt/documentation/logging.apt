@@ -1,0 +1,45 @@
+Logging And Debugging
+
+
+* {Commons Logging}
+
+    JPam uses the Apache Commons Logging library for logging.
+
+    It acts as a thin bridge between
+    logging statements in the code and logging infrastructure detected in
+    the classpath. It will use in order of preference:
+
+     * {log4j}
+
+     * {JDK1.4 logging}
+
+     * and then its own <<<{SimpleLog}>>>
+
+     This enables JPam to use logging infrastructures.
+
+     It does create a dependency on Apache Commons
+    Logging, however many projects share the same dependency.
+
+    For normal production use, use the <<<WARN>>> level in log4J
+    and the <<<WARNING>>> level for JDK1.4 logging.
+
+* {libjpam.so Debugging}
+
+    If the DEBUG logging level is enabled, JPam will instruct libjpam.so to log messages to the console.
+    This is very useful for identifying errors.
+
+*   {syslogd logging}
+
+    It can be useful to turn on syslogd for PAM logging. Library problems with PAM modules will then be logged.
+
+    Add "auth.notice" to the /var/log/messages line in /etc/syslog.conf.
+
+    e.g.
+
+---
+   *.info;mail.none;authpriv.none;cron.none;auth.notice /var/log/messages
+---
+
+    Then simply tail /var/log/messages to see PAM logging.
+
+    

@@ -1,0 +1,127 @@
+<!DOCTYPE module PUBLIC
+    "-//Puppy Crawl//DTD Check Configuration 1.1//EN"
+    "file:./checkstyle_config.dtd" >
+<module name="checker">
+    <module name="PackageHtml"/>
+    <module name="TreeWalker">                                                                               
+        <property name="cacheFile" value="${checkstyle.cache}"/>
+
+        <!-- Javadoc checks -->
+        <module name="JavadocType">
+            <property name="scope" value="private"/>
+            <property name="authorFormat" value=".+"/>
+            <property name="versionFormat" value="\$Id.*\$"/>
+        </module>
+
+
+        <module name="JavadocMethod">
+            <property name="scope" value="package"/>
+            <property name="allowMissingParamTags" value="true"/>
+            <property name="allowMissingThrowsTags" value="true"/>
+            <property name="allowMissingReturnTag" value="true"/>
+        </module>
+
+        <module name="JavadocVariable">
+            <property name="scope" value="package"/>
+        </module>
+
+        <!-- Naming checks -->
+        <module name="ConstantName"/>
+        <module name="LocalFinalVariableName"/>
+        <module name="LocalVariableName"/>
+        <module name="MemberName"/>
+        <module name="MethodName"/>
+        <module name="PackageName">
+            <property name="format" value="^[a-z]+(\.[a-z][a-z0-9]*)*$"/>
+        </module>
+        <module name="ParameterName"/>
+        <module name="StaticVariableName"/>
+        <module name="TypeName"/>
+
+        <!-- Import checks -->
+        <module name="AvoidStarImport"/>
+        <module name="IllegalImport"/>
+        <module name="RedundantImport"/>
+        <module name="UnusedImports"/>
+
+        <!-- Length checks -->
+        <module name="FileLength">
+            <property name="max" value="1400"/>
+        </module>
+        <module name="LineLength">
+            <property name="max" value="130"/>
+            <property name="ignorePattern" value="^ *\* *"/>
+        </module>
+        <module name="MethodLength">
+            <property name="max" value="200"/>
+            <property name="tokens" value="METHOD_DEF"/>
+        </module>
+        <module name="MethodLength">
+            <property name="max" value="60"/>
+            <property name="tokens" value="CTOR_DEF"/>
+        </module>
+        <module name="ParameterNumber">
+            <property name="max" value="8"/>
+            <property name="tokens" value="METHOD_DEF"/>
+        </module>
+        <module name="ParameterNumber">
+            <property name="max" value="8"/>
+            <property name="tokens" value="CTOR_DEF"/>
+        </module>
+
+        <!-- Whitespace checks -->
+        <module name="NoWhitespaceAfter">
+            <property name="allowLineBreaks" value="false"/>
+        </module>
+        <module name="NoWhitespaceBefore">
+            <property name="allowLineBreaks" value="false"/>
+        </module>
+        <module name="OperatorWrap"/>
+        <module name="ParenPad"/>
+        <module name="TabCharacter"/>
+        <module name="WhitespaceAfter">
+            <property name="tokens" value="COMMA, SEMI"/>
+        </module>
+        <module name="WhitespaceAround"/>
+
+        <!-- Modifier checks -->
+        <module name="ModifierOrder"/>
+        <module name="RedundantModifier"/>
+
+        <!-- Block checks -->
+        <module name="EmptyBlock">
+            <property name="option" value="text"/>
+            <property name="tokens" value="LITERAL_CATCH"/>
+        </module>
+        <module name="EmptyBlock">
+            <property name="tokens" value="LITERAL_DO, LITERAL_ELSE, LITERAL_FINALLY, LITERAL_IF, LITERAL_FOR, LITERAL_TRY, LITERAL_WHILE, STATIC_INIT"/>
+        </module>
+        <module name="LeftCurly"/>
+        <module name="NeedBraces"/>
+        <module name="RightCurly"/>
+        <module name="AvoidNestedBlocks"/>
+
+        <!-- Misc checks -->
+        <module name="Header">
+            <property name="headerFile" value="${checkstyle.header}"/>
+        </module>
+        <module name="AvoidInlineConditionals"/>
+        <module name="DoubleCheckedLocking"/>
+        <module name="EmptyStatement"/>
+        <module name="EqualsHashCode"/>
+        <module name="InnerAssignment"/>
+        <!--<module name="MagicNumber"/>-->
+        <module name="MissingSwitchDefault"/>
+        <!--<module name="RedundantThrows"/>-->
+        <module name="SimplifyBooleanExpression"/>
+        <module name="SimplifyBooleanReturn"/>
+        <module name="UpperEll"/>
+        <module name="ArrayTypeStyle"/>
+        <module name="VisibilityModifier">
+            <property name="protectedAllowed" value="true"/>
+        </module>
+        <module name="InterfaceIsType"/>
+        <module name="HideUtilityClassConstructor"/>
+
+    </module>
+</module>

@@ -1,0 +1,99 @@
+        Building RPM packages as a non-root user.
+         by Mike A. Harris <mharris@redhat.com>
+
+This document will teach you how to build RPM packages without
+being logged in as the root user, which is unfortunately the
+default in any new system installation.
+
+Building packages logged in as "root" is a very very dangerous
+thing to do.  Many things can go wrong, and can actually destroy
+files located throughout your system.  Typos, and other errors
+in RPM spec files, makefiles, etc. often produce unexpected results,
+and that can lead to "very bad things(tm)" happening during
+development.
+
+Software development processes should never modify the build
+environment they are using, nor overwrite installed system software.
+As such, building RPM packages should never ever be done logged in
+as root, but instead should be done by being logged into a regular
+user account.
+
+To start off with, you will need 3 things.  The first is a custom
+RPM config file (.rpmrc) in your home directory, and the second is
+a custom RPM macrofile (.rpmmacros) also in your homedir.  These
+two files are included in this package.  The .rpmrc should be used
+as is, unless you really really really know what you are doing.  The
+.rpmmacros file can be tweaked to taste, but is useable by default.
+These two files are copies of the exact configuration I use when
+building packages for Red Hat Linux.  Different developers each
+have their own preferences however, so I urge everyone to play with
+the config to find something that suits their needs.
+
+These two files together tweak the locations of where RPM looks
+for files when it is building packages, and where it places files
+and scripts during building and packaging.
+
+The third thing you need, is to create the directory structure
+for building RPM packages.  These dirs are completely configureable
+via the .rpmmacros file, but RPM in general does not create them
+for you if they do not exist.  So if you change the dirs, make
+absolutely sure that the new directories exist before testing.
+
+My default supplied config uses a top level directory in your home
+account "~/rpmbuild".  All other directories are subdirectories
+of the ~/rpmbuild directory.
+
+SRPMS	- where src.rpms get placed
+RPMS	- where all binary and noarch rpm packages get placed
+BUILD	- where software gets decompressed, patched and built
+tmp	- where the buildroot is and %install dumps files
+
+The SOURCES and SPECS directories used by RPM in a default
+installation of Red Hat Linux, I personally find irritating, as
+I had to jump back and forth between two directories all the
+time, and I found it very innefficient to work with.  As such
+I have merged the two into a single directory.  This makes my
+life so much easier it isn't even funny.  ;o)
+
+The other thing that annoys me about the default systemwide
+RPM build environment is that if you have many many source
+RPM packages installed, the SOURCES and SPECS directories were
+huge steaming piles of random files that are impossible to
+know which file came from which src.rpm package.  Also, it is
+possible 2 src.rpms might have the exact same filename contained
+in them, but be different files.  Ouch.
+
+My solution was to have the sources for each package installed
+into its own private per package-version directory.  So when
+you install a package ie: pine-4.33-15.src.rpm, it will be
+placed into the directory:  ~/rpmbuild/pine-4.33
+
+This keeps each source package separate, and makes life a
+highway.
+
+I also hated RPM putting binary packages into RPMS/i386, RPMS/i686,
+RPMS/alpha, RPMS/noarch, etc.  GRRR!!  So..  Now, instead of that,
+ALL architectures are put into one single RPMS dir.  Keep It Simple
+Stupid!   ;o)
+
+I hope this RPM configuration is useful to other developers, and
+makes life easier for you all as well.  I am very much interested
+in any feedback anyone may have from using these files, suggestions
+for enhancement, etc.
+
+Feel free to email me your suggestions for improvements.  If you
+have any problems with the configurations, I regret that I may
+not be able to give individual assistance with configuring RPM or
+tweaking these configurations as I am a very busy person usually.
+
+Fortunately, Red Hat maintains a mailing list just for this
+purpose, where you can ask for professional level help on RPM.
+Please join the RPM mailing list if you have any questions about
+customizing RPM, etc.  To subscribe, send a message containing
+the word "subscribe" to:  rpm-list-request@redhat.com
+
+Happy hacking!
+TTYL
+
+
+

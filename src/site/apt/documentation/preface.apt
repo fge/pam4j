@@ -1,0 +1,46 @@
+     ------
+     JPam v1.0 User Guide
+     ------
+     Greg Luck
+     ------
+     31 December 2006
+     ------
+
+Preface
+
+* Audience
+
+    The intended audience for this book is developers who use JPam. It should be able to be used to start from scratch,
+     get up and running quickly, and also be useful for the more complex options.
+
+    JPam is a missing piece in the Java - Unix security puzzle. Another natural audience is therefore security specialists.
+
+    It is also intended for application and enterprise architects. JPam creates new possibilities. It is not necessary to
+    front Java Application servers with Apache in order to plug in native security. You are no longer limited by the availability
+    of Java implementations of security services.
+
+* Book Format
+
+    This content is suitable for use as an online PDF or printed. Blank pages have been deliberately left to give a good
+    flow.
+
+* Acknowledgements
+
+    JPam has had contributions in the form of forum discussions, feature requests, bug reports, patches and code commits.
+
+    Rather than try and list the many hundreds of people who have contributed to JPam in some way it is better to link
+    to the web site where contributions are acknowledged in the following ways:
+
+    * Bug reports and features requests appear in the changes report here: {{{http://jpam.sourceforge.net/changes-report.html}}}
+
+    * Patch contributors generally end up with an author tag in the source they contributed to
+
+    * Team members appear on the team list page here: {{{http://jpam.sourceforge.net/team-list.html}}}
+
+
+
+
+
+
+
+

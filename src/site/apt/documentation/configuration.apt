@@ -1,0 +1,118 @@
+{Configuration}
+
+    The distribution contains an example pam.d configuration file called {net-sf-jpam}.
+
+    To configure jpam, edit net-sf-jpam and copy it to /etc/pam.d.
+
+*   Format of pam.d files
+
+    PAM configuration files have four columns:
+
+    * facility
+
+      Possible values are:
+
+            *   account - account management
+
+            *   auth - authentication
+
+            *   management
+
+            *   password - password management
+
+            *   session - session session management.
+
+    * control flag
+
+      The control flag is how the result of the operation is to be interpreted. Possible values are:
+
+          * required - If the module succeeds, the rest of the chain is executed, and the request is granted unless some other module fails. If the module fails, the rest of the chain is also executed, but the request is ultimately denied.
+
+          * requisite - If the module succeeds, the rest of the chain is executed, and the request is granted unless some other module fails. If the module fails, the chain is immediately terminated and the request is denied.
+
+          * sufficient - If the module succeeds and no earlier module in the chain has failed, the chain is immediately terminated and the request is granted. If the module fails, the module is ignored and the rest of the chain is executed.
+
+    * module path
+
+      The path to the module
+
+    * module arguments
+
+      This column is optional. It is for any options to be passed to the module.
+
+
+*   Example 32 bit net-sf-jpam file
+
+    An example which uses the standard Unix password PAM module is shown below.
+
+---
+#######################################################################
+# Unix PAM Module
+# ===============
+#
+# If using pam_unix you may need to change /etc/shadow to be readable by
+# the user executing Jpam.
+#######################################################################
+auth required /lib/security/pam_unix_auth.so
+account required /lib/security/pam_unix_acct.so
+password required /lib/security/pam_unix_passwd.so
+session required /lib/security/pam_unix_session.so
+---
+
+*   Example 64 bit net-sf-jpam file
+
+    64 bit Linux distributions such as RedHat, Fedora, Suse and Novell Linux Desktop have adopted a convention of placing their 64 libraries
+    in /lib64. The net-sf-jpam configuration file for these would look like:
+
+---
+#######################################################################
+# Unix PAM Module
+# ===============
+#
+# If using pam_unix you may need to change /etc/shadow to be readable by
+# the user executing Jpam.
+#######################################################################
+auth required /lib64/security/pam_unix_auth.so
+account required /lib64/security/pam_unix_acct.so
+password required /lib64/security/pam_unix_passwd.so
+session required /lib64/security/pam_unix_session.so
+---
+
+* Configuring Popular Security Services
+
+    However, there are many more approaches than these two. There are hundreds of authentication systems accessible through PAM. See a list fo Linux here. Many of these are installed by default in the Linux distributions. For example Fedora Core 3 has 55 PAM modules in its /lib/security directory by default.
+
+    Some notable examples of PAM modules are:
+
+
+*---------+----------------+-----------------------------+
+|Name      |Module         |Use                         |
+*----------
+|SecurId   |pam_securid.so |Authenticates SecurId hardware tokens with the ACE Server. Available from RSA.|
+*----------
+|Unix      |pam_unix_+.so  |Authenticates using the configured auth Unix scheme. e.g. shadow passwords or NIS.|
+*----------
+|RADIUS    |pam_radius.so  |Authenticates using RADIUS servers. |
+*----------
+|CryptoCard|pam_smxs.so    |Authenticates using CryptoCard RB1 hardware tokens and similar. |
+*----------
+|Samba     |pam_winbind.so |Authenticates using Windows and Samba servers. |
+*----------
+|Kerberos  |pam_krb5.so    |Authenticates with Kerberos/Active Directory. |
+*----------
+|LDAP      |pam_ldap.so    |Authenticates with LDAP servers (from Java you could also use the JNDI API). |
+*----------
+|SafeWord  |pam_safeword.so|Authenticates SafeWord tokens. |
+*----------
+Popular Security Services
+
+    The path to the module shown above becomes the third column in the net-sf-jpam configuration line.
+
+*   Installing Additional PAM Modules
+
+    JPam will dynamically link to any Pam module which is installed on the operating system and specified in its configuration. No recompilation is required.
+
+*   More information
+
+    See http://www.kernel.org/pub/linux/libs/pam/Linux-PAM-html/pam.html for information on configuring PAM.
+

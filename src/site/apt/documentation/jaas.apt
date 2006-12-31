@@ -1,0 +1,125 @@
+JAAS API
+
+    Jpam comes with a JAAS implementation. See the JpamLoginModule.
+
+    JAAS stands for Java Authentication and Authorisation Service. Sun maintains the home page for JAAS: http://java.sun.com/products/jaas/
+
+
+*   JAAS Configuration
+
+    JAAS works with a configuration file. If the location of the configuration files is not set in the java.security properties file, and also is not specified dynamically from the command line (via the -Djava.security.auth.login.config option), JAAS attempts to load a default configuration from file:${user.home}/.java.login.config.  An example  is provided in the download.  It is reproduced below:
+
+---
+    net-sf-jpam {
+       net.sf.jpam.jaas.JpamLoginModule required serviceName="net-sf-jpam";
+     };
+---
+
+    The service name is the name of the PAM service, which must be in a file of the same name in /etc/pam.d. With the default JAAS configuration, Jpam will look for a service called net-sf-jpam. Change the service name to use another service. This is vital when you have multiple JPam installations on the same machine.
+
+
+*   Example
+
+    The test suite contains an example of how to use JAAS with JPAM. The essential parts are reproduced here.
+
+---
+    public class LoginContextTest extends TestCase {
+        /**
+         * user 1 name
+         */
+        protected String user1Name = "test";
+
+        /**
+         * user 1 credentials
+         */
+        protected String user1Credentials = "test01";
+
+        private String callbackCredentials;
+
+        /**
+         * Sets up the test
+         * @throws Exception
+         */
+        protected void setUp() throws Exception {
+            callbackCredentials = user1Credentials;
+        }
+
+        /**
+         * Checks that we can login.
+         * <p/>
+         * In this test, login is successful and commit is called.
+         * @throws LoginException
+         */
+        public void testLoginContext() throws LoginException {
+            LoginContext loginContext;
+            loginContext = new LoginContext("net-sf-jpam", new JpamCallbackHandler());
+            loginContext.login();
+        }
+
+        /**
+         * The application must implement the CallbackHandler.
+         * <p/>
+         * <p> This application is text-based.  Therefore it displays information
+         * to the user using the OutputStreams System.out and System.err,
+         * and gathers input from the user using the InputStream, System.in.
+         */
+        class JpamCallbackHandler implements CallbackHandler {
+
+            /**
+             * Invoke an array of Callbacks.
+             * <p/>
+             * <p/>
+             *
+             * @param callbacks an array of <code>Callback</code> objects which contain
+             *                  the information requested by an underlying security
+             *                  service to be retrieved or displayed.
+             * @throws java.io.IOException          if an input or output error occurs. <p>
+             * @throws UnsupportedCallbackException if the implementation of this
+             *                                      method does not support one or more of the Callbacks
+             *                                      specified in the <code>callbacks</code> parameter.
+             */
+            public void handle(Callback[] callbacks)
+                    throws IOException, UnsupportedCallbackException {
+
+                for (int i = 0; i < callbacks.length; i++) {
+                    if (callbacks[i] instanceof TextOutputCallback) {
+
+                        // display the message according to the specified type
+                        TextOutputCallback toc = (TextOutputCallback) callbacks[i];
+                        switch (toc.getMessageType()) {
+                            case TextOutputCallback.INFORMATION:
+                                System.out.println(toc.getMessage());
+                                break;
+                            case TextOutputCallback.ERROR:
+                                System.out.println("ERROR: " + toc.getMessage());
+                                break;
+                            case TextOutputCallback.WARNING:
+                                System.out.println("WARNING: " + toc.getMessage());
+                                break;
+                            default:
+                                throw new IOException("Unsupported message type: "
+                                        + toc.getMessageType());
+                        }
+
+                    } else if (callbacks[i] instanceof NameCallback) {
+
+                        // prompt the user for a username
+                        NameCallback nc = (NameCallback) callbacks[i];
+                        nc.setName(user1Name);
+
+                    } else if (callbacks[i] instanceof PasswordCallback) {
+
+                        // prompt the user for sensitive information
+                        PasswordCallback pc = (PasswordCallback) callbacks[i];
+                        pc.setPassword(callbackCredentials.toCharArray());
+
+                    } else {
+                        throw new UnsupportedCallbackException
+                                (callbacks[i], "Unrecognized Callback");
+                    }
+                }
+            }
+
+        }
+    }
+---

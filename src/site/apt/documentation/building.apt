@@ -1,0 +1,27 @@
+Building JPam from Source
+
+*   Building from source
+
+    To build JPam from source:
+
+    [[1]] Check the source out from the subversion repository.
+
+    [[1]] As root, install the pam-devel-0.77-66.2 package or similar is installed (Linux systems only)
+
+    [[1]] Create the following users on your machine:
+
+        * user test password test01
+
+        * user test2 password test02
+
+    [[1]] As root, copy src/config/<architecture>/net-sf-jpam* to /etc/pam.d
+
+    [[1]] Copy src/config/<architecture>/.java.login.config to your home directory
+
+    [[1]] Ensure you have a valid JAVA_HOME and ANT_HOME configured with binaries in your PATH
+
+    [[1]] From within the pam directory, type ant
+
+*   RPM packaging (Optional)
+
+    The source download and the CVS source contain a src/rpm directory containg an RPM spec file created in collaboration with developers at Red Hat. You can use this spec.file to build an rpm installable package for your architecture.

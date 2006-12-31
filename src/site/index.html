@@ -1,0 +1,196 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>jpam</title>
+  <link rel="STYLESHEET" type="text/css"
+ href="stylesheets/documentation.css">
+</head>
+<body>
+<div id="page-logo"> <img src="images/jpam_logo_trans_small.gif"
+ alt="jpam" align="left"> JPAM<br>
+</div>
+<div id="page-buttons">
+<div style="text-align: right;"><a
+ href="https://sourceforge.net/projects/jpam/">Summary</a>&nbsp;|&nbsp;
+<a href="https://sourceforge.net/project/admin/?group_id=116930">Admin</a>&nbsp;|&nbsp;
+Home Page&nbsp;|&nbsp;
+<a href="https://sourceforge.net/forum/?group_id=116930">Forums</a>&nbsp;|&nbsp;
+<a href="https://sourceforge.net/tracker/?group_id=116930">Tracker</a>&nbsp;|&nbsp;
+<a href="https://sourceforge.net/tracker/?group_id=116930&amp;atid=603559">Bugs</a>&nbsp;|&nbsp;
+<a href="https://sourceforge.net/tracker/?group_id=116930&amp;atid=603560">Support</a>&nbsp;|&nbsp;
+<a href="https://sourceforge.net/tracker/?group_id=116930&amp;atid=603561">Patches</a>&nbsp;|&nbsp;
+<a href="https://sourceforge.net/tracker/?group_id=116930&amp;atid=603562">RFE</a>&nbsp;|&nbsp;
+<a href="https://sourceforge.net/mail/?group_id=116930">Lists</a>&nbsp;|&nbsp;
+<a href="https://sourceforge.net/pm/?group_id=116930">Tasks</a>&nbsp;|&nbsp;
+<a href="/documentation/">Docs</a>&nbsp;|&nbsp;
+<a href="https://sourceforge.net/news/?group_id=116930">News</a>&nbsp;|&nbsp;
+<a href="https://sourceforge.net/cvs/?group_id=116930">CVS</a>&nbsp;|&nbsp;
+<a href="https://sourceforge.net/project/showfiles.php?group_id=116930">Files</a>&nbsp;|
+</div>
+<h2>Overview</h2>
+Jpam is a Java-PAM bridge.&nbsp; PAM, or Pluggable Authentication
+Modules, is a standard security architecture used on Unix, Linux and
+Mac OS X systems.<br>
+<br>
+JPAM permits the use of PAM authentication facilities by Java
+applications running on those platforms.<br>
+<br>
+These facilities include:<br>
+<ul>
+  <li>account</li>
+  <li>auth</li>
+  <li>password,</li>
+  <li>session</li>
+</ul>
+<span style="text-decoration: underline;"><br>
+</span>
+<h2>News Highlights</h2>
+<ul>
+  <li>23 April 2005. <a
+ href="http://sourceforge.net/project/shownotes.php?release_id=322761">jpam
+0.4 released</a>.&nbsp; Source and binaries for Linux x86, Linux x86_64
+and Mac OS X. This is a stable release. JPAM has been used in
+production for three motnhs and extensively tested. Several bugs fixed.
+    <br>
+  </li>
+  <li>17 November 2004.<a
+ href="http://sourceforge.net/project/shownotes.php?release_id=283334">
+jpam 0.3 released</a>. Source and binaries for Linux x86, Linux x86_64
+and Mac OS X. With this release JPAM is ready for developer use. &nbsp;
+  </li>
+</ul>
+<ul>
+  <li>&nbsp;
+17 August 2004 jpam project commenced. See cvs for a 0.1 alpha release
+which supports Linux</li>
+</ul>
+<br>
+<h2>Downloads</h2>
+Download <a
+ href="http://sourceforge.net/project/showfiles.php?group_id=116930">here.</a><br>
+<br>
+<h2>Documentation</h2>
+The following documentation is available:<br>
+<ul>
+  <li><a href="/documentation">Guide to jpam</a>.</li>
+  <li><a href="/documentation/javadoc">JavaDoc</a><br>
+  </li>
+</ul>
+<h2>Uses</h2>
+Jpam provides the integration with PAM.&nbsp; Any Java application that
+needs to do authentication can potentially use jpam. <br>
+<br>
+Commonly Java application authenticate using one of the following
+approaches and APIs:<br>
+<ul>
+  <li>Database username and password tables; JDBC<br>
+  </li>
+  <li>LDAP, such as Novell NDS, open LDAP or Active Directory; JNDI<br>
+  </li>
+</ul>
+However, there are many more approaches than these two. There are
+hundreds of authentication systems accessible through PAM. See a list
+fo Linux <a
+ href="http://www.kernel.org/pub/linux/libs/pam/modules.html">here</a>.
+Many of these are installed by default in the Linux distributions.
+Fedora Core 2 has 54 PAM modules in its /lib/security directory ready
+for use. Some notable examples of PAM modules are:<br>
+<br>
+<table style="text-align: left; width: 100%;" border="1" cellpadding="2"
+ cellspacing="2">
+  <tbody>
+    <tr>
+      <th style="vertical-align: top;">Name<br>
+      </th>
+      <th style="vertical-align: top;">Module<br>
+      </th>
+      <th style="vertical-align: top;">Use<br>
+      </th>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">SecurId<br>
+      </td>
+      <td style="vertical-align: top;">pam_securid.so<br>
+      </td>
+      <td style="vertical-align: top;">Authenticates SecurId hardware
+tokens with the RSAACE Server. Available from <a
+ href="http://www.rsasecurity.com/node.asp?id=1177">RSA</a> as a free
+download.<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">Unix<br>
+      </td>
+      <td style="vertical-align: top;"><i><em><tt>pam_unix_*.so</tt></em></i></td>
+      <td style="vertical-align: top;">Authenticates using configured
+Unix scheme. This can be shadow passwords or NIS, depending on how the
+machine was configured<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">RADIUS<br>
+      </td>
+      <td style="vertical-align: top;"><i><em><tt>pam_radius.so</tt></em></i></td>
+      <td style="vertical-align: top;">Authenticates using RADIUS
+servers<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">CryptoCard<br>
+      </td>
+      <td style="vertical-align: top;">
+      <pre>pam_smxs.so</pre>
+      </td>
+      <td style="vertical-align: top;">Authenticates using CryptoCard
+RB1 hardware tokens and similar<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">Samba<br>
+      </td>
+      <td style="vertical-align: top;"><i>pam_winbind.so<br>
+      </i></td>
+      <td style="vertical-align: top;">Authenticates using Windows and
+Samba servers.<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">Kerberos<br>
+      </td>
+      <td style="vertical-align: top;">pam_krb5.so<br>
+      </td>
+      <td style="vertical-align: top;">Authenticates with
+Kerberos/Active Directory<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">LDAP<br>
+      </td>
+      <td style="vertical-align: top;">pam_ldap.so<br>
+      </td>
+      <td style="vertical-align: top;">Authenticates with LDAP servers
+(from Java you could also use the JNDI API)<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">SafeWord<br>
+      </td>
+      <td style="vertical-align: top;">pam_safeword.so<br>
+      </td>
+      <td style="vertical-align: top;">Authenticates SafeWord tokens<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<font><br>
+</font>
+<hr><font>&nbsp;<a href="http://sourceforge.net"><img
+ src="images/sflogo.php.png" alt="SourceForge.net"
+ style="border: 0px solid ; width: 88px; height: 31px;"></a> <a
+ href="https://sourceforge.net/donate/index.php?group_id=116930"><img
+ style="border: 0px solid ; width: 88px; height: 32px;" alt=""
+ src="http://sourceforge.net/images/project-support.jpg"></a><br>
+</font></div>
+</body>
+</html>

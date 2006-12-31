@@ -1,0 +1,38 @@
+ ------
+ News
+ ------
+ ------
+ Date
+ ------
+
+* 31 December 2006: JPam 1.0 released.
+
+    Source and binaries for Linux x86, Linux x86_64, Mac OS X_ppc, Solaris_sparc and new in this release; HP-UX
+
+    On Linux, this release has been tested on Red Hat AS 3 and 4, Fedora Core 3 and 4, SuSe Linux 9 and Novell Linux Desktop. On Mac OS X it has been tested on Mac OS X 10.4.1 Tiger.
+
+    This is a stable release. It contains one bug fix.
+
+    JPam has been now been used in production in many sites around the world for over a year.
+
+    JPam has no open bugs or patches at the time of release.
+ 
+
+* 18 June 2005: JPam 0.5 released.
+
+    Source and binaries for Linux x86, Linux x86_64, Mac OS X and new in this release: Solaris.
+
+    On Linux, this release has been tested on Red Hat AS 3 and 4, Fedora Core 3 and 4, SuSe Linux 9 and Novell Linux Desktop. On Mac OS X it has been tested on Mac OS X 10.4.1 Tiger.
+
+    This is a stable release. JPAM has been now been used in production for five months and extensively tested. Several bugs fixed.
+
+
+*   23 April 2005: JPam 0.4 released.
+
+    Source and binaries for Linux x86, Linux x86_64 and Mac OS X. This is a stable release. JPAM has been used in production for three months and extensively tested. Several bugs fixed.
+
+*   17 November 2004: JPam 0.3 released.
+
+    Source and binaries for Linux x86, Linux x86_64 and Mac OS X. With this release JPAM is ready for developer use.
+
+*   17 August 2004: JPam project commenced.

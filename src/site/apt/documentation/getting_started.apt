@@ -1,0 +1,61 @@
+
+Getting Started
+
+*   Supported Operating Systems and Architectures
+
+    JPam will create builds for the following:
+
+    *   Linux x86
+
+    *   Linux x86_64, including AMD64
+
+    *   Mac OS X
+
+    *   Solaris sparc
+
+    *   HP-UX
+
+    PAM is used on Unix and Unix-like operating systems. JPam should be readily portable to other *nixes. 
+
+*   Step-by-step Installation Instructions
+
+    The steps are:
+    
+    [[1]] Place the jpam-X.X.jar into your classpath.
+
+    [[1]] Ensure that any libraries required to satisfy dependencies are also in the classpath.
+
+    [[1]] As an optional step, configure an appropriate logging level.
+
+    [[1]] Copy the native library to the Java Native Libary Path. See the table below.
+
+*---------------------*----------------------*-----------------------------*
+| OS and Architecture | Native Library File  | Java Native Library Path    |
+*----------
+| Linux AMD64 server  | libjpam.so           | $JAVA_HOME/lib/amd64/server |
+*----------
+| Linux i386 client   | libjpam.so           | $JAVA_HOME/lib/i386/client  |
+*----------
+| Linux i386 server   | libjpam.so           | $JAVA_HOME/lib/i386/server  |
+*----------
+| Linux x86  client   | libjpam.so           | $JAVA_HOME/lib/i386/client  |
+*----------
+| Linux x86  server   | libjpam.so           | $JAVA_HOME/lib/i386/server  |
+*----------
+| Mac OS X PPC        | libjpam.jnilib       | ~/Library/Java/Extensions   |
+*----------
+| Solaris sparc       | libjpam.so           | $JAVA_HOME/lib/sparc/client |
+*----------
+| Solaris sparc       | libjpam.so           | $JAVA_HOME/lib/sparc/server |
+*----------
+Native Library Installation Location
+
+           Alternately, JPam will search for the native library in the same directory as the JPam jar is located.
+
+    [[1]] If using the JAAS API, copy .java.login.config to your home directory.
+    
+    [[1]] {{{documentation/configuration.html}Configure}} a PAM module for use by JPam.
+
+
+
+   

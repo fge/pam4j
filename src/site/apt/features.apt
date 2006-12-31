@@ -1,0 +1,111 @@
+{Features}
+
+~~ Table of Contents
+
+ * High Quality
+
+  * {{{#High Test Coverage}High Test Coverage}}
+
+  * {{{#Automated Load, Limit and Performance System Tests}Automated Load, Limit and Performance System Tests}}
+
+  * {{{#Production tested}Production tested}}
+
+  * {{{#Fully documented}Fully documented}}
+
+  * {{{#Conservative Commit policy}Conservative Commit policy}}
+
+  * {{{#Full public information on the history of every bug}Full public information on the history of every bug}}
+
+  * {{{#Responsiveness to serious bugs}Responsiveness to serious bugs}}
+
+ * Open Source Licensing
+
+  * {{{#Apache 2.0 license}Apache 2.0 license}}
+
+
+~~ Contents
+
+* {High Quality}
+
+** {High Test Coverage}
+
+ The JPam team believe that the first and most important quality measure is a well designed and comprehensive test suite.
+
+ JPam has a relatively high test coverage of source code. This has edged higher over time.
+
+** {Automated Load, Limit and Performance System Tests}
+
+  The JPam JUnit test suite contains some long-running system tests which place high load on different JPam subsystems
+    to the point of failure and then are back off to just below that point. The same is done with limits such as the amount
+      of Elements that can fit in a given heap size. The same is also done with performance testing of each subsystem and
+      the whole together. The same is also done with network tests for cache replication.
+
+  The tests serve a number of purposes:
+
+  * establishing well understood metrics and limits
+
+  * preventing regressions
+
+  * reproducing any reported issues in production
+
+  * Allowing the design principle of graceful degradation to be achieved. For example, the asynchronous cache replicator
+    uses SoftReferences for queued messages, so that the messages will be reclaimed before before an OutOfMemoryError occurs,
+    thus favouring stability over replication. 
+
+** {Specific Concurrency Testing}
+
+  JPam also has concurrency testing, which typically uses 50 concurrent threads hammering a piece of code. The test
+  suites are also run on multi-core or multi-cpu machines so that concurrency is real rather than simulated.
+  Additionally, every concurrency related issue that has ever been anticipated or resulted in a bug report has a unit
+  test which prevents the condition from recurring. There are no reported issues that have not been reproduced in a unit
+  test.
+
+  Concurrency unit tests are somewhat difficult to write, and are often overlooked. The team considers these tests a
+  major factor in JPam's quality.
+
+
+** {Production tested}
+
+ JPam has been in production for 18 months.
+
+** {Fully documented}
+
+ A core belief held by the project team is that a project needs good documentation to be useful.
+
+ In JPam, this is manifested by:
+
+     * comprehensive written {{{documentation/index.html}documentation}}
+
+     * Complete, meaningful JavaDoc for every package, class and public and protected method. Checkstyle rules enforce this level of documentation.
+
+     * an up-to-date {{{documentation/faq.html}FAQ}}
+
+** {Conservative Commit policy}
+
+ Projects like Linux maintain their quality through a restricted change process, whereby changes are submitted as patches,
+ then reviewed by the maintainer and included, or modified. JPam follows the same process.
+
+** {Full public information on the history of every bug}
+
+ Through the {{{http://sourceforge.net/tracker/?group_id=116930&atid=676444}SourceForge project bug tracker}}, the full
+ history of all bugs are shown, including current status. We take this for granted in an open source project, as this
+ is typically a feature that all open source projects have, but this transparency makes it possible to gauge the
+ quality and riskiness of a library, something not usually possible in commercial products.
+
+** {Responsiveness to serious bugs}
+
+ The JPam team is serious about quality. If one user is having a problem, it probably means others are too, or will
+ have. The JPam team use JPam themselves in production. Every effort will be made to provide fixes for serious
+ production problems as soon as possible. These will be committed to trunk. From there an affected user can apply
+ the fix to their own branch.
+
+* {Open Source Licensing}
+
+** {Apache 2.0 license}
+
+ JPam's original Apache1.1 copyright and licensing was reviewed and approved by the Apache Software Foundation,
+ making JPam suitable for use in Apache projects. JPam 1.0 is released under the updated Apache 2.0 license.
+
+ The Apache license is also friendly one, making it safe and easy to include JPam in other open source projects or commercial products.
+
+

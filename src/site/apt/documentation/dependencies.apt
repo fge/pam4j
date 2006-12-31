@@ -1,0 +1,44 @@
+
+Java Requirements, Dependencies and Maven POM snippet
+
+* {Java Requirements}
+
+    JPam supports 1.4, 1.5 and 1.6 at runtime. JPam final releases are compiled with -target 1.4.
+    This produces Java class data, version 48.0.
+
+    JPam does not work with JDK1.2 or JDK1.1. JAAS is not available for these JDKs.
+    Moreover, JNI used a different interface prior to JDK1.2.
+
+    IBM 1.4.2.0 JVM is known to work although it places its native libraries in a different place.
+    Add <<<-Dnative.java.library.path=/usr/lib/jvm/java-ibm/jre/bin>>> (or wherever the IBM JVM is installed ) to your Java command line.
+
+
+* Mandatory Java Dependencies
+
+    JPam requires {{{http://jakarta.apache.org/commons/logging.html}commons-logging}} commons-logging is a very common dependency, and is therefore not included in the distribution.
+
+    Jpam also requires JAAS.  Originally introduced as an optional package (JAAS 1.0) to version 1.3 of the Java 2 SDK, JAAS has now been integrated into the Java 2 SDK, version 1.4.
+
+
+* Operating System Dependencies
+
+    It has been reported that JPam relies on the presence of pam-devel-0.77-66.2 or similar RPMs.
+
+
+* Maven pom.xml snippet
+
+     JPam releases are placed in the central Maven repository.
+
+     The Maven snippet for JPam 1.0 is:
+
+--------
+     <dependency>
+        <groupId>net.sf.jpam</groupId>
+        <artifactId>jpam</artifactId>
+        <version>1.0</version>
+     </dependency>
+--------
+
+
+
+    

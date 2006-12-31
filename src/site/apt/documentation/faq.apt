@@ -1,0 +1,11 @@
+Frequently Asked Questions
+
+* Does JPam run on {JDK1.2}?
+
+ No, it is not supported.
+
+* JPam does not have a configuration for my OS/architecture. What can I do?
+
+ It is easy to make the changes to the build.xml and makefile to support other
+ architectures. Do it and submit a patch! Both Solaris and HP-UX support come from patches.
+

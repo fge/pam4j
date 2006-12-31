@@ -1,0 +1,10 @@
+Limitations
+
+
+    Jpam presently does not support advanced PAM conversations such as:
+
+    * change password on first login
+
+    * change password as expired
+    
+    These may be added into a future version.
