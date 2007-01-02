@@ -30,20 +30,20 @@
   <component name="ChangeListManager">
     <list default="true" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/site/apt/features.apt" afterPath="$PROJECT_DIR$/src/site/apt/features.apt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/site/apt/nameandlogo.apt" afterPath="$PROJECT_DIR$/src/site/apt/nameandlogo.apt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jpam.iml" afterPath="$PROJECT_DIR$/jpam.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/site/apt/nameandlogo.apt" afterPath="$PROJECT_DIR$/src/site/apt/nameandlogo.apt" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/build" afterPath="" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/changes/changes.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.xml" afterPath="$PROJECT_DIR$/build.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/site/upload.sh" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/net/sf/jpam/PamTest.java" afterPath="$PROJECT_DIR$/src/test/java/net/sf/jpam/PamTest.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/site/upload.sh" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/dist/LICENSE.txt" afterPath="" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Mac OS X_i386.properties" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/changes" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/build/classes" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jpam.iws" afterPath="$PROJECT_DIR$/jpam.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/net/sf/jpam/AbstractPamTest.java" afterPath="$PROJECT_DIR$/src/test/java/net/sf/jpam/AbstractPamTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jpam.ipr" afterPath="$PROJECT_DIR$/jpam.ipr" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/net/sf/jpam/AbstractPamTest.java" afterPath="$PROJECT_DIR$/src/test/java/net/sf/jpam/AbstractPamTest.java" />
     </list>
   </component>
   <component name="ChangeListSynchronizer" />
