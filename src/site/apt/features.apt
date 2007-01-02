@@ -54,7 +54,7 @@
 
 ** {Specific Concurrency Testing}
 
-  JPam also has concurrency testing, which typically uses 50 concurrent threads hammering a piece of code. The test
+  JPam also has concurrency testing, which uses 15 concurrent threads hammering a piece of code. The test
   suites are also run on multi-core or multi-cpu machines so that concurrency is real rather than simulated.
   Additionally, every concurrency related issue that has ever been anticipated or resulted in a bug report has a unit
   test which prevents the condition from recurring. There are no reported issues that have not been reproduced in a unit

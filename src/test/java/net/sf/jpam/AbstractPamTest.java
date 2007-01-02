@@ -130,8 +130,15 @@ public class AbstractPamTest extends TestCase {
                 match = true;
             }
         }
+        StringBuffer expected = new StringBuffer();
+        for (int i = 0; i < expectedReturnValues.length; i++) {
+            PamReturnValue expectedReturnValue = expectedReturnValues[i];
+            expected.append("\"").append(expectedReturnValue).append("\"").append(' ');
+        }
+
         if (!match) {
-            throw new PamException("Test failure. Return expectedReturnValues was: " + pamReturnValue);
+            throw new PamException("Test failure. Return expected one of " + expected
+                    + " Actual return value was: " + pamReturnValue);
         }
     }
 

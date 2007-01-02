@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<document>
+    <body>
+
+        <release version="1.0" date="2007-01-31" desc="1.0 release">
+            <!-- Feature Changes  -->
+            <action dev="Greg Luck" type="add">
+                Added support for HP-UX.
+            </action>
+            <action dev="Greg Luck" type="add">
+                Added support for Mac OS X_i386 (32 bit Intel Macs)
+            </action>
+            <action dev="Greg Luck" type="update">
+                Changed Sourceforge status to mature
+            </action>
+            <action dev="Greg Luck" type="update">
+                New documentation and website
+            </action>
+        </release>
+
+        <release version="0.5" date="2004-12-31" desc="release">
+            <!-- Feature Changes  -->
+            <action dev="Greg Luck" type="add">
+                Tests now pass on Novell Linux Desktop 9. Change the passwd line in /etc/nsswitch.conf to "passwd: files
+                compat"
+                from "passwd: compat"
+            </action>
+            <action dev="Ken Huffman" type="add">
+                Applied a patch from Ken Huffman. JPam service names are now configurable in the JAAS configuration
+                files, if you
+                using JAAS. If using the Pam class directly, you as always add the serviceName as an argument.
+            </action>
+            <action dev="Ken Huffman" type="add">
+                Added support for Solaris Sparc thanks to Seth Theriault.
+            </action>
+
+        </release>
+
+        <release version="0.4" date="2004-12-31" desc="release">
+            <!-- Feature Changes  -->
+            <action dev="Greg Luck" type="update">
+                Removed dependency on selinux on Linux systems.
+            </action>
+            <action dev="Greg Luck" type="add">
+                Added SecurId support.
+            </action>
+            <action dev="Greg Luck" type="add">
+                Added support for dynamic linking to shared libraries. The makefile is now very simple. Additional PAM
+                modules
+                can be used at runtime simply by changing config files. No need to link them in.
+
+            </action>
+            <action dev="Greg Luck" type="add">
+                Concurrency test now passes with 0 errors. JPam's authenticate method is now threadsafe even though PAM
+                is not.
+
+            </action>
+            <action dev="Greg Luck" type="add">
+                Changed SourceForge status to beta.
+            </action>
+
+
+            <action dev="Greg Luck" type="add">
+                Testing and improvements by David Lutterkort of RedHat.
+            </action>
+
+        </release>
+
+
+        <release version="0.3" date="2004-12-31" desc="Initial public release">
+            <!-- Feature Changes  -->
+            <action dev="Greg Luck" type="add">
+                Added support for Mac OS X_ppc
+            </action>
+            <action dev="Greg Luck" type="add">
+                Added PAM Radius support using the Free Radius PAM module.
+            </action>
+        </release>
+
+        <release version="0.2" date="2004-12-31" desc="release">
+            <!-- Feature Changes  -->
+            <action dev="Greg Luck" type="add">
+                Added support for Linux x86_64.
+            </action>
+            <action dev="Greg Luck" type="add">
+                Added SecurId support.
+            </action>
+        </release>
+
+        <release version="0.1" date="2004-12-31" desc="Initial release">
+            <!-- Feature Changes  -->
+            <action dev="Greg Luck" type="add">
+                Initial version for Linux x86.
+            </action>
+
+        </release>
+
+
+    </body>
+</document>

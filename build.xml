@@ -206,12 +206,8 @@
         <zip destfile="${build.dir}/${name}-${version}-src.zip">
             <zipfileset dir="${basedir}" prefix="${name}-${version}">
                 <exclude name="build/**"/>
-                <exclude name="jpam.i*"/>
-                <exclude name="logging.properties"/>
-                <exclude name="site/**"/>
-            </zipfileset>
-            <zipfileset dir="site" prefix="${name}-${version}/doc">
-                <exclude name="upload.sh"/>
+                <exclude name="jpam.iws"/>
+                <exclude name="src/site/**"/>
             </zipfileset>
         </zip>
     </target>

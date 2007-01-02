@@ -24,10 +24,11 @@ import java.io.File;
 /**
  * Performs tests on the Pam class.
  * <p/>
- * Before running this test please:
+ * Before running this test:
  * <p/>
  * 1. Add the net-sf-jpam config file to /etc/pam.d
- * 2. Create a user called test with password test01 in the PAM module configured
+ * 2. Create a user called test with password test01
+ * 3. Create a user called test2 with password test02
  *
  * @author <a href="mailto:gluck@thoughtworks.com">Greg Luck</a>
  * @version $Id$
