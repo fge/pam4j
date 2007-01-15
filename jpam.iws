@@ -29,17 +29,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jpam.iml" afterPath="$PROJECT_DIR$/jpam.iml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/config/HP-UX_itanium/.java.login.config" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/config/HP-UX_itanium/net-sf-jpam-securid" afterPath="" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HP-UX_ia64.properties" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/config/HP-UX_itanium" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/site/site.xml" afterPath="$PROJECT_DIR$/src/site/site.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/site/apt/nameandlogo.apt" afterPath="$PROJECT_DIR$/src/site/apt/nameandlogo.apt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/site/apt/news.apt" afterPath="$PROJECT_DIR$/src/site/apt/news.apt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/site/apt/documentation/index.apt" afterPath="$PROJECT_DIR$/src/site/apt/documentation/index.apt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/site/apt/documentation/building.apt" afterPath="$PROJECT_DIR$/src/site/apt/documentation/building.apt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/site/maven-site.vm" afterPath="$PROJECT_DIR$/src/site/maven-site.vm" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jpam.iws" afterPath="$PROJECT_DIR$/jpam.iws" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/HP-UX_itanium.properties" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/net/sf/jpam/PamTest.java" afterPath="$PROJECT_DIR$/src/test/java/net/sf/jpam/PamTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jpam.ipr" afterPath="$PROJECT_DIR$/jpam.ipr" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/config/HP-UX_ia64" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/config/HP-UX_itanium/net-sf-jpam" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/site/apt/documentation/limitations.apt" afterPath="$PROJECT_DIR$/src/site/apt/documentation/limitations.apt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/site/resources/images/jpam_logo_trans.gif" afterPath="$PROJECT_DIR$/src/site/resources/images/jpam_logo_trans.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/sf/jpam/Pam.java" afterPath="$PROJECT_DIR$/src/main/java/net/sf/jpam/Pam.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/site/apt/who_is_using.apt" afterPath="$PROJECT_DIR$/src/site/apt/who_is_using.apt" />
     </list>
   </component>
   <component name="ChangeListSynchronizer" />
@@ -164,28 +165,91 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="changes.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/changes/changes.xml">
+      <file leaf-file-name="limitations.apt" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/site/apt/documentation/limitations.apt">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="59" column="89" selection-start="2612" selection-end="2612" vertical-scroll-proportion="0.56935817">
+            <state line="11" column="85" selection-start="214" selection-end="214" vertical-scroll-proportion="0.24175824">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="makefile" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/c/makefile">
+      <file leaf-file-name="jaas.apt" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/site/apt/documentation/jaas.apt">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="47" column="91" selection-start="1876" selection-end="1876" vertical-scroll-proportion="1.0165632">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-1.3879473">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PamTest.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/test/java/net/sf/jpam/PamTest.java">
+      <file leaf-file-name="features.apt" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/site/apt/features.apt">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="73" column="0" selection-start="2564" selection-end="2564" vertical-scroll-proportion="0.2836439">
+            <state line="57" column="42" selection-start="2070" selection-end="2070" vertical-scroll-proportion="0.23809524">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="building.apt" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/site/apt/documentation/building.apt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="17" column="147" selection-start="461" selection-end="461" vertical-scroll-proportion="0.38418078">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.apt" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/site/apt/documentation/index.apt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="21" column="0" selection-start="411" selection-end="411" vertical-scroll-proportion="0.46153846">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="site.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/site/site.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="34" column="99" selection-start="1598" selection-end="1598" vertical-scroll-proportion="0.74725276">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="who_is_using.apt" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/site/apt/who_is_using.apt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="23" column="0" selection-start="286" selection-end="286" vertical-scroll-proportion="0.50549453">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Pam.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/net/sf/jpam/Pam.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="37" column="14" selection-start="1406" selection-end="1406" vertical-scroll-proportion="0.48351648">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pom.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="315" column="65" selection-start="12341" selection-end="12341" vertical-scroll-proportion="1.6629002">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="maven-site.vm" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/site/maven-site.vm">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="180" column="66" selection-start="5505" selection-end="5505" vertical-scroll-proportion="1.2561206">
               <folding />
             </state>
           </provider>
@@ -400,6 +464,62 @@
         </PATH_ELEMENT>
         <PATH_ELEMENT>
           <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/site/resources/images" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="jpam.ipr" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="jpam" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/site" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/site/apt" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="jpam.ipr" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="jpam" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/site" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/site/apt" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/site/apt/documentation" />
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
         </PATH_ELEMENT>
       </PATH>
@@ -860,11 +980,11 @@
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="8" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" order="1" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="8" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33" order="8" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.48222223" order="2" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" order="2" />
       <window_info id="File View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.4" order="4" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" order="4" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" order="0" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="8" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="8" />
@@ -953,105 +1073,105 @@
     <option name="myLastEditedConfigurable" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/test/java/net/sf/jpam/AbstractPamTest.java">
+    <entry file="file://$PROJECT_DIR$/src/site/apt/news.apt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="140" column="20" selection-start="4789" selection-end="4789" vertical-scroll-proportion="0.019607844">
+        <state line="9" column="5" selection-start="56" selection-end="56" vertical-scroll-proportion="0.23076923">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/net/sf/jpam/DigiPassTest.java">
+    <entry file="file://$PROJECT_DIR$/src/site/apt/roadmap.apt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="79" column="16" selection-start="2995" selection-end="2995" vertical-scroll-proportion="0.83094096">
+        <state line="0" column="0" selection-start="0" selection-end="58" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/sf/jpam/jaas/JpamLoginModule.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="167" column="0" selection-start="7042" selection-end="7042" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/net/sf/jpam/jaas/LoginContextTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="104" column="26" selection-start="3205" selection-end="3205" vertical-scroll-proportion="0.019138755">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///System/Library/Frameworks/JavaVM.framework/Versions/1.5.0/Classes/classes.jar!/javax/security/auth/login/LoginContext.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="19" selection-start="1868" selection-end="1868" vertical-scroll-proportion="0.15686275">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/HP-UX_ia64.properties">
+    <entry file="file://$PROJECT_DIR$/src/site/apt/documentation/configuration.apt">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/config/HP-UX_ia64/.java.login.config">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+    <entry file="file://$PROJECT_DIR$/src/site/resources/images/jpam_logo_trans_small.gif">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/config/HP-UX_ia64/net-sf-jpam">
+    <entry file="file://$PROJECT_DIR$/src/site/apt/nameandlogo.apt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="7" column="0" selection-start="248" selection-end="248" vertical-scroll-proportion="0.15819208">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/config/HP-UX_ia64/net-sf-jpam-securid">
+    <entry file="file://$PROJECT_DIR$/src/site/apt/documentation/jaas.apt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-1.3879473">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/site/apt/documentation/limitations.apt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="85" selection-start="214" selection-end="214" vertical-scroll-proportion="0.24175824">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/site/apt/features.apt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="42" selection-start="2070" selection-end="2070" vertical-scroll-proportion="0.019607844">
+        <state line="57" column="42" selection-start="2070" selection-end="2070" vertical-scroll-proportion="0.23809524">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/build.xml">
+    <entry file="file://$PROJECT_DIR$/src/site/apt/documentation/building.apt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="343" column="37" selection-start="13261" selection-end="13261" vertical-scroll-proportion="0.0">
+        <state line="17" column="147" selection-start="461" selection-end="461" vertical-scroll-proportion="0.38418078">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/c/Pam.c">
+    <entry file="file://$PROJECT_DIR$/src/site/maven-site.vm">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="197" column="6" selection-start="6723" selection-end="6723" vertical-scroll-proportion="0.9617225">
+        <state line="180" column="66" selection-start="5505" selection-end="5505" vertical-scroll-proportion="1.2561206">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/changes/changes.xml">
+    <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="59" column="89" selection-start="2612" selection-end="2612" vertical-scroll-proportion="0.56935817">
+        <state line="315" column="65" selection-start="12341" selection-end="12341" vertical-scroll-proportion="1.6629002">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/c/makefile">
+    <entry file="file://$PROJECT_DIR$/src/site/apt/documentation/index.apt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="91" selection-start="1876" selection-end="1876" vertical-scroll-proportion="1.0165632">
+        <state line="21" column="0" selection-start="411" selection-end="411" vertical-scroll-proportion="0.46153846">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/net/sf/jpam/PamTest.java">
+    <entry file="file://$PROJECT_DIR$/src/site/site.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="73" column="0" selection-start="2564" selection-end="2564" vertical-scroll-proportion="0.2836439">
+        <state line="34" column="99" selection-start="1598" selection-end="1598" vertical-scroll-proportion="0.74725276">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/site/apt/who_is_using.apt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="0" selection-start="286" selection-end="286" vertical-scroll-proportion="0.50549453">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/sf/jpam/Pam.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="14" selection-start="1406" selection-end="1406" vertical-scroll-proportion="0.48351648">
           <folding />
         </state>
       </provider>

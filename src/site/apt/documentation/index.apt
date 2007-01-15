@@ -13,8 +13,6 @@ JPam 1.0 User Guide
 
     * {{{./logging.html}Logging & Debugging}}
 
-    * {{{./configuration.html}Configuration}}
-
     * {{{./limitations.html}Limitations}}
 
     * {{{./building.html}Building from Source}}

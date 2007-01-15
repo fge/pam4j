@@ -313,7 +313,7 @@
                 <artifactId>changes-maven-plugin</artifactId>
                 <configuration>
                     <link_template>
-                        %URL%/index.php?func=detail&amp;group_id=93232&amp;atid=603559&amp;aid=%ISSUE%
+                        %URL%/index.php?func=detail&amp;group_id=116930&amp;atid=603559&amp;aid=%ISSUE%
                     </link_template>
                 </configuration>
                 <reportSets>
