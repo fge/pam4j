@@ -36,6 +36,7 @@ import org.apache.commons.logging.LogFactory;
  * todo javadoc
  * todo ant and maven: book, singlepageguide, javadoc
  * todo close bugs and issue
+ * todo code samples
  */
 public class Pam {
     private static final Log LOG = LogFactory.getLog(Pam.class.getName());

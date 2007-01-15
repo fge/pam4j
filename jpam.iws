@@ -29,18 +29,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/site/site.xml" afterPath="$PROJECT_DIR$/src/site/site.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/site/apt/nameandlogo.apt" afterPath="$PROJECT_DIR$/src/site/apt/nameandlogo.apt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/site/apt/news.apt" afterPath="$PROJECT_DIR$/src/site/apt/news.apt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/site/apt/documentation/index.apt" afterPath="$PROJECT_DIR$/src/site/apt/documentation/index.apt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/site/apt/documentation/building.apt" afterPath="$PROJECT_DIR$/src/site/apt/documentation/building.apt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/site/maven-site.vm" afterPath="$PROJECT_DIR$/src/site/maven-site.vm" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jpam.iws" afterPath="$PROJECT_DIR$/jpam.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/site/apt/documentation/limitations.apt" afterPath="$PROJECT_DIR$/src/site/apt/documentation/limitations.apt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/site/resources/images/jpam_logo_trans.gif" afterPath="$PROJECT_DIR$/src/site/resources/images/jpam_logo_trans.gif" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/sf/jpam/Pam.java" afterPath="$PROJECT_DIR$/src/main/java/net/sf/jpam/Pam.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/site/apt/who_is_using.apt" afterPath="$PROJECT_DIR$/src/site/apt/who_is_using.apt" />
     </list>
   </component>
   <component name="ChangeListSynchronizer" />
@@ -231,7 +221,7 @@
       <file leaf-file-name="Pam.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/net/sf/jpam/Pam.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="37" column="14" selection-start="1406" selection-end="1406" vertical-scroll-proportion="0.48351648">
+            <state line="38" column="20" selection-start="1442" selection-end="1442" vertical-scroll-proportion="0.50549453">
               <folding />
             </state>
           </provider>
@@ -1171,7 +1161,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/sf/jpam/Pam.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="14" selection-start="1406" selection-end="1406" vertical-scroll-proportion="0.48351648">
+        <state line="38" column="20" selection-start="1442" selection-end="1442" vertical-scroll-proportion="0.50549453">
           <folding />
         </state>
       </provider>
