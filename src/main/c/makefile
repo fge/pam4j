@@ -66,3 +66,8 @@ libjpam.mac_os_x: Pam.c
 libjpam.solaris: Pam.c
 	gcc -DSOLARIS -fPIC -Wall -g -c -I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/solaris Pam.c
 	gcc -DSOLARIS -g --export-dynamic -shared -Wl -o libjpam.so Pam.o -lpam  -ldl
+
+# HP-UX
+libjpam.hp-ux: Pam.c
+	gcc -DHPUX -fPIC -Wall -g -c -I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/hp-ux Pam.c
+	gcc -DHPUX -g --export-dynamic -shared -Wl -o libjpam.so Pam.o -lpam

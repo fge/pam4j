@@ -93,6 +93,23 @@ public class LoginContextTest extends TestCase {
         loginContext.login();
     }
 
+
+    /**
+     * Checks that specifying a service name:
+     * 1) works
+     * 2) causes an error when the config is missing
+     * <p/>
+     * In this test, login is successful and commit is called.
+     * @throws LoginException
+     */
+    public void testLoginContextBadServiceName() {
+        try {
+            new LoginContext("bad-service", new JpamCallbackHandler());
+        } catch (LoginException e) {
+            //expected
+        }
+    }
+
     /**
      * Checks what happens if a bad password is given
      * <p/>

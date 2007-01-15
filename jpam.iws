@@ -29,21 +29,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/site/apt/features.apt" afterPath="$PROJECT_DIR$/src/site/apt/features.apt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jpam.iml" afterPath="$PROJECT_DIR$/jpam.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/site/apt/nameandlogo.apt" afterPath="$PROJECT_DIR$/src/site/apt/nameandlogo.apt" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build" afterPath="" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/changes/changes.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/config/HP-UX_itanium" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/config/HP-UX_itanium/net-sf-jpam" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.xml" afterPath="$PROJECT_DIR$/build.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/net/sf/jpam/PamTest.java" afterPath="$PROJECT_DIR$/src/test/java/net/sf/jpam/PamTest.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/site/upload.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/dist/LICENSE.txt" afterPath="" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Mac OS X_i386.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/changes" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/classes" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/config/HP-UX_itanium/net-sf-jpam-securid" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/c/makefile" afterPath="$PROJECT_DIR$/src/main/c/makefile" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/changes/changes.xml" afterPath="$PROJECT_DIR$/src/changes/changes.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/config/HP-UX_itanium/.java.login.config" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/sf/jpam/jaas/JpamLoginModule.java" afterPath="$PROJECT_DIR$/src/main/java/net/sf/jpam/jaas/JpamLoginModule.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/net/sf/jpam/jaas/LoginContextTest.java" afterPath="$PROJECT_DIR$/src/test/java/net/sf/jpam/jaas/LoginContextTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jpam.iws" afterPath="$PROJECT_DIR$/jpam.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jpam.ipr" afterPath="$PROJECT_DIR$/jpam.ipr" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/net/sf/jpam/AbstractPamTest.java" afterPath="$PROJECT_DIR$/src/test/java/net/sf/jpam/AbstractPamTest.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HP-UX_itanium.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/c/Pam.c" afterPath="$PROJECT_DIR$/src/main/c/Pam.c" />
     </list>
   </component>
   <component name="ChangeListSynchronizer" />
@@ -168,26 +165,62 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="build.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/build.xml">
+      <file leaf-file-name="changes.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/changes/changes.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="289" column="46" selection-start="11039" selection-end="11039" vertical-scroll-proportion="0.4019608">
+            <state line="19" column="111" selection-start="843" selection-end="843" vertical-scroll-proportion="0.019607844">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="nameandlogo.apt" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/site/apt/nameandlogo.apt">
+      <file leaf-file-name="Pam.c.orig" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/c/Pam.c.orig">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="34" selection-start="250" selection-end="250" vertical-scroll-proportion="0.09803922">
+            <state line="21" column="29" selection-start="1331" selection-end="1331" vertical-scroll-proportion="0.40191388">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CommonErrors.txt" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/dist/CommonErrors.txt">
+      <file leaf-file-name="Pam.c" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/c/Pam.c">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="197" column="6" selection-start="6723" selection-end="6723" vertical-scroll-proportion="0.9617225">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LoginContextTest.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/net/sf/jpam/jaas/LoginContextTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="104" column="26" selection-start="3205" selection-end="3205" vertical-scroll-proportion="0.019138755">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LoginContext.class" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar:///System/Library/Frameworks/JavaVM.framework/Versions/1.5.0/Classes/classes.jar!/javax/security/auth/login/LoginContext.class">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="35" column="19" selection-start="1868" selection-end="1868" vertical-scroll-proportion="0.15686275">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HP-UX_itanium.properties" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/HP-UX_itanium.properties">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".java.login.config" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/config/HP-UX_itanium/.java.login.config">
           <provider selected="true" editor-type-id="text-editor">
             <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
@@ -196,16 +229,7 @@
         </entry>
       </file>
       <file leaf-file-name="net-sf-jpam" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/config/Mac OS X_i386/net-sf-jpam">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="35" selection-start="398" selection-end="398" vertical-scroll-proportion="0.13725491">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="net-sf-jpam" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/config/Linux_x86_64/net-sf-jpam">
+        <entry file="file://$PROJECT_DIR$/src/main/config/HP-UX_itanium/net-sf-jpam">
           <provider selected="true" editor-type-id="text-editor">
             <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
@@ -213,28 +237,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PamTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/net/sf/jpam/PamTest.java">
+      <file leaf-file-name="net-sf-jpam-securid" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/config/HP-UX_itanium/net-sf-jpam-securid">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="30" column="6" selection-start="936" selection-end="936" vertical-scroll-proportion="0.24880382">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AbstractPamTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/net/sf/jpam/AbstractPamTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="140" column="20" selection-start="4789" selection-end="4789" vertical-scroll-proportion="0.3529412">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DigiPassTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/net/sf/jpam/DigiPassTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="79" column="16" selection-start="2995" selection-end="2995" vertical-scroll-proportion="0.7894737">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -243,7 +249,7 @@
       <file leaf-file-name="features.apt" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/site/apt/features.apt">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="57" column="42" selection-start="2070" selection-end="2070" vertical-scroll-proportion="0.16993465">
+            <state line="57" column="42" selection-start="2070" selection-end="2070" vertical-scroll-proportion="0.019607844">
               <folding />
             </state>
           </provider>
@@ -467,14 +473,14 @@
     <option name="STATE" value="0" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="0.11111111" version="1" splitterProportion="0.5">
+    <navigator currentView="Scope" currentSubView="Project" proportions="0.11111111" version="1" splitterProportion="0.5">
       <flattenPackages />
       <showMembers />
       <showModules />
       <showLibraryContents />
       <hideEmptyPackages />
       <abbreviatePackageNames />
-      <showStructure ProjectPane="false" PackagesPane="false" Favorites="false" />
+      <showStructure PackagesPane="false" ProjectPane="false" Scope="false" Favorites="false" />
       <autoscrollToSource />
       <autoscrollFromSource />
       <sortByType />
@@ -487,6 +493,7 @@
     <property name="MemberChooser.showClasses" value="true" />
     <property name="MemberChooser.sorted" value="false" />
     <property name="GoToFile.includeJavaFiles" value="false" />
+    <property name="last_opened_file_path" value="/Users/gluck/work/jpam" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
   </component>
   <component name="ReadonlyStatusHandler">
@@ -494,15 +501,15 @@
   </component>
   <component name="RecentsManager" />
   <component name="RestoreUpdateTree" />
-  <component name="RunManager" selected="JUnit.PamTest.testJPamConcurrent">
-    <tempConfiguration default="false" name="PamTest.testJPamConcurrent" type="JUnit" factoryName="JUnit" enabled="false" merge="false">
-      <pattern value="net.sf.jpam.*" />
+  <component name="RunManager" selected="JUnit.LoginContextTest.testLoginContextBadServiceName">
+    <tempConfiguration default="false" name="LoginContextTest.testLoginContextBadServiceName" type="JUnit" factoryName="JUnit" enabled="false" merge="false">
+      <pattern value="net.sf.jpam.jaas.*" />
       <module name="jpam" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="net.sf.jpam" />
-      <option name="MAIN_CLASS_NAME" value="net.sf.jpam.PamTest" />
-      <option name="METHOD_NAME" value="testJPamConcurrent" />
+      <option name="PACKAGE_NAME" value="net.sf.jpam.jaas" />
+      <option name="MAIN_CLASS_NAME" value="net.sf.jpam.jaas.LoginContextTest" />
+      <option name="METHOD_NAME" value="testLoginContextBadServiceName" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" />
       <option name="PARAMETERS" />
@@ -517,24 +524,15 @@
         <option name="Make" value="true" />
       </method>
     </tempConfiguration>
-    <configuration default="true" type="JUnit" factoryName="JUnit" enabled="false" merge="false">
-      <module name="" />
+    <configuration default="true" type="Application" factoryName="Application" enabled="false" merge="false">
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ADDITIONAL_CLASS_PATH" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="wholeProject" />
-      </option>
-      <method>
-        <option name="Make" value="true" />
-      </method>
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <module name="" />
     </configuration>
     <configuration default="true" type="Applet" factoryName="Applet">
       <module name="" />
@@ -555,18 +553,184 @@
       <option name="HOST" value="localhost" />
       <option name="PORT" value="5005" />
     </configuration>
-    <configuration default="true" type="Application" factoryName="Application" enabled="false" merge="false">
-      <option name="MAIN_CLASS_NAME" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+    <configuration default="true" type="JUnit" factoryName="JUnit" enabled="false" merge="false">
+      <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <module name="" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ADDITIONAL_CLASS_PATH" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="wholeProject" />
+      </option>
+      <method>
+        <option name="Make" value="true" />
+      </method>
     </configuration>
   </component>
-  <component name="ScopeViewComponent" />
+  <component name="ScopeViewComponent">
+    <subPane subId="Project">
+      <PATH>
+        <PATH_ELEMENT USER_OBJECT="Root">
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT USER_OBJECT="jpam">
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT USER_OBJECT="$PROJECT_DIR$">
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT USER_OBJECT="Root">
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT USER_OBJECT="jpam">
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT USER_OBJECT="$PROJECT_DIR$">
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT USER_OBJECT="src">
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT USER_OBJECT="test/java/net/sf/jpam">
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT USER_OBJECT="Root">
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT USER_OBJECT="jpam">
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT USER_OBJECT="$PROJECT_DIR$">
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT USER_OBJECT="src">
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT USER_OBJECT="test/java/net/sf/jpam">
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT USER_OBJECT="jaas">
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT USER_OBJECT="Root">
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT USER_OBJECT="jpam">
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT USER_OBJECT="$PROJECT_DIR$">
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT USER_OBJECT="src">
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT USER_OBJECT="Root">
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT USER_OBJECT="jpam">
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT USER_OBJECT="$PROJECT_DIR$">
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT USER_OBJECT="src">
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT USER_OBJECT="main">
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT USER_OBJECT="Root">
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT USER_OBJECT="jpam">
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT USER_OBJECT="$PROJECT_DIR$">
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT USER_OBJECT="src">
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT USER_OBJECT="main">
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT USER_OBJECT="config">
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT USER_OBJECT="Root">
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT USER_OBJECT="jpam">
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT USER_OBJECT="$PROJECT_DIR$">
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT USER_OBJECT="src">
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT USER_OBJECT="main">
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT USER_OBJECT="c">
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="" />
+        </PATH_ELEMENT>
+      </PATH>
+    </subPane>
+  </component>
   <component name="SelectInManager" />
   <component name="StarteamConfiguration">
     <option name="SERVER" value="" />
@@ -642,7 +806,7 @@
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="7" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24939074" order="0" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="1" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293944" order="1" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" order="1" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293944" order="8" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" order="6" />
@@ -744,49 +908,70 @@
     <option name="myLastEditedConfigurable" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Mac OS X_i386.properties">
+    <entry file="file://$PROJECT_DIR$/src/test/java/net/sf/jpam/PamTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="0" selection-start="35" selection-end="35" vertical-scroll-proportion="0.040955633">
+        <state line="30" column="6" selection-start="936" selection-end="936" vertical-scroll-proportion="0.019138755">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/site/apt/documentation/logging.apt">
+    <entry file="file://$PROJECT_DIR$/src/test/java/net/sf/jpam/AbstractPamTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="22" selection-start="381" selection-end="381" vertical-scroll-proportion="0.69624573">
+        <state line="140" column="20" selection-start="4789" selection-end="4789" vertical-scroll-proportion="0.019607844">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/dist/CHANGELOG.txt">
+    <entry file="file://$PROJECT_DIR$/src/test/java/net/sf/jpam/DigiPassTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="1" selection-start="60" selection-end="1227" vertical-scroll-proportion="0.019138755">
+        <state line="79" column="16" selection-start="2995" selection-end="2995" vertical-scroll-proportion="0.83094096">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/changes/changes.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/sf/jpam/jaas/JpamLoginModule.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="45" selection-start="645" selection-end="645" vertical-scroll-proportion="0.3137255">
+        <state line="167" column="0" selection-start="7042" selection-end="7042" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/config/Mac OS X_i386/.java.login.config">
+    <entry file="file://$PROJECT_DIR$/src/test/java/net/sf/jpam/jaas/LoginContextTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="104" column="26" selection-start="3205" selection-end="3205" vertical-scroll-proportion="0.019138755">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///System/Library/Frameworks/JavaVM.framework/Versions/1.5.0/Classes/classes.jar!/javax/security/auth/login/LoginContext.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="19" selection-start="1868" selection-end="1868" vertical-scroll-proportion="0.15686275">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HP-UX_itanium.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/config/Mac OS X_i386/net-sf-jpam">
+    <entry file="file://$PROJECT_DIR$/src/main/config/HP-UX_itanium/.java.login.config">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="35" selection-start="398" selection-end="398" vertical-scroll-proportion="0.13725491">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/config/Linux_x86_64/net-sf-jpam">
+    <entry file="file://$PROJECT_DIR$/src/main/config/HP-UX_itanium/net-sf-jpam">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/config/HP-UX_itanium/net-sf-jpam-securid">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
@@ -795,49 +980,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/site/apt/features.apt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="42" selection-start="2070" selection-end="2070" vertical-scroll-proportion="0.16993465">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/net/sf/jpam/DigiPassTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="79" column="16" selection-start="2995" selection-end="2995" vertical-scroll-proportion="0.7894737">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/net/sf/jpam/PamTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="6" selection-start="936" selection-end="936" vertical-scroll-proportion="0.24880382">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/net/sf/jpam/AbstractPamTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="140" column="20" selection-start="4789" selection-end="4789" vertical-scroll-proportion="0.3529412">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/dist/CommonErrors.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="57" column="42" selection-start="2070" selection-end="2070" vertical-scroll-proportion="0.019607844">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/build.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="289" column="46" selection-start="11039" selection-end="11039" vertical-scroll-proportion="0.4019608">
+        <state line="343" column="37" selection-start="13261" selection-end="13261" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/site/apt/nameandlogo.apt">
+    <entry file="file://$PROJECT_DIR$/src/changes/changes.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="34" selection-start="250" selection-end="250" vertical-scroll-proportion="0.09803922">
+        <state line="19" column="111" selection-start="843" selection-end="843" vertical-scroll-proportion="0.019607844">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/c/Pam.c.orig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="29" selection-start="1331" selection-end="1331" vertical-scroll-proportion="0.40191388">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/c/Pam.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="197" column="6" selection-start="6723" selection-end="6723" vertical-scroll-proportion="0.9617225">
           <folding />
         </state>
       </provider>

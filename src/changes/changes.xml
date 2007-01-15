@@ -16,6 +16,9 @@
             <action dev="Greg Luck" type="update">
                 New documentation and website
             </action>
+            <action dev="Greg Luck" issue="1440799" type="fix">
+                The jaas implementation always uses the default service name. It should use the specified name.
+            </action>
         </release>
 
         <release version="0.5" date="2004-12-31" desc="release">

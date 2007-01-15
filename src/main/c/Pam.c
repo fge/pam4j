@@ -126,7 +126,7 @@ static int PAM_conv (int num_msg, const struct pam_message **msg,
    int replies = 0;
    struct pam_response *reply = NULL;
 
-   reply = malloc(sizeof(struct pam_response) * num_msg);
+   reply = (struct pam_response *) malloc(sizeof(struct pam_response) * num_msg);
    if (!reply) return PAM_CONV_ERR;
 
    for (replies = 0; replies < num_msg; replies++) {
@@ -134,25 +134,39 @@ static int PAM_conv (int num_msg, const struct pam_message **msg,
           printf("***Message from PAM is: |%s|\n", msg[replies]->msg);
           printf("***Msg_style to PAM is: |%d|\n", msg[replies]->msg_style);
       }
+
       //SecurId requires this syntax.
       if (! strcmp(msg[replies]->msg,"Enter PASSCODE: ")) {
         if (debug)
             printf("***Sending password\n");
          reply[replies].resp = COPY_STRING(password);
       }
+
       if (! strcmp(msg[replies]->msg,"Password: ")) {
         if (debug)
             printf("***Sending password\n");
          reply[replies].resp = COPY_STRING(password);
       }
+
       //Mac OS X
       if (! strcmp(msg[replies]->msg,"Password:")) {
         if (debug)
             printf("***Sending password\n");
          reply[replies].resp = COPY_STRING(password);
       }
-      if (debug)
+
+      // HP-UX
+      if (! strcmp(msg[replies]->msg,"System Password:")) {
+        if (debug)
+            printf("***Sending password\n");
+         reply[replies].resp = COPY_STRING(password);
+      }
+
+      // If none of the above matches, make sure the printf() does not
+      // crash because reply[replies].resp is NULL
+      if (debug && (reply[replies].resp != NULL)) {
         printf("***Response to PAM is: |%s|\n", reply[replies].resp);
+      }
    }
    *resp = reply;
    return PAM_SUCCESS;

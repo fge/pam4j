@@ -1,0 +1,49 @@
+#####################################################################
+# Pam Service Name For SecurId
+# Author: Greg Luck
+# Version: $Id: net-sf-jpam-securid,v 1.1 2004/11/18 02:20:20 gregluck Exp $
+#
+# Requirements
+# ============
+# This configuration file is specific to Linux, although it should work on most Unixes.
+#
+# Instructions
+# ============
+# 1. Place this file in /etc/pam.d
+# 2. Uncomment one of the Module configurations below
+#
+# Format of pam.d files
+# =====================
+#
+# The first column is the facility. Possible values are:
+# account - account management
+# auth - authentication management
+# password - password  management
+# session - session session management.
+#
+# The second column is the control flag,  which is how the result of the operation is to
+# be interpreted. Possible values are:
+#
+# required - If the module succeeds, the rest of the chain is executed, and the request is granted unless some other module fails. If the module fails, the rest of the chain is also executed, but the request is ultimately denied.
+# requisite - If the module succeeds, the rest of the chain is executed, and the request is granted unless some other module fails. If the module fails, the chain is immediately terminated and the request is denied.
+# sufficient - If the module succeeds and no earlier module in the chain has failed, the chain is immediately terminated and the request is granted. If the module fails, the module is ignored and the rest of the chain is executed.
+#
+# The third column is the path to the module to be used for the chain.
+#
+# The fourth column is optional. It is for any options to be passed to the module.
+#
+######################################################################
+
+# SecurId PAM Module
+# ==================
+#
+# Requirements:
+# 1. Requires installation and configuration of RSA PAM Module.
+# Available as a free download from http://rsasecurity.com/download/pamagent/pam.html
+# 2. pam_securid.so path to be /opt/pam/lib/pam_securid.so
+# 3. VAR_ACE environment variable set to PAM Agent installation path
+# 4. A working acestatus and acetest
+#
+auth 		required  /opt/pam/lib/pam_securid.so
+account 	required  /opt/pam/lib/pam_securid.so
+password 	required  /opt/pam/lib/pam_securid.so
