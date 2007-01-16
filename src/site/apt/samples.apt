@@ -1,15 +1,101 @@
 {Code Samples}
 
- * {{{#Using the JPAM API}#Using the JPAM API}}}
+ * {{{#Using the JPAM API}#Using the JPAM API}}
 
 
- * {{{#Using the JAAS API}#Using the JAAS API}}}
+ * {{{#Using the JAAS API}#Using the JAAS API}}
 
 * {Using the JPAM API}
+
+    Attempt to authenticate a username and password
+
+---
+    String user1Name = "test";
+    String user1Credentials = "testPassword";
+    Pam pam = new Pam();
+    boolean authenticated = pam.authenticateSuccessful(user1Name, user1Credentials));
+
+---
+
 
 * {Using the JAAS API}
 
 
+    Shows how to use the JAAS API together with a CallbackHandler
+
+---
+
+    LoginContext loginContext = new LoginContext("net-sf-jpam", new JpamCallbackHandler());
+    loginContext.login();
+
+
+    /**
+     * The application must implement the CallbackHandler.
+     * <p/>
+     * <p> This application is text-based.  Therefore it displays information
+     * to the user using the OutputStreams System.out and System.err,
+     * and gathers input from the user using the InputStream, System.in.
+     */
+    class JpamCallbackHandler implements CallbackHandler {
+
+        /**
+         * Invoke an array of Callbacks.
+         * <p/>
+         * <p/>
+         *
+         * @param callbacks an array of <code>Callback</code> objects which contain
+         *                  the information requested by an underlying security
+         *                  service to be retrieved or displayed.
+         * @throws java.io.IOException          if an input or output error occurs. <p>
+         * @throws UnsupportedCallbackException if the implementation of this
+         *                                      method does not support one or more of the Callbacks
+         *                                      specified in the <code>callbacks</code> parameter.
+         */
+        public void handle(Callback[] callbacks)
+                throws IOException, UnsupportedCallbackException {
+
+            for (int i = 0; i < callbacks.length; i++) {
+                if (callbacks[i] instanceof TextOutputCallback) {
+
+                    // display the message according to the specified type
+                    TextOutputCallback toc = (TextOutputCallback) callbacks[i];
+                    switch (toc.getMessageType()) {
+                        case TextOutputCallback.INFORMATION:
+                            System.out.println(toc.getMessage());
+                            break;
+                        case TextOutputCallback.ERROR:
+                            System.out.println("ERROR: " + toc.getMessage());
+                            break;
+                        case TextOutputCallback.WARNING:
+                            System.out.println("WARNING: " + toc.getMessage());
+                            break;
+                        default:
+                            throw new IOException("Unsupported message type: "
+                                    + toc.getMessageType());
+                    }
+
+                } else if (callbacks[i] instanceof NameCallback) {
+
+                    // prompt the user for a username
+                    NameCallback nc = (NameCallback) callbacks[i];
+                    nc.setName(user1Name);
+
+                } else if (callbacks[i] instanceof PasswordCallback) {
+
+                    // prompt the user for sensitive information
+                    PasswordCallback pc = (PasswordCallback) callbacks[i];
+                    pc.setPassword(callbackCredentials.toCharArray());
+
+                } else {
+                    throw new UnsupportedCallbackException
+                            (callbacks[i], "Unrecognized Callback");
+                }
+            }
+        }
+
+    }
+
+---
 
 
 

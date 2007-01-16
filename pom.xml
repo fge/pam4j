@@ -140,22 +140,10 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-antrun-plugin</artifactId>
                 <executions>
-                    <execution>
-                        <id>dist</id>
-                        <phase>package</phase>
-                        <configuration>
-                            <tasks>
-                                <antcall target="dist-tgz"/>
-                            </tasks>
-                        </configuration>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                    </execution>
 
                     <execution>
                         <id>book</id>
-                        <phase>generate-resources</phase>
+                        <phase>validate</phase>
                         <configuration>
                             <tasks>
                                 <ant antfile="${basedir}/build.xml" inheritRefs="true">
@@ -172,7 +160,7 @@
                     </execution>
                     <execution>
                         <id>singlepageguide</id>
-                        <phase>generate-resources</phase>
+                        <phase>validate</phase>
                         <configuration>
                             <tasks>
                                 <ant antfile="${basedir}/build.xml" inheritRefs="true">

@@ -34,7 +34,7 @@
             <item name="PDF User Guide" href="JPamUserGuide.pdf" />
             <item name="Single Page User Guide" href="JPamUserGuide.html" />
             <item name="Multi Page User Guide" href="documentation/index.html"/>
-            <item name="JavaDoc" href="apidocs/index.html"/>
+            <item name="JavaDoc" href="javadoc"/>
             <item name="FAQ" href="/documentation/faq.html"/>
         </menu>
 
