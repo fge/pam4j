@@ -15,7 +15,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MAVEN_REPOSITORY_PATH$/junit/junit/4.1/junit-4.1.jar!/" />
+          <root url="jar://$MAVEN_LOCAL_REPOSITORY_PATH$/junit/junit/4.1/junit-4.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -24,7 +24,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MAVEN_REPOSITORY_PATH$/checkstyle/checkstyle-optional/4.1/checkstyle-optional-4.1.jar!/" />
+          <root url="jar://$MAVEN_LOCAL_REPOSITORY_PATH$/checkstyle/checkstyle-optional/4.1/checkstyle-optional-4.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -33,7 +33,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MAVEN_REPOSITORY_PATH$/commons-logging/commons-logging/1.0.4/commons-logging-1.0.4.jar!/" />
+          <root url="jar://$MAVEN_LOCAL_REPOSITORY_PATH$/commons-logging/commons-logging/1.0.4/commons-logging-1.0.4.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -42,7 +42,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MAVEN_REPOSITORY_PATH$/commons-collections/commons-collections/2.1/commons-collections-2.1.jar!/" />
+          <root url="jar://$MAVEN_LOCAL_REPOSITORY_PATH$/commons-collections/commons-collections/2.1/commons-collections-2.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -51,7 +51,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MAVEN_REPOSITORY_PATH$/commons-beanutils/commons-beanutils-core/1.7.0/commons-beanutils-core-1.7.0.jar!/" />
+          <root url="jar://$MAVEN_LOCAL_REPOSITORY_PATH$/commons-beanutils/commons-beanutils-core/1.7.0/commons-beanutils-core-1.7.0.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -60,7 +60,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MAVEN_REPOSITORY_PATH$/checkstyle/checkstyle/4.1/checkstyle-4.1.jar!/" />
+          <root url="jar://$MAVEN_LOCAL_REPOSITORY_PATH$/checkstyle/checkstyle/4.1/checkstyle-4.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -69,7 +69,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MAVEN_REPOSITORY_PATH$/antlr/antlr/2.7.2/antlr-2.7.2.jar!/" />
+          <root url="jar://$MAVEN_LOCAL_REPOSITORY_PATH$/antlr/antlr/2.7.2/antlr-2.7.2.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

@@ -29,17 +29,13 @@ Welcome to JPam
 
 * Latest News
 
-** 31 December 2006: JPam 1.0 released.
+** 15 February 2007: Website upgraded and 1.0 coming
 
-    Source and binaries for Linux x86, Linux x86_64, Mac OS X_ppc, Solaris_sparc and new in this release; HP-UX
+    The JPam website has been upgraded to make it more useable. It is build using Maven, although the core build is still Ant based.
+    Also a new mailing list jpam-list@lists.sourceforge.net has been added.
+    This is the preferred support mechanism. In addition the documentation is now available as a PDF which may be printed.
 
-    On Linux, this release has been tested on Red Hat AS 3 and 4, Fedora Core 3 and 4, SuSe Linux 9 and Novell Linux Desktop. On Mac OS X it has been tested on Mac OS X 10.4.1 Tiger.
-
-    This is a stable release. It contains one bug fix.
-
-    JPam has been now been used in production in many sites around the world for over a year.
-
-    JPam has no open bugs or patches at the time of release.
+    JPam has been used in production systems for several years now. Expect a 1.0 release, with a few minor tweaks over 0.5 in the next month or so.
 
  More {{{news.html}news}}...
 
