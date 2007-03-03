@@ -9,7 +9,7 @@ News
 
 * 15 February 2007: Website upgraded and 1.0 coming
 
-    The JPam website has been upgraded to make it more useable. It is build using Maven, although the core build is still Ant based.
+    The JPam website has been upgraded to make it more useable. It is built using Maven, although the core build is still Ant based.
     Also a new mailing list jpam-list@lists.sourceforge.net has been added.
     This is the preferred support mechanism. In addition the documentation is now available as a PDF which may be printed.
 

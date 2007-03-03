@@ -54,7 +54,7 @@ Native Library Installation Location
 
     [[1]] If using the JAAS API, copy .java.login.config to your home directory.
     
-    [[1]] {{{documentation/configuration.html}Configure}} a PAM module for use by JPam.
+    [[1]] {{{/documentation/configuration.html}Configure}} a PAM module for use by JPam.
 
 
 
