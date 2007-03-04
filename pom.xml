@@ -174,6 +174,9 @@
                         <configuration>
                             <tasks>
                                 <ant antfile="${basedir}/build.xml" inheritRefs="true">
+                                    <target name="generate-checkstyle-config"/>
+                                </ant>
+                                <ant antfile="${basedir}/build.xml" inheritRefs="true">
                                     <target name="singlepageguide"/>
                                 </ant>
                             </tasks>

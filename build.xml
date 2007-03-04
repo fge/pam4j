@@ -350,7 +350,7 @@
         </sequential>
     </macrodef>
 
-    <target name="prepare-book-resources" depends="checkstyle-check" unless="checkstyle.up-to-date">
+    <target name="prepare-book-resources" depends="checkstyle-check">
         <antcall target="compile"/>
         <antcall target="ydoc"/>
     </target>
