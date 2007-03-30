@@ -27,6 +27,7 @@
 
     LoginContext loginContext = new LoginContext("net-sf-jpam", new JpamCallbackHandler());
     loginContext.login();
+    loginContext.login();
 
 
     /**

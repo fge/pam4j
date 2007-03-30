@@ -52,6 +52,7 @@ public class JpamLoginModule implements LoginModule {
     private CallbackHandler callbackHandler;
     private Map sharedState;
     private Map options;
+    private Pam pam;
 
     /**
      * Method to abort the authentication process (phase 2).
@@ -122,7 +123,7 @@ public class JpamLoginModule implements LoginModule {
      *          if the authentication fails
      */
     public boolean login() throws LoginException {
-        Pam pam = createPam();
+        pam = createPam();
 
         Callback[] callbacks = new Callback[2];
         String username = null;
@@ -216,5 +217,13 @@ public class JpamLoginModule implements LoginModule {
         this.callbackHandler = callbackHandler;
         this.sharedState = sharedState;
         this.options = options;
+    }
+
+
+    /**
+     * Get the underlying PAM object
+     */
+    public Pam getPam() {
+        return pam;
     }
 }

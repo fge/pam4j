@@ -103,8 +103,9 @@ public class LoginContextTest extends TestCase {
      * @throws LoginException
      */
     public void testLoginContextBadServiceName() {
+        LoginContext loginContext;
         try {
-            new LoginContext("bad-service", new JpamCallbackHandler());
+            loginContext = new LoginContext("bad-service", new JpamCallbackHandler());
         } catch (LoginException e) {
             //expected
         }
