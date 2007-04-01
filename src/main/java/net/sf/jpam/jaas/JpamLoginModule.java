@@ -167,7 +167,6 @@ public class JpamLoginModule implements LoginModule {
         } else {
             LOG.debug("Using service name of "
             + serviceName + " from JAAS configuration file");
-            serviceName = Pam.DEFAULT_SERVICE_NAME;
         }
         Pam pam = new Pam(serviceName);
         return pam;
