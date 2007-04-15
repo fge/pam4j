@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project version="4" relativePaths="false">
+<project relativePaths="false" version="4">
   <component name="AntConfiguration">
     <defaultAnt bundledAnt="true" />
   </component>
   <component name="BuildJarProjectSettings">
     <option name="BUILD_JARS_ON_MAKE" value="false" />
   </component>
+  <component name="ClearCase" />
   <component name="CodeStyleProjectProfileManger">
     <option name="PROJECT_PROFILE" />
     <option name="USE_PROJECT_LEVEL_SETTINGS" value="false" />
@@ -25,6 +26,7 @@
       <entry name="!?*.java" />
     </wildcardResourcePatterns>
   </component>
+  <component name="CppTools.Loader" warnedAboutFileOutOfSourceRoot="true" />
   <component name="DataSourceManagerImpl" />
   <component name="DependenciesAnalyzeManager">
     <option name="myForwardDirection" value="false" />
@@ -45,7 +47,7 @@
     <option name="MAXIMUM_HEAP_SIZE" value="128" />
   </component>
   <component name="EntryPointsManager">
-    <entry_points />
+    <entry_points version="2.0" />
   </component>
   <component name="ExportToHTMLSettings">
     <option name="PRINT_LINE_NUMBERS" value="false" />
@@ -105,7 +107,9 @@
         <inspection_tool class="ThrowablePrintStackTrace" level="WARNING" enabled="true" />
         <inspection_tool class="ThreadDumpStack" level="WARNING" enabled="true" />
         <inspection_tool class="SuppressionAnnotation" level="WARNING" enabled="true" />
-        <inspection_tool class="ObsoleteCollection" level="WARNING" enabled="true" />
+        <inspection_tool class="ObsoleteCollection" level="WARNING" enabled="true">
+          <option name="ignoreLibraryArguments" value="false" />
+        </inspection_tool>
         <inspection_tool class="SystemOutErr" level="WARNING" enabled="true" />
         <inspection_tool class="InstanceofCatchParameter" level="WARNING" enabled="true" />
       </profile>
@@ -152,10 +156,10 @@
   <component name="Maven Reloaded">
     <option name="config">
       <value>
-        <option name="pluginEnabled" value="false" />
+        <option name="pluginEnabled" value="true" />
         <option name="updateClasspathsEnabled" value="true" />
-        <option name="sortDependenciesEnabled" value="false" />
-        <option name="removeDuplicateDependenciesEnabled" value="false" />
+        <option name="sortDependenciesEnabled" value="true" />
+        <option name="removeDuplicateDependenciesEnabled" value="true" />
         <option name="respondToPomChangesEnabled" value="true" />
         <option name="manageSourceRootsEnabled" value="true" />
         <option name="manageModuleInterdependenciesEnabled" value="true" />
@@ -180,7 +184,7 @@
   </component>
   <component name="MavenBuildProjectComponent">
     <option name="mavenExecutable" value="" />
-    <option name="Settings File" value="$MAVEN_LOCAL_CONFIG_PATH$/settings.xml" />
+    <option name="Settings File" value="/Users/gluck$MAVEN_LOCAL_CONFIG_PATH$/settings.xml" />
     <option name="mavenCommandLineParams" value="" />
     <option name="vmOptions" value="" />
     <option name="useMavenEmbedder" value="false" />
@@ -344,6 +348,13 @@
     <RUBY_DOC NAME="DEFAULTS" VALUE="TRUE" />
     <RUBY_DOC NAME="NUMBER" VALUE="0" />
   </component>
+  <component name="ResourceManagerContainer">
+    <option name="myResourceBundles">
+      <value>
+        <list size="0" />
+      </value>
+    </option>
+  </component>
   <component name="RmicSettings">
     <option name="IS_EANABLED" value="false" />
     <option name="DEBUGGING_INFO" value="true" />
@@ -352,6 +363,10 @@
     <option name="ADDITIONAL_OPTIONS_STRING" value="" />
   </component>
   <component name="StarteamVcsAdapter" />
+  <component name="SvnBranchConfigurationManager" />
+  <component name="VcsDirectoryMappings">
+    <mapping directory="" vcs="svn" />
+  </component>
   <component name="VssVcs" />
   <component name="com.intellij.jsf.UserDefinedFacesConfigs">
     <option name="USER_DEFINED_CONFIGS">
@@ -359,6 +374,11 @@
         <list size="0" />
       </value>
     </option>
+  </component>
+  <component name="copyright">
+    <Base>
+      <setting name="state" value="2" />
+    </Base>
   </component>
   <component name="libraryTable" />
   <component name="uidesigner-configuration">

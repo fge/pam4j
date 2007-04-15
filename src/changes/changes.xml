@@ -19,6 +19,19 @@
             <action dev="Greg Luck" issue="1440799" type="fix">
                 The jaas implementation always uses the default service name. It should use the specified name.
             </action>
+            <action dev="Greg Luck" issue="1381572" type="fix">
+                JVM crash when the user account is expired.
+                This issue was produced by the fact that the conversational function
+                "pam_conv" from Pam.c was not aware of message style. In fact, if
+                PAM_ERROR_MSG or other was sent, a free() on an invalid pointer would be
+                produced, leading to Java threads going nuts and therefore the Java
+                program hanging or 'segfaulting'.
+                See also https://bugzilla.redhat.com/bugzilla/show_bug.cgi?id=219916
+            </action>
+            <action dev="Greg Luck" type="update">
+                Rather than coding for the different types of password prompts, we now check for the PAM_PROMPT. This
+                should make JPam deal with many more situations without modification.
+            </action>
         </release>
 
         <release version="0.5" date="2004-12-31" desc="release">

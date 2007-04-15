@@ -33,7 +33,6 @@ import org.apache.commons.logging.LogFactory;
  * @author Ken Huffman
  * @version $Id$
  *
- * todo reproduce expiry bug
  */
 public class Pam {
     private static final Log LOG = LogFactory.getLog(Pam.class.getName());
@@ -79,7 +78,7 @@ public class Pam {
     }
 
     /**
-     * A method that be called to prove that JNI is installed and properly works
+     * A simple way to check that JNI is installed and properly works
      *
      * @return true if working
      */
