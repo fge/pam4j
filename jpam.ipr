@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project relativePaths="false" version="4">
+<project version="4" relativePaths="false">
   <component name="AntConfiguration">
     <defaultAnt bundledAnt="true" />
   </component>
@@ -47,7 +47,7 @@
     <option name="MAXIMUM_HEAP_SIZE" value="128" />
   </component>
   <component name="EntryPointsManager">
-    <entry_points version="2.0" />
+    <entry_points />
   </component>
   <component name="ExportToHTMLSettings">
     <option name="PRINT_LINE_NUMBERS" value="false" />
@@ -107,9 +107,7 @@
         <inspection_tool class="ThrowablePrintStackTrace" level="WARNING" enabled="true" />
         <inspection_tool class="ThreadDumpStack" level="WARNING" enabled="true" />
         <inspection_tool class="SuppressionAnnotation" level="WARNING" enabled="true" />
-        <inspection_tool class="ObsoleteCollection" level="WARNING" enabled="true">
-          <option name="ignoreLibraryArguments" value="false" />
-        </inspection_tool>
+        <inspection_tool class="ObsoleteCollection" level="WARNING" enabled="true" />
         <inspection_tool class="SystemOutErr" level="WARNING" enabled="true" />
         <inspection_tool class="InstanceofCatchParameter" level="WARNING" enabled="true" />
       </profile>
@@ -184,7 +182,7 @@
   </component>
   <component name="MavenBuildProjectComponent">
     <option name="mavenExecutable" value="" />
-    <option name="Settings File" value="/Users/gluck$MAVEN_LOCAL_CONFIG_PATH$/settings.xml" />
+    <option name="Settings File" value="$MAVEN_LOCAL_CONFIG_PATH$/settings.xml" />
     <option name="mavenCommandLineParams" value="" />
     <option name="vmOptions" value="" />
     <option name="useMavenEmbedder" value="false" />

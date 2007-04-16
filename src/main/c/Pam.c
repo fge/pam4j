@@ -135,7 +135,7 @@ static int PAM_conv (int num_msg,  struct pam_message **msg,
 	default:
 		if (debug)
 			fprintf(stderr, "***erroneous conversation (%d)\n", msg[replies]->msg_style);
-		/* Fixme: Need to cleanup the message stack, first this needs testing. (jmp) */
+		/* XXX Need to cleanup the message stack */
 		reply[replies].resp = strdup("\0");
 		msg[replies]->msg = strdup("\0");
       }

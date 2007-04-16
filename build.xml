@@ -106,7 +106,7 @@
     <!-- Compiles the source classes -->
     <target name="compile-src" description="compile src files">
         <mkdir dir="${build.classes.dir}"/>
-        <javac destdir="${build.classes.dir}" debug="true" deprecation="on" source="1.4">
+        <javac destdir="${build.classes.dir}" debug="true" deprecation="on">
             <src location="${src.java.dir}"/>
             <classpath refid="project.class.path"/>
         </javac>
@@ -124,7 +124,7 @@
 
     <target name="compile-tests" depends="compile-src">
         <mkdir dir="${test.classes.dir}"/>
-        <javac destdir="${test.classes.dir}" debug="true" deprecation="on" source="1.4">
+        <javac destdir="${test.classes.dir}" debug="true" deprecation="on">
             <src location="${test.java.dir}"/>
             <classpath>
                 <path path="${build.classes.dir}"/>

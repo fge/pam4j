@@ -29,6 +29,8 @@ import java.io.File;
  * 1. Add the net-sf-jpam config file to /etc/pam.d
  * 2. Create a user called test with password test01
  * 3. Create a user called test2 with password test02
+ * <p/>
+ * On Linux make sure that /etc/shadow is readable by the user running this test.
  *
  * @author <a href="mailto:gluck@thoughtworks.com">Greg Luck</a>
  * @version $Id$
@@ -100,7 +102,7 @@ public class PamTest extends AbstractPamTest {
 
     /**
      * A test that empty credentials cause an error.
-     *
+     * <p/>
      * The actual error depends on the PAM modules involved. The test checks for the errors thrown
      * on Mac OS X and Linux.
      */
@@ -134,7 +136,7 @@ public class PamTest extends AbstractPamTest {
         Pam pam = new Pam();
         PamReturnValue pamReturnValue = pam.authenticate(user1Name, "");
         assertTrue(pamReturnValue.equals(PamReturnValue.PAM_PERM_DENIED)
-            || pamReturnValue.equals(PamReturnValue.PAM_AUTH_ERR));
+                || pamReturnValue.equals(PamReturnValue.PAM_AUTH_ERR));
     }
 
     /**
@@ -179,9 +181,10 @@ public class PamTest extends AbstractPamTest {
 
     /**
      * Stress tests jpam with net-sf-jpam
+     *
      * @throws InterruptedException
      */
     public void testJPamConcurrent() throws InterruptedException {
-        concurrentPamStressTest(new Pam(), new PamReturnValue[] {PamReturnValue.PAM_SUCCESS});
+        concurrentPamStressTest(new Pam(), new PamReturnValue[]{PamReturnValue.PAM_SUCCESS});
     }
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module relativePaths="true" type="JAVA_MODULE" version="4">
+<module version="4" relativePaths="true" type="JAVA_MODULE">
   <component name="ModuleRootManager" />
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <output url="file://$MODULE_DIR$/target/classes" />
@@ -15,7 +15,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MAVEN_LOCAL_REPOSITORY_PATH$/junit/junit/4.1/junit-4.1.jar!/" />
+          <root url="jar://$MAVEN_LOCAL_REPOSITORY_PATH$/antlr/antlr/2.7.2/antlr-2.7.2.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -33,16 +33,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MAVEN_LOCAL_REPOSITORY_PATH$/commons-logging/commons-logging/1.0.4/commons-logging-1.0.4.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MAVEN_LOCAL_REPOSITORY_PATH$/commons-collections/commons-collections/2.1/commons-collections-2.1.jar!/" />
+          <root url="jar://$MAVEN_LOCAL_REPOSITORY_PATH$/checkstyle/checkstyle/4.1/checkstyle-4.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -60,7 +51,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MAVEN_LOCAL_REPOSITORY_PATH$/checkstyle/checkstyle/4.1/checkstyle-4.1.jar!/" />
+          <root url="jar://$MAVEN_LOCAL_REPOSITORY_PATH$/commons-collections/commons-collections/2.1/commons-collections-2.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -69,10 +60,86 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
+          <root url="jar://$MAVEN_LOCAL_REPOSITORY_PATH$/commons-logging/commons-logging/1.0.4/commons-logging-1.0.4.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MAVEN_LOCAL_REPOSITORY_PATH$/junit/junit/4.1/junit-4.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Maven Dependency: antlr:antlr:jar:2.7.2:test">
+        <CLASSES>
           <root url="jar://$MAVEN_LOCAL_REPOSITORY_PATH$/antlr/antlr/2.7.2/antlr-2.7.2.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Maven Dependency: checkstyle:checkstyle-optional:jar:4.1:test">
+        <CLASSES>
+          <root url="jar://$MAVEN_LOCAL_REPOSITORY_PATH$/checkstyle/checkstyle-optional/4.1/checkstyle-optional-4.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Maven Dependency: checkstyle:checkstyle:jar:4.1:test">
+        <CLASSES>
+          <root url="jar://$MAVEN_LOCAL_REPOSITORY_PATH$/checkstyle/checkstyle/4.1/checkstyle-4.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Maven Dependency: commons-beanutils:commons-beanutils-core:jar:1.7.0:test">
+        <CLASSES>
+          <root url="jar://$MAVEN_LOCAL_REPOSITORY_PATH$/commons-beanutils/commons-beanutils-core/1.7.0/commons-beanutils-core-1.7.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Maven Dependency: commons-collections:commons-collections:jar:2.1:test">
+        <CLASSES>
+          <root url="jar://$MAVEN_LOCAL_REPOSITORY_PATH$/commons-collections/commons-collections/2.1/commons-collections-2.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Maven Dependency: commons-logging:commons-logging:jar:1.0.4:compile">
+        <CLASSES>
+          <root url="jar://$MAVEN_LOCAL_REPOSITORY_PATH$/commons-logging/commons-logging/1.0.4/commons-logging-1.0.4.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Maven Dependency: junit:junit:jar:4.1:test">
+        <CLASSES>
+          <root url="jar://$MAVEN_LOCAL_REPOSITORY_PATH$/junit/junit/4.1/junit-4.1.jar!/" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="jar://$MAVEN_LOCAL_REPOSITORY_PATH$/junit/junit/4.1/junit-4.1-javadoc.jar!/" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="jar://$MAVEN_LOCAL_REPOSITORY_PATH$/junit/junit/4.1/junit-4.1-sources.jar!/" />
+        </SOURCES>
       </library>
     </orderEntry>
     <orderEntryProperties />
