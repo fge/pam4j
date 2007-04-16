@@ -1,7 +1,7 @@
 $Id: RELEASE_NOTES.txt,v 1.6 2005/06/15 03:02:36 gregluck Exp $
 
-Release Notes For jpam version 0.4
-=====================================
+Release Notes For jpam version 1.0
+==================================
 
 Introduction
 ============
@@ -25,7 +25,8 @@ Jpam does not support advanced PAM conversations such as:
 
 Java Requirements
 =================
-Jpam supports JDK1.2, 1.3, 1.4 and 1.5 at runtime.
+Jpam supports JDK1.2, 1.3, 1.4, 1.5 and 1.6 at runtime. Binaries are compiled using JDK1.5. It is recommended to
+build your own from source.
 
 Jpam does not work with JDK1.1. JNI used a different interface prior to JDK1.2.
 
@@ -39,6 +40,7 @@ Java Dependencies
 
 Apache Commons Logging is required for logging.
 
+
 Operating Systems
 =================
 
@@ -46,8 +48,9 @@ Jpam supports:
 
 1. Linux x86
 2. Linux x86_64, including AMD64
-3. Mac OS X
+3. Mac OS X, PPC and Intel
 4. Solaris
+5. HP-UX
 
 
 Thread Safety

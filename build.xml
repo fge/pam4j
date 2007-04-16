@@ -202,7 +202,7 @@
     <target name="dist-src" depends="dist-jar, zip-javadoc"
             description="Builds a source distribution">
         <zip destfile="${build.dir}/${name}-${version}-src.zip">
-            <zipfileset dir="${basedir}" prefix="${name}-${version}">
+            <zipfileset dir="${src.dir}" prefix="${name}-${version}">
                 <exclude name="build/**"/>
                 <exclude name="jpam.iws"/>
                 <exclude name="src/site/**"/>

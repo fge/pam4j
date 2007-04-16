@@ -6,7 +6,7 @@ Follow the instructions for your architecture.
 Linux x86
 =========
 
-1. Place jpam-0.4.jar in your classpath.
+1. Place jpam.jar in your classpath.
 
 2. Place libjpam.so in the java.library.path.
 
@@ -23,7 +23,7 @@ to use it.
 Linux x86_64
 ============
 
-1. Place jpam-0.4.jar in your classpath.
+1. Place jpam.jar in your classpath.
 
 2. Place libjpam.so in the java.library.path.
 
@@ -41,7 +41,7 @@ configure net-sf-jpam to use it.
 Mac OS X ppc
 ============
 
-1. Place jpam-0.4.jar in your classpath.
+1. Place jpam.jar in your classpath.
 
 2. Place libjpam.jnilib in the java.library.path.
 
@@ -50,3 +50,5 @@ Mac OS X ppc
 3. Configure JAAS by copying .java.login.config to the home directory.
 
 4. Copy the net-sf-jpam PAM configuration to /etc/pam.d and alter it to suit your needs.
+
+Other architectures are similar.
