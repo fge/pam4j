@@ -7,6 +7,9 @@
 
 * {Using the JPAM API}
 
+
+[images/uml/Pam.png] Pam Class Diagram
+
     Attempt to authenticate a username and password
 
 ---
@@ -20,8 +23,9 @@
 
 * {Using the JAAS API}
 
+[images/uml/JpamLoginModule.png] JPamLoginModule Class Diagram
 
-    Shows how to use the JAAS API together with a CallbackHandler
+    Shows how to use the JAAS API together with a CallbackHandler.
 
 ---
 

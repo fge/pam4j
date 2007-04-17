@@ -9,10 +9,12 @@ Welcome to JPam
 
 * Overview
 
-    JPam is a Java-PAM bridge.  PAM, or Pluggable Authentication Modules, is a standard security architecture used on Linux, Solaris, Mac OS X and other Unix systems.
+    JPam is a Java-PAM bridge. PAM, or Pluggable Authentication Modules, is a standard security architecture used on
+    Linux, Mac OS X, Solaris, HP-UX and other Unix systems.
     JPam is the missing link between the two.
 
     JPAM permits the use of PAM authentication facilities by Java applications running on those platforms.
+    
     These facilities include:
 
     * account
@@ -46,8 +48,6 @@ Welcome to JPam
     The JPam website has been upgraded to make it more useable. It is built using Maven, although the core build is still Ant based.
     Also a new mailing list jpam-list@lists.sourceforge.net has been added.
     This is the preferred support mechanism. In addition the documentation is now available as a PDF which may be printed.
-
-    JPam has been used in production systems for several years now. Expect a 1.0 release, with a few minor tweaks over 0.5 in the next month or so.
 
  More {{{news.html}news}}...
 

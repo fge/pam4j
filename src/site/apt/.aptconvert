@@ -6,8 +6,8 @@ paper=a4
 latex.documentclass=book
 html.css=/css/book.css
 html.paging=0
-.gif.eps=giftopnm %F | pnmtops --noturn -scale=0.45 -rle > %G
-.png.eps=pngtopnm -mix -background=rgb:ff/ff/ff %F | pnmtops --noturn -scale=0.45 -rle > %G
+.gif.eps=giftopnm %F | pnmtops --noturn -scale=0.75 -rle > %G
+.png.eps=pngtopnm -mix -background=rgb:ff/ff/ff %F | pnmtops --noturn -scale=0.75 -rle > %G
 .fig.jpg=fig2dev -L jpeg %F %G
 
 

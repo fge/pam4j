@@ -2,7 +2,7 @@
 <document>
     <body>
 
-        <release version="1.0" date="2007-01-31" desc="1.0 release">
+        <release version="1.0" date="2007-04-16" desc="1.0 release">
             <!-- Feature Changes  -->
             <action dev="Greg Luck" type="add">
                 Added support for HP-UX.

@@ -24,8 +24,6 @@ News
     Also a new mailing list jpam-list@lists.sourceforge.net has been added.
     This is the preferred support mechanism. In addition the documentation is now available as a PDF which may be printed.
 
-    JPam has been used in production systems for several years now. Expect a 1.0 release, with a few minor tweaks over 0.5 in the next month or so.
-
 * 18 June 2005: JPam 0.5 released.
 
     Source and binaries for Linux x86, Linux x86_64, Mac OS X and new in this release: Solaris.

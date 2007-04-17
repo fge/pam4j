@@ -26,4 +26,29 @@ Building JPam from Source
 
     The source download and the CVS source contain a src/rpm directory containg an RPM spec file created in collaboration with developers at Red Hat. You can use this spec.file to build an rpm installable package for your architecture.
 
+
+*   Building the Site
+
+    (These instructions are for project maintainers)
+
+    You need the following unix utilities installed:
+
+    * latex or tetex
+
+    * ghostscript
+
+    * pdftk
+
+    * aptconvert
+
+    * netpbm
+
+    You also need a yDoc license.
+
+    With all that, build the site as below:
+    
+---
+    mvn site:site
+---
+
     
