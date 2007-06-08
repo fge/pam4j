@@ -185,7 +185,7 @@
     </target>
 
     <target name="install-jaas-config">
-        <copy file="${src.config.dir}/${os}/.java.login.config" todir="${user.home}"/>
+        <copy file="${src.config.dir}/${os}/.java.login.config" todir="${env.HOME}"/>
     </target>
 
     <!-- Builds a jar file containing the application  -->
@@ -282,7 +282,7 @@
 
     <!-- Requires quite a few utils to be present. See building in the doco -->
     <target name="book">
-        <copy file="src/site/apt/.aptconvert" todir="${user.home}"/>
+        <copy file="src/site/apt/.aptconvert" todir="${env.HOME}"/>
         <mkdir dir="${build.dir}/book"/>
         <copy todir="${build.dir}/book/images">
             <fileset dir="src/site/resources/images"/>

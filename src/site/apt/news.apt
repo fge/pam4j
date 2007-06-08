@@ -7,6 +7,11 @@
 
 News
 
+* 8 June 2007: JPAM 1.1 released
+
+    This is a maintenance release which fixes issue 1707044 where JPAM causes JDK crashes on
+    lots of machines. The fix is to roll back the 1.0 fix for expired accounts.
+
 * 16 April 2007: JPAM 1.0 released
 
     JPam is available and should run on Linux x86, Linux x86_64, Mac OS X, Solaris and HP-UX.

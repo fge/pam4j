@@ -1,6 +1,6 @@
 $Id: RELEASE_NOTES.txt,v 1.6 2005/06/15 03:02:36 gregluck Exp $
 
-Release Notes For jpam version 1.0
+Release Notes For jpam version 1.1
 ==================================
 
 Introduction
@@ -12,6 +12,12 @@ JPAM permits the use of PAM authentication services to Java applications running
 These services include:
 
 account, auth, password, session
+
+WARNING
+=======
+
+This version of JPAM will crash if the password is expired. A fix should be fortcoming for this
+in a future version.
 
 JAAS
 ====

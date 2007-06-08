@@ -5,7 +5,7 @@
     <groupId>net.sf.jpam</groupId>
     <artifactId>jpam</artifactId>
     <packaging>jar</packaging>
-    <version>1.0</version>
+    <version>1.1</version>
     <name>JPam</name>
     <description>
         <![CDATA[Jpam is a Java-PAM bridge.  PAM, or Pluggable Authentication Modules, is a standard security architecture used on Linux, Solaris, HP-UX, Mac OS X and other Unix systems.]]>
@@ -153,7 +153,7 @@
 
                     <execution>
                         <id>book</id>
-                        <phase>validate</phase>
+                        <phase>site</phase>
                         <configuration>
                             <tasks>
                                 <ant antfile="${basedir}/build.xml" inheritRefs="true">
@@ -170,7 +170,7 @@
                     </execution>
                     <execution>
                         <id>singlepageguide</id>
-                        <phase>validate</phase>
+                        <phase>site</phase>
                         <configuration>
                             <tasks>
                                 <ant antfile="${basedir}/build.xml" inheritRefs="true">

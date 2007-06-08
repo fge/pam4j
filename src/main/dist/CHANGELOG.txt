@@ -1,5 +1,30 @@
 $Id: CHANGELOG.txt,v 1.7 2005/06/18 19:18:37 gregluck Exp $
 
+jpam-1.1
+========
+
+<release version="1.1" date="2007-06-8" desc="1.1 maintenance release">
+
+            <action dev="Greg Luck" issue="1381572" type="update">
+                JVM crash when the user account is expired.
+                This issue was produced by the fact that the conversational function
+                "pam_conv" from Pam.c was not aware of message style. In fact, if
+                PAM_ERROR_MSG or other was sent, a free() on an invalid pointer would be
+                produced, leading to Java threads going nuts and therefore the Java
+                program hanging or 'segfaulting'.
+                See also https://bugzilla.redhat.com/bugzilla/show_bug.cgi?id=219916
+
+                This issue has been reopened.
+            </action>
+            <action dev="Greg Luck" type="fix" issue="1707044">
+                The fix for 1381572 seems to make JPAM crash immediately on lots of systems.
+                Fix this issue by reverting 1381572. A new fix to 1381572 will be put out
+                as a beta. In the meantime a release note around not allowing passwords to expire
+                when using JPAM will be created.
+            </action>
+        </release>
+
+
 jpam-1.0
 ========
 
