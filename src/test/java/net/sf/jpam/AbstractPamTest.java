@@ -78,7 +78,7 @@ public class AbstractPamTest extends TestCase {
         final long startingSize = measureMemoryUse();
 
         //Create a list of threads
-        final List executables = new ArrayList();
+        final List<Executable> executables = new ArrayList<Executable>();
 
         //Add threads for user1 authentication
         for (int i = 0; i < 15; i++) {
@@ -161,15 +161,16 @@ public class AbstractPamTest extends TestCase {
     /**
      * Runs a set of threads, for a fixed amount of time.
      */
-    protected List runThreads(final List executables) throws InterruptedException {
+    protected List runThreads(final List<Executable> executables) throws
+        InterruptedException {
         final Counter counter = new Counter();
         final long endTime = System.currentTimeMillis() + 10000;
-        final List errors = new ArrayList();
+        final List<Throwable> errors = new ArrayList<Throwable>();
 
         // Spin up the threads
         final Thread[] threads = new Thread[executables.size()];
         for (int i = 0; i < threads.length; i++) {
-            final Executable executable = (Executable) executables.get(i);
+            final Executable executable = executables.get(i);
             threads[i] = new Thread() {
                 public void run() {
                     try {
