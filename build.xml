@@ -20,10 +20,6 @@
 
     <artifact:pom file="pom.xml" id="maven.project"/>
 
-
-    <!-- Load local environment overrides -->
-    <property environment="env"/>
-
     <property name="name" value="${maven.project.name}"/>
     <property name="version" value="${maven.project.version}"/>
 
