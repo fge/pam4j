@@ -76,7 +76,7 @@ static int PAM_conv(int num_messages, const struct pam_message **messages,
         }
 
         //Mac OS X
-        if (! strcmp(prompt, "Password:")) {
+        if (!strcmp(prompt, "Password:")) {
             pr_debug("***Sending password\n");
             reply->resp = COPY_STRING(password);
         }
@@ -156,55 +156,41 @@ JNIEXPORT jint JNICALL Java_net_sf_jpam_Pam_authenticate(JNIEnv *pEnv,
     pr_debug("username is %s\n", username);
 
     /* Get a handle to a PAM instance */
-    pr_debug("Trying to get a handle to the PAM service...\n");
-
     retval = pam_start(service_name, username, &PAM_converse, &pamh);
 
     if (retval != PAM_SUCCESS) {
-        pr_debug("...call to create service handle failed with error: %d\n",
-            retval);
+        pr_debug("pam_start failed for service %s: %s\n", service_name,
+            pam_strerror(NULL, retval));
         goto out_nohandle;
     }
-
-    /* Is the user really a user? */
-    pr_debug("...service handle was created.\n");
-    pr_debug("Trying to see if the user is a valid system user...\n");
 
     pam_set_item(pamh, PAM_AUTHTOK, password);
     retval = pam_authenticate(pamh, 0);
 
     /* Is user permitted access? */
     if (retval != PAM_SUCCESS) {
-        if (retval == PAM_USER_UNKNOWN)
-            pr_debug("...failed to find user %s with error: %d\n", username,
-                retval);
-        else
-            pr_debug("...failed to authenticate with error: %d\n", retval);
+        pr_debug("failed to authenticate user %s: %s\n", username,
+            pam_strerror(NULL, retval));
         goto out_free;
     }
 
-    pr_debug("...user %s is a real user.\n",username);
-    pr_debug("Trying to pass info to the pam_acct_mgmt function...\n");
-
     retval = pam_acct_mgmt(pamh, 0);
 
-    if (retval == PAM_SUCCESS)
-        pr_debug("...user %s is permitted access.\n",username);
-    else {
-        pr_debug("...call returned with error: %d\n",retval);
-    }
+    if (retval != PAM_SUCCESS)
+        pr_debug("failed to setup account for user %s: %s\n", username,
+            pam_strerror(NULL, retval));
 
 out_free:
     /* Clean up our handles and variables */
     if (pam_end(pamh, retval) != PAM_SUCCESS) {
         pamh = NULL;
-        if (debug)
-            fprintf(stderr, "cs_password error: failed to release handle\n");
+        pr_debug("cs_password error: failed to release handle\n");
     }
 
 out_nohandle:
     (*pEnv)->ReleaseStringUTFChars(pEnv, pServiceName, service_name);
     (*pEnv)->ReleaseStringUTFChars(pEnv, pUsername, username);
     (*pEnv)->ReleaseStringUTFChars(pEnv, pPassword, password);
+
     return retval;
 }
