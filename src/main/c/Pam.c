@@ -159,36 +159,29 @@ JNIEXPORT jint JNICALL Java_net_sf_jpam_Pam_authenticate(JNIEnv *pEnv,
     }
 
     /* Get a handle to a PAM instance */
-	if (debug) {
+	if (debug)
         printf("Trying to get a handle to the PAM service...\n");
-	}
 
     retval = pam_start(service_name, username, &PAM_converse, &pamh);
 
-    /* Is the user really a user? */
-    if (retval == PAM_SUCCESS) {
-        if (debug) {
-            printf("...service handle was created.\n");
-            printf("Trying to see if the user is a valid system user...\n");
-        }
-
-	    pam_set_item(pamh, PAM_AUTHTOK, password);
-        retval = pam_authenticate(pamh, 0);
-    } else {
-        if (debug) {
+    if (retval != PAM_SUCCESS) {
+        if (debug)
             printf("...call to create service handle failed with error: %d\n",
                 retval);
-        }
+        goto out_nohandle;
     }
 
+    /* Is the user really a user? */
+    if (debug) {
+        printf("...service handle was created.\n");
+        printf("Trying to see if the user is a valid system user...\n");
+    }
+
+    pam_set_item(pamh, PAM_AUTHTOK, password);
+    retval = pam_authenticate(pamh, 0);
+
     /* Is user permitted access? */
-    if (retval == PAM_SUCCESS) {
-        if (debug) {
-            printf("...user %s is a real user.\n",username);
-            printf("Trying to pass info to the pam_acct_mgmt function...\n");
-        }
-        retval = pam_acct_mgmt(pamh, 0);
-    } else {
+    if (retval != PAM_SUCCESS) {
         if (debug) {
             if (retval == PAM_USER_UNKNOWN)
                 printf("...failed to find user %s with error: %d\n",
@@ -196,18 +189,24 @@ JNIEXPORT jint JNICALL Java_net_sf_jpam_Pam_authenticate(JNIEnv *pEnv,
             else
                 printf("...failed to authenticate with error: %d\n", retval);
         }
+        goto out_free;
     }
+
+    if (debug) {
+        printf("...user %s is a real user.\n",username);
+        printf("Trying to pass info to the pam_acct_mgmt function...\n");
+    }
+    retval = pam_acct_mgmt(pamh, 0);
 
     if (debug) {
         if (retval == PAM_SUCCESS)
             printf("...user %s is permitted access.\n",username);
         else {
-            printf("...cs_password error: user %s is not authenticated\n",
-                username);
             printf("...call returned with error: %d\n",retval);
         }
     }
 
+out_free:
     /* Clean up our handles and variables */
     if (pam_end(pamh, retval) != PAM_SUCCESS) {
         pamh = NULL;
@@ -215,6 +214,7 @@ JNIEXPORT jint JNICALL Java_net_sf_jpam_Pam_authenticate(JNIEnv *pEnv,
             fprintf(stderr, "cs_password error: failed to release handle\n");
     }
 
+out_nohandle:
     (*pEnv)->ReleaseStringUTFChars(pEnv, pServiceName, service_name);
     (*pEnv)->ReleaseStringUTFChars(pEnv, pUsername, username);
     (*pEnv)->ReleaseStringUTFChars(pEnv, pPassword, password);
