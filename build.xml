@@ -179,9 +179,7 @@
 
         <mkdir dir="${build.javadoc.dir}"/>
         <javadoc sourcepath="${src.java.dir}" destdir="${build.javadoc.dir}"
-            packagenames="net.sf.*" Package="true"
-                overview="${src.java.dir}/net/sf/jpam/overview.html"
-                author="true" version="true" use="true" windowtitle="${name}">
+            packagenames="net.sf.*" use="true">
             <classpath refid="project.class.path"/>
             <doctitle><![CDATA[<h1>${name}</h1>]]></doctitle>
         </javadoc>
