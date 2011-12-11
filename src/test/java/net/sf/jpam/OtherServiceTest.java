@@ -16,8 +16,8 @@
 
 package net.sf.jpam;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Performs tests on the Pam class using the other service.
@@ -39,7 +39,8 @@ import org.apache.commons.logging.LogFactory;
  */
 public class OtherServiceTest extends AbstractPamTest {
 
-    private static final Log LOG = LogFactory.getLog(OtherServiceTest.class.getName());
+    private static final Logger LOG
+        = LoggerFactory.getLogger(OtherServiceTest.class);
 
     private Pam pam;
 
@@ -47,6 +48,7 @@ public class OtherServiceTest extends AbstractPamTest {
      * Sets up each test, specifying "other" as the service.
      * @throws Exception
      */
+    @Override
     protected void setUp() throws Exception {
         pam = new Pam("other");
     }

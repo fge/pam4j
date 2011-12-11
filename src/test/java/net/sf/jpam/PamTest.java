@@ -16,8 +16,8 @@
 
 package net.sf.jpam;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 
@@ -37,7 +37,7 @@ import java.io.File;
  */
 public class PamTest extends AbstractPamTest {
 
-    private static final Log LOG = LogFactory.getLog(PamTest.class.getName());
+    private static final Logger LOG = LoggerFactory.getLogger(PamTest.class);
 
     /**
      * Checks that the shared object libjpam.so is installed in

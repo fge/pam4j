@@ -16,8 +16,8 @@
 
 package net.sf.jpam;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Performs tests on the Pam class using the DigiPass service. Digipass uses the PAM Radius module.
@@ -38,7 +38,10 @@ public class DigiPassTest extends AbstractPamTest {
 
     private static final String RADIUS_SERVICE = "net-sf-jpam-digipass";
 
-    private static final Log LOG = LogFactory.getLog(DigiPassTest.class.getName());
+    //private static final Log LOG = LogFactory.getLog(DigiPassTest.class
+    //    .getName());
+    private static final Logger LOG
+        = LoggerFactory.getLogger(DigiPassTest.class);
 
 
 

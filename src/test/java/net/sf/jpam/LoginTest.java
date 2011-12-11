@@ -16,8 +16,8 @@
 
 package net.sf.jpam;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Performs tests on the Pam class using the "login" service.
@@ -31,13 +31,14 @@ public class LoginTest extends AbstractPamTest {
 
     private Pam pam;
 
-    private static final Log LOG = LogFactory.getLog(LoginTest.class.getName());
+    private static final Logger LOG = LoggerFactory.getLogger(LoginTest.class);
 
 
     /**
      * Creates a new PAM for service login
      * @throws Exception
      */
+    @Override
     protected void setUp() throws Exception {
         pam = new Pam("login");
     }

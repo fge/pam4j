@@ -16,8 +16,8 @@
 
 package net.sf.jpam;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Performs tests on the Pam class using the SecurId service.
@@ -39,7 +39,8 @@ public class SecurIdTest extends AbstractPamTest {
 
     private static final String SECURID_SERVICE = "net-sf-jpam-securid";
 
-    private static final Log LOG = LogFactory.getLog(SecurIdTest.class.getName());
+    private static final Logger LOG
+        = LoggerFactory.getLogger(SecurIdTest.class);
 
 
 

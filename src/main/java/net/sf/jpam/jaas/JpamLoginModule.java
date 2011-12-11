@@ -18,8 +18,8 @@ package net.sf.jpam.jaas;
 
 import net.sf.jpam.Pam;
 import net.sf.jpam.PamReturnValue;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.security.auth.Subject;
 import javax.security.auth.callback.Callback;
@@ -46,7 +46,8 @@ import java.util.Map;
  * @version $Id$
  */
 public class JpamLoginModule implements LoginModule {
-    private static final Log LOG = LogFactory.getLog(JpamLoginModule.class.getName());
+    private static final Logger LOG
+        = LoggerFactory.getLogger(JpamLoginModule.class);
     private static final String SERVICE_NAME_OPTION = "serviceName";
     private Subject subject;
     private CallbackHandler callbackHandler;
@@ -74,6 +75,7 @@ public class JpamLoginModule implements LoginModule {
      * @throws javax.security.auth.login.LoginException
      *          if the abort fails
      */
+    @Override
     public boolean abort() throws LoginException {
         return true;
     }
@@ -101,6 +103,7 @@ public class JpamLoginModule implements LoginModule {
      * @throws javax.security.auth.login.LoginException
      *          if the commit fails
      */
+    @Override
     public boolean commit() throws LoginException {
         return true;
     }
@@ -122,6 +125,7 @@ public class JpamLoginModule implements LoginModule {
      * @throws javax.security.auth.login.LoginException
      *          if the authentication fails
      */
+    @Override
     public boolean login() throws LoginException {
         pam = createPam();
 
@@ -185,6 +189,7 @@ public class JpamLoginModule implements LoginModule {
      * @throws javax.security.auth.login.LoginException
      *          if the logout fails
      */
+    @Override
     public boolean logout() throws LoginException {
         return true;
     }
@@ -211,6 +216,7 @@ public class JpamLoginModule implements LoginModule {
      *                        <code>Configuration</code> for this particular
      *                        <code>LoginModule</code>.
      */
+    @Override
     public void initialize(Subject subject, CallbackHandler callbackHandler, Map sharedState, Map options) {
         this.subject = subject;
         this.callbackHandler = callbackHandler;

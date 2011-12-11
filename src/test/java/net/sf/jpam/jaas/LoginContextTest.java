@@ -17,8 +17,8 @@
 package net.sf.jpam.jaas;
 
 import junit.framework.TestCase;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.security.auth.callback.Callback;
 import javax.security.auth.callback.CallbackHandler;
@@ -45,7 +45,8 @@ import java.io.IOException;
  * @version $Id$
  */
 public class LoginContextTest extends TestCase {
-    private static final Log LOG = LogFactory.getLog(LoginContextTest.class.getName());
+    private static final Logger LOG
+        = LoggerFactory.getLogger(LoginContextTest.class);
     /**
      * user 1 name
      */
@@ -77,6 +78,7 @@ public class LoginContextTest extends TestCase {
      * Sets up the test
      * @throws Exception
      */
+    @Override
     protected void setUp() throws Exception {
         callbackCredentials = user1Credentials;
     }
@@ -151,6 +153,7 @@ public class LoginContextTest extends TestCase {
          *                                      method does not support one or more of the Callbacks
          *                                      specified in the <code>callbacks</code> parameter.
          */
+        @Override
         public void handle(Callback[] callbacks)
                 throws IOException, UnsupportedCallbackException {
 

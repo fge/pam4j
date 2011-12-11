@@ -16,8 +16,8 @@
 package net.sf.jpam;
 
 import junit.framework.TestCase;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +36,8 @@ import java.util.List;
  * @version $Id$
  */
 public class AbstractPamTest extends TestCase {
-    private static final Log LOG = LogFactory.getLog(AbstractPamTest.class.getName());
+    private static final Logger LOG
+        = LoggerFactory.getLogger(AbstractPamTest.class);
     /**
      * user 1 name
      */
@@ -75,7 +76,6 @@ public class AbstractPamTest extends TestCase {
      * Multi-threaded PAM test.
      */
     public void concurrentPamStressTest(final Pam pam, final PamReturnValue[] expectedReturnValues) throws InterruptedException {
-        final long startingSize = measureMemoryUse();
 
         //Create a list of threads
         final List<Executable> executables = new ArrayList<Executable>();
@@ -83,6 +83,7 @@ public class AbstractPamTest extends TestCase {
         //Add threads for user1 authentication
         for (int i = 0; i < 15; i++) {
             final Executable executable = new Executable() {
+                @Override
                 public void execute() throws Exception {
                     LOG.info("Running 1");
                     PamReturnValue value = pam.authenticate(user1Name, user1Credentials);
@@ -95,6 +96,7 @@ public class AbstractPamTest extends TestCase {
         //Add threads for user2 authentication
         for (int i = 0; i < 15; i++) {
             final Executable executable1 = new Executable() {
+                @Override
                 public void execute() throws Exception {
                     LOG.info("Running 2");
                     PamReturnValue value = pam.authenticate(user2Name, user2Credentials);
@@ -105,10 +107,6 @@ public class AbstractPamTest extends TestCase {
         }
 
         List errors = runThreads(executables);
-
-        long finishingSize = measureMemoryUse();
-        long difference = finishingSize - startingSize;
-        LOG.info("Memory Change is: " + difference);
 
         // Throw any error that happened
         if (errors.size() != 0) {
@@ -143,22 +141,6 @@ public class AbstractPamTest extends TestCase {
     }
 
     /**
-     * Measures the memory use. Because Garbage Collection is done, memory should
-     * not increase.
-     *
-     * @return the memory increase/- decrease in bytes
-     * @throws InterruptedException
-     */
-    protected long measureMemoryUse() throws InterruptedException {
-        System.gc();
-        Thread.sleep(3000);
-        System.gc();
-        long startingSize = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
-        return startingSize;
-    }
-
-
-    /**
      * Runs a set of threads, for a fixed amount of time.
      */
     protected List runThreads(final List<Executable> executables) throws
@@ -172,6 +154,7 @@ public class AbstractPamTest extends TestCase {
         for (int i = 0; i < threads.length; i++) {
             final Executable executable = executables.get(i);
             threads[i] = new Thread() {
+                @Override
                 public void run() {
                     try {
                         // Run the thread until the given end time

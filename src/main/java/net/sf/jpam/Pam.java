@@ -16,8 +16,8 @@
 
 package net.sf.jpam;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The PAM bridging class. Most of the work is done here.
@@ -35,7 +35,7 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class Pam {
-    private static final Log LOG = LogFactory.getLog(Pam.class.getName());
+    private static final Logger LOG = LoggerFactory.getLogger(Pam.class);
     private static final String JPAM_SHARED_LIBRARY_NAME = "jpam";
     private String serviceName;
 
