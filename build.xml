@@ -69,25 +69,6 @@
         </exec>
     </target>
 
-    <target name="generate-checkstyle-config">
-        <mkdir dir="${build.log.dir}"/>
-        <!-- Make hardcoded version available to IDE plugin -->
-        <copy file="${checkstyle.config}" todir="${build.log.dir}">
-            <filterchain>
-                <expandproperties/>
-            </filterchain>
-        </copy>
-    </target>
-
-    <!-- Runs checkstyle over the java source -->
-    <target name="checkstyle-check">
-        <uptodate property="checkstyle.up-to-date" value="true"
-                  targetfile="${build.dir}/checkstyle">
-            <srcfiles dir="${src.java.dir}" includes="**/*.java"/>
-            <srcfiles dir="${test.java.dir}" includes="**/*.java"/>
-        </uptodate>
-    </target>
-
     <!-- Compiles the source classes -->
     <target name="compile-src" description="compile src files">
         <mkdir dir="${build.classes.dir}"/>
