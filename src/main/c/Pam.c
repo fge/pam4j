@@ -224,12 +224,12 @@ void printreturnmeaning(int retval, pam_handle_t *pamh) {
  * Method:    authenticate
  * Signature: (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Z)I
  */
-JNIEXPORT jint JNICALL Java_net_sf_jpam_Pam_authenticate
-  (JNIEnv *pEnv, jobject pObj, jstring pServiceName, jstring pUsername, jstring pPassword, jboolean debug) {
-
-     /* DEFINITIONS */
-       pam_handle_t*    pamh = NULL;
-       int              retval;
+JNIEXPORT jint JNICALL Java_net_sf_jpam_Pam_authenticate(JNIEnv *pEnv,
+    jobject pObj, jstring pServiceName, jstring pUsername, jstring pPassword,
+    jboolean debug)
+{
+    pam_handle_t *pamh = NULL;
+    int retval;
 
     service_name = (*pEnv)->GetStringUTFChars(pEnv, pServiceName,0);
     username = (*pEnv)->GetStringUTFChars(pEnv, pUsername,0);
@@ -241,64 +241,62 @@ JNIEXPORT jint JNICALL Java_net_sf_jpam_Pam_authenticate
         printf("username is %s\n", username);
     }
 
+    /* Get a handle to a PAM instance */
+	if (debug) {
+        printf("Trying to get a handle to the PAM service...\n");
+	}
 
-        /* GET A HANDLE TO A PAM INSTANCE */
-	   if (debug) {
-		   printf("Trying to get a handle to the PAM service...\n");
-	    }
-       retval = pam_start(service_name, username, &PAM_converse, &pamh);
+    retval = pam_start(service_name, username, &PAM_converse, &pamh);
 
-        /* IS THE USER REALLY A USER? */
-       if (retval == PAM_SUCCESS) {
-		  if (debug) {
-	          printf("...Service handle was created.\n");
-	          printf("Trying to see if the user is a valid system user...\n");
-		  }
-	  pam_set_item(pamh, PAM_AUTHTOK, password);
-          retval = pam_authenticate(pamh, 0);
-       }
-       else {
-       		if (debug) {
-          		printf("...Call to create service handle failed with error: %d\n",retval);
-       		}
-       }
-
-        /* IS USER PERMITTED ACCESS? */
-       if (retval == PAM_SUCCESS) {
-       		if (debug) {
-		          printf("...User %s is a real user.\n",username);
-		          printf("Trying to pass info to the pam_acct_mgmt function...\n");
-       		}
-          retval = pam_acct_mgmt(pamh, 0);
-       }
-       else {
-       	if (debug){
-          if (retval == PAM_USER_UNKNOWN)
-             printf("...Failed to find user %s with error: %d\n",username,retval);
-          else
-          	printf("...Failed to authenticate for an unknown error: %d\n",retval);
+    /* Is the user really a user? */
+    if (retval == PAM_SUCCESS) {
+        if (debug) {
+            printf("...service handle was created.\n");
+            printf("Trying to see if the user is a valid system user...\n");
         }
-       }
 
-		if (debug) {
-	       if (retval == PAM_SUCCESS) {
-	          printf("...User %s is permitted access.\n",username);
-	       }
-	       else {
-	          printf("...cs_password error: User %s is not authenticated\n",username);
-	          printf("...Call returned with error: %d\n",retval);
-	       }
-		}
+	    pam_set_item(pamh, PAM_AUTHTOK, password);
+        retval = pam_authenticate(pamh, 0);
+    } else {
+        if (debug) {
+            printf("...call to create service handle failed with error: %d\n",
+                retval);
+        }
+    }
 
-        /* CLEAN UP OUR HANDLES AND VARIABLES */
-       if (pam_end(pamh, retval) != PAM_SUCCESS) {
-          pamh = NULL;
-          if (debug) {
-          	fprintf(stderr, "cs_password error: Failed to release authenticator\n");
-          }
-       }
+    /* Is user permitted access? */
+    if (retval == PAM_SUCCESS) {
+        if (debug) {
+            printf("...user %s is a real user.\n",username);
+            printf("Trying to pass info to the pam_acct_mgmt function...\n");
+        }
+        retval = pam_acct_mgmt(pamh, 0);
+    } else {
+        if (debug) {
+            if (retval == PAM_USER_UNKNOWN)
+                printf("...failed to find user %s with error: %d\n",
+                    username, retval);
+            else
+                printf("...failed to authenticate with error: %d\n", retval);
+        }
+    }
 
-       return retval;
+    if (debug) {
+        if (retval == PAM_SUCCESS)
+            printf("...user %s is permitted access.\n",username);
+        else {
+            printf("...cs_password error: user %s is not authenticated\n",
+                username);
+            printf("...call returned with error: %d\n",retval);
+        }
+    }
 
+    /* Clean up our handles and variables */
+    if (pam_end(pamh, retval) != PAM_SUCCESS) {
+        pamh = NULL;
+        if (debug)
+            fprintf(stderr, "cs_password error: failed to release handle\n");
+    }
 
+    return retval;
 }
