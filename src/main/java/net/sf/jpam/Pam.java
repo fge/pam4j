@@ -120,8 +120,6 @@ public class Pam {
      * @see #authenticateSuccessful(String, String)
      */
     public PamReturnValue authenticate(String username, String credentials) throws NullPointerException {
-        boolean debug = LOG.isDebugEnabled();
-        LOG.debug("Debug mode active.");
         if (serviceName == null) {
             throw new NullPointerException("Service name is null");
         } else if (username == null) {
@@ -130,7 +128,9 @@ public class Pam {
             throw new NullPointerException("Credentials are null");
         }
         synchronized (Pam.class) {
-            PamReturnValue pamReturnValue = PamReturnValue.fromId(authenticate(serviceName, username, credentials, debug));
+            PamReturnValue pamReturnValue
+                = PamReturnValue.fromId(authenticate(serviceName, username,
+                    credentials, LOG.isDebugEnabled()));
             return pamReturnValue;
         }
     }

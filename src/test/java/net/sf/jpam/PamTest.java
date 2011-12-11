@@ -73,7 +73,8 @@ public class PamTest extends AbstractPamTest {
      */
     public void testUserAuthenticated() {
         Pam pam = new Pam();
-        assertTrue("Test user authenticated: ", pam.authenticateSuccessful(user1Name, user1Credentials));
+        assertTrue("Test user authenticated: ", pam.authenticateSuccessful
+            (user1Name, user1Credentials));
     }
 
     /**
@@ -177,14 +178,5 @@ public class PamTest extends AbstractPamTest {
         } catch (IllegalArgumentException e) {
             //do nothing;
         }
-    }
-
-    /**
-     * Stress tests jpam with net-sf-jpam
-     *
-     * @throws InterruptedException
-     */
-    public void testJPamConcurrent() throws InterruptedException {
-        concurrentPamStressTest(new Pam(), new PamReturnValue[]{PamReturnValue.PAM_SUCCESS});
     }
 }

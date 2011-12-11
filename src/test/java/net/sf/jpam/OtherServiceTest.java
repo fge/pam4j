@@ -114,12 +114,4 @@ public class OtherServiceTest extends AbstractPamTest {
         PamReturnValue pamReturnValue = pam.authenticate(user1Name, "");
         assertTrue(pamReturnValue.equals(PamReturnValue.PAM_AUTH_ERR));
     }
-
-    /**
-     * Stress tests jpam with net-sf-jpam 
-     * @throws InterruptedException
-     */
-    public void testJPamConcurrent() throws InterruptedException {
-        concurrentPamStressTest(pam, new PamReturnValue[] {PamReturnValue.PAM_AUTH_ERR});
-    }
 }

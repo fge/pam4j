@@ -27,13 +27,13 @@
     <property name="name" value="${maven.project.name}"/>
     <property name="version" value="${maven.project.version}"/>
 
-    <artifact:dependencies filesetId="dependency.fileset" pathId="dependency.classpath"
-                           verbose="false">
+    <artifact:dependencies filesetId="dependency.fileset"
+        pathId="dependency.classpath" verbose="false">
         <pom refid="maven.project"/>
     </artifact:dependencies>
 
     <artifact:dependencies filesetId="compile.dependency.fileset"
-                           pathId="compile.dependency.classpath" useScope="compile">
+        pathId="compile.dependency.classpath" useScope="compile">
         <pom refid="maven.project"/>
     </artifact:dependencies>
 
@@ -42,25 +42,20 @@
         <path refid="dependency.classpath"/>
     </path>
 
-    <target name="os" description="OS and Architecture label">
-        <echo message="${os}"/>
-    </target>
-
-
     <target name="clean" description="Cleans the build directory">
         <delete dir="${build.dir}"/>
     </target>
 
     <!-- Top level target -->
     <target name="build" depends="clean, test, dist-tgz"
-            description="Builds a clean distribution"/>
+        description="Builds a clean distribution"/>
 
     <!-- compiles -->
     <target name="compile" depends="compile-src, compile-tests"
-            description="Performs a compile"/>
+        description="Performs a compile"/>
 
     <target name="shared-object" depends="compile, generate-c-headers"
-            description="Creates the shared library">
+        description="Creates the shared library">
 
         <copy todir="${generated.src.c.dir}">
             <fileset dir="${src.c.dir}" includes="*"/>
@@ -78,7 +73,6 @@
             <classpath refid="project.class.path"/>
         </javac>
     </target>
-
 
     <target name="generate-c-headers">
         <mkdir dir="${generated.src.c.dir}"/>
@@ -101,30 +95,10 @@
     </target>
 
 
-    <target name="test" depends="run-tests-no-check" if="tests.failed"
-            description="Runs Tests">
-        <fail message="One or more tests failed. See the log file for details."/>
-    </target>
-
-
-    <!-- Make sure you have copied junit-3.8.1.jar to $ANT_HOME/lib -->
-    <target name="run-tests-no-check"
-            depends="compile-tests, install-shared-object, install-jaas-config">
+    <target name="test" depends="compile-tests, install-shared-object">
         <mkdir dir="${test.results.dir}"/>
 
-        <condition property="test.pattern" value="*">
-            <not>
-                <isset property="test.case"/>
-            </not>
-        </condition>
-        <condition property="test.pattern" value="${test.case}">
-            <isset property="test.case"/>
-        </condition>
-
-
-        <junit printSummary="true" failureproperty="tests.failed" fork="true" dir="${basedir}">
-            <sysproperty key="java.util.logging.config.file"
-                         file="${test.logging.properties.file}"/>
+        <junit printSummary="true" fork="true" dir="${basedir}">
             <classpath>
                 <path location="${test.classes.dir}"/>
                 <path location="${build.classes.dir}"/>
@@ -134,7 +108,7 @@
             <formatter type="plain" usefile="false"/>
             <batchtest todir="${test.results.dir}">
                 <fileset dir="${test.classes.dir}">
-                    <include name="**/${test.pattern}Test.class"/>
+                    <include name="**/*Test.class"/>
                     <exclude name="**/Abstract*"/>
                 </fileset>
             </batchtest>
@@ -142,21 +116,18 @@
     </target>
 
     <!-- assumes we have permission -->
-    <target name="install-shared-object"
-            depends="shared-object"
-            description="Installs the shared object. Does not install config">
+    <target name="install-shared-object" depends="shared-object"
+        description="Installs the shared object. Does not install config">
         <echo message="Installing shared object named: ${shared.library.name} to ${native.java.library.path}"/>
         <copy todir="${native.java.library.path}">
-            <fileset dir="${generated.src.c.dir}" includes="${shared.library.name}"/>
+            <fileset dir="${generated.src.c.dir}"
+                includes="${shared.library.name}"/>
         </copy>
     </target>
 
-    <target name="install-jaas-config">
-        <copy file="${src.config.dir}/${os}/.java.login.config" todir="${env.HOME}"/>
-    </target>
-
     <!-- Builds a jar file containing the application  -->
-    <target name="dist-jar" depends="compile" description="Builds the application jar">
+    <target name="dist-jar" depends="compile"
+        description="Builds the application jar">
         <mkdir dir="${dist.dir}"/>
         <jar destfile="${build.dir}/${name}-${version}.jar">
             <fileset dir="${build.classes.dir}"/>
@@ -164,10 +135,9 @@
         </jar>
     </target>
 
-
     <!-- Builds a src release tar-ball -->
     <target name="dist-src" depends="dist-jar, zip-javadoc"
-            description="Builds a source distribution">
+        description="Builds a source distribution">
         <zip destfile="${build.dir}/${name}-${version}-src.zip">
             <zipfileset dir="${src.dir}" prefix="${name}-${version}">
                 <exclude name="build/**"/>
@@ -177,52 +147,43 @@
         </zip>
     </target>
 
-
     <!-- Builds a release tar-ball for the os this target is executed on -->
     <target name="dist-tgz" depends="test, dist-jar, zip-javadoc, dist-src"
-            description="Builds a distribution for this os">
-        <tar destfile="${dist.dir}/${name}-${os}-${version}.tgz" compression="gzip">
+        description="Builds a distribution for this os">
+        <tar destfile="${dist.dir}/${name}-${version}.tgz"
+            compression="gzip">
             <tarfileset dir="${build.dir}" prefix="${name}-${version}">
                 <include name="${name}-${version}.jar"/>
                 <include name="${name}-${version}-src.zip"/>
                 <include name="${name}-${version}-${javadoc.zip}"/>
             </tarfileset>
-            <tarfileset dir="${src.dist.dir}" prefix="${name}-${version}">
-                <include name="*.txt"/>
-            </tarfileset>
-            <tarfileset dir="${generated.src.c.dir}" prefix="${name}-${version}">
+            <tarfileset dir="${generated.src.c.dir}"
+                prefix="${name}-${version}">
                 <include name="${shared.library.name}"/>
             </tarfileset>
-            <tarfileset dir="${src.config.dir}/${os}" prefix="${name}-${version}"/>
+            <tarfileset dir="${src.config.dir}/${os}"
+                prefix="${name}-${version}"/>
         </tar>
     </target>
 
     <!-- Create zip file for javadocs -->
-    <target name="zip-javadoc" depends="javadoc" description="Creates a zip file for javadocs">
+    <target name="zip-javadoc" depends="javadoc"
+        description="Creates a zip file for javadocs">
         <zip destfile="${build.dir}/${name}-${version}-${javadoc.zip}">
             <zipfileset dir="${build.javadoc.dir}" prefix="docs/"/>
         </zip>
     </target>
 
     <!-- Produce the javadocs -->
-    <target
-            name="javadoc"
-            description="Creates the javadocs">
+    <target name="javadoc" description="Creates the javadocs">
 
         <mkdir dir="${build.javadoc.dir}"/>
-        <javadoc
-                sourcepath="${src.java.dir}"
-                destdir="${build.javadoc.dir}"
-                packagenames="net.sf.*"
-                Package="true"
+        <javadoc sourcepath="${src.java.dir}" destdir="${build.javadoc.dir}"
+            packagenames="net.sf.*" Package="true"
                 overview="${src.java.dir}/net/sf/jpam/overview.html"
-                author="true"
-                version="true"
-                use="true"
-                windowtitle="${name}">
+                author="true" version="true" use="true" windowtitle="${name}">
             <classpath refid="project.class.path"/>
             <doctitle><![CDATA[<h1>${name}</h1>]]></doctitle>
-
         </javadoc>
     </target>
 </project>

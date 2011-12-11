@@ -34,7 +34,8 @@ import org.slf4j.LoggerFactory;
  * @author <a href="mailto:gluck@thoughtworks.com">Greg Luck</a>
  * @version $Id$
  */
-public class DigiPassTest extends AbstractPamTest {
+public class DigiPassTest extends AbstractPamTest
+{
 
     private static final String RADIUS_SERVICE = "net-sf-jpam-digipass";
 
@@ -73,15 +74,7 @@ public class DigiPassTest extends AbstractPamTest {
      */
     public void testUserWithUnkownUserName() {
         Pam pam = new Pam(RADIUS_SERVICE);
-        assertFalse("Test user authenticated: ", pam.authenticateSuccessful("zzzunknown", user1Credentials));
-    }
-
-    /**
-     * Stress tests jpam with net-sf-jpam-securid
-     * @throws InterruptedException
-     */
-    public void testJPamConcurrent() throws InterruptedException {
-        concurrentPamStressTest(new Pam("net-sf-jpam-digipass"), 
-                new PamReturnValue[] {PamReturnValue.PAM_AUTH_ERR, PamReturnValue.PAM_AUTH_ERR});
+        assertFalse("Test user authenticated: ", pam.authenticateSuccessful(
+            "zzzunknown", user1Credentials));
     }
 }
