@@ -83,7 +83,7 @@ public class PamTest
                 PamReturnValue.PAM_AUTH_ERR);
 
         final Pam pam = new Pam();
-        final PamReturnValue retval = pam.authenticate(passwd, "");
+        final PamReturnValue retval = pam.authenticate(user, "");
         assertTrue(set.contains(retval));
     }
 
