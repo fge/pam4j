@@ -37,6 +37,7 @@ public class PamTest
 
     @Test
     public void testJNIWorking()
+        throws PamException
     {
         final Pam pam = new Pam();
         assertTrue(pam.isSharedLibraryWorking());
@@ -44,6 +45,7 @@ public class PamTest
 
     @Test
     public void testUserAuthenticated()
+        throws PamException
     {
         final Pam pam = new Pam();
         assertEquals(pam.authenticate(user, passwd),
@@ -52,22 +54,29 @@ public class PamTest
 
     @Test
     public void testUserWithBadCredentialsNotAuthenticated()
+        throws PamException
     {
         final Pam pam = new Pam();
         assertNotEquals(pam.authenticate(user, badPasswd),
             PamReturnValue.PAM_SUCCESS);
     }
 
-    @Test(
-        expectedExceptions = NullPointerException.class
-    )
+    @Test
     public void testUserWithNullCredentials()
+        throws PamException
     {
-        new Pam().authenticate(passwd, null);
+        final Pam pam = new Pam();
+        try {
+            pam.authenticate(user, null);
+            fail("No exception thrown");
+        } catch (PamException e) {
+            assertEquals(e.getMessage(), "credentials are null");
+        }
     }
 
     @Test
     public void testUserWithEmptyCredentials()
+        throws PamException
     {
         final EnumSet<PamReturnValue> set
             = EnumSet.of(PamReturnValue.PAM_USER_UNKNOWN,
@@ -75,19 +84,25 @@ public class PamTest
 
         final Pam pam = new Pam();
         final PamReturnValue retval = pam.authenticate(passwd, "");
-        assertTrue(set.contains(retval ));
+        assertTrue(set.contains(retval));
     }
 
-    @Test(
-        expectedExceptions = NullPointerException.class
-    )
+    @Test
     public void testUserWithNullUsername()
+        throws PamException
     {
-        new Pam().authenticate(user, null);
+        final Pam pam = new Pam();
+        try {
+            pam.authenticate(null, "whatever");
+            fail("No exception thrown");
+        } catch (PamException e) {
+            assertEquals(e.getMessage(), "user name is null");
+        }
     }
 
     @Test
     public void testUserWithEmptyUsername()
+        throws PamException
     {
         final EnumSet<PamReturnValue> set
             = EnumSet.of(PamReturnValue.PAM_PERM_DENIED,
@@ -98,19 +113,25 @@ public class PamTest
         assertTrue(set.contains(retval));
     }
 
-    @Test(
-        expectedExceptions = NullPointerException.class
-    )
+    @Test
     public void testNullService()
     {
-        new Pam(null);
+        try {
+            new Pam(null);
+            fail("No exception thrown");
+        } catch (PamException e) {
+            assertEquals(e.getMessage(), "service name is null");
+        }
     }
 
-    @Test(
-        expectedExceptions = IllegalArgumentException.class
-    )
+    @Test
     public void testEmptyServiceName()
     {
-        new Pam("");
+        try {
+            new Pam("");
+            fail("No exception thrown");
+        } catch (PamException e) {
+            assertEquals(e.getMessage(), "service name is empty");
+        }
     }
 }

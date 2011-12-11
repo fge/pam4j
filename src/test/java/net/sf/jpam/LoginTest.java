@@ -15,6 +15,7 @@ public class LoginTest
     @Override
     @BeforeClass
     public void setUp()
+        throws PamException
     {
         super.setUp();
         pam = new Pam("login");
@@ -22,6 +23,7 @@ public class LoginTest
 
     @Test
     public void testUserAuthenticated()
+        throws PamException
     {
         assertEquals(pam.authenticate(user, passwd),
             PamReturnValue.PAM_SUCCESS);
@@ -29,6 +31,7 @@ public class LoginTest
 
     @Test
     public void testUserWithBadCredentialsNotAuthenticated()
+        throws PamException
     {
         assertNotEquals(pam.authenticate(user, badPasswd),
             PamReturnValue.PAM_SUCCESS);

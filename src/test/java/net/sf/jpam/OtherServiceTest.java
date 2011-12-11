@@ -14,6 +14,7 @@ public class OtherServiceTest
     @Override
     @BeforeClass
     public void setUp()
+        throws PamException
     {
         super.setUp();
         pam = new Pam("other");
@@ -21,38 +22,47 @@ public class OtherServiceTest
 
     @Test
     public void testUserAuthenticated()
+        throws PamException
     {
         final PamReturnValue retval = pam.authenticate(user, passwd);
         assertEquals(retval, PamReturnValue.PAM_AUTH_ERR);
     }
 
-    @Test(
-        expectedExceptions = NullPointerException.class
-    )
+    @Test
     public void testUserWithNullCredentials()
     {
-        pam.authenticate(passwd, null);
+        try {
+            pam.authenticate(user, null);
+            fail("No exception thrown");
+        } catch (PamException e) {
+            assertEquals(e.getMessage(), "credentials are null");
+        }
     }
 
     @Test
     public void testUserWithEmptyCredentials()
+        throws PamException
     {
-        final PamReturnValue retval = pam.authenticate(passwd,
-            "");
+        final PamReturnValue retval = pam.authenticate(user, "");
         assertEquals(retval, PamReturnValue.PAM_AUTH_ERR);
     }
 
-    @Test(
-        expectedExceptions = NullPointerException.class)
+    @Test
     public void testUserWithNullUsername()
     {
-        pam.authenticate(user, null);
+        try {
+            pam.authenticate(null, null);
+            fail("No exception thrown");
+        } catch (PamException e) {
+            assertEquals(e.getMessage(), "user name is null");
+        }
     }
 
     @Test
     public void testUserWithEmptyUsername()
+        throws PamException
     {
-        final PamReturnValue retval = pam.authenticate(user, "");
+        final PamReturnValue retval = pam.authenticate("", passwd);
         assertEquals(retval, PamReturnValue.PAM_AUTH_ERR);
     }
 }

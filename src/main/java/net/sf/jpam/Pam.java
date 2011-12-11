@@ -40,30 +40,19 @@ public class Pam
     }
 
 
-    /**
-     * Creates a new Pam object configured to use the {@link #DEFAULT_SERVICE_NAME}
-     */
     public Pam()
+        throws PamException
     {
         this(DEFAULT_SERVICE_NAME);
     }
 
-    /**
-     * Creates a new PAM object configured with the specified service name.
-     * <p/>
-     * A file with the same name must exist in /etc/pam.d
-     *
-     * @param serviceName
-     * @throws NullPointerException
-     * @throws IllegalArgumentException
-     */
     public Pam(final String serviceName)
-        throws NullPointerException, IllegalArgumentException
+        throws PamException
     {
         if (serviceName == null)
-            throw new NullPointerException("Service name is null");
+            throw new PamException("service name is null");
         if (serviceName.isEmpty())
-            throw new IllegalArgumentException("Service name is empty");
+            throw new PamException("service name is empty");
         this.serviceName = serviceName;
     }
 
@@ -84,24 +73,23 @@ public class Pam
 
     public PamReturnValue authenticate(final String username,
         final String credentials)
-        throws NullPointerException
+        throws PamException
     {
         if (username == null)
-            throw new NullPointerException("User name is null");
+            throw new PamException("user name is null");
         if (credentials == null)
-            throw new NullPointerException("Credentials are null");
+            throw new PamException("credentials are null");
 
         synchronized (Pam.class) {
             final int id = authenticate(serviceName, username, credentials,
                 LOG.isDebugEnabled());
-            final PamReturnValue retval = PamReturnValue.fromId(id);
-            LOG.debug("retval: " + retval);
-            return retval;
+            return PamReturnValue.fromId(id);
         }
     }
 
 
     public static void main(final String... args)
+        throws PamException
     {
         final Pam pam = new Pam();
         final PamReturnValue retval = pam.authenticate(args[0], args[1]);

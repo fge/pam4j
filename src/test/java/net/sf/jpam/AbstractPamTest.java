@@ -10,6 +10,7 @@ public class AbstractPamTest
 
     @BeforeClass
     public void setUp()
+        throws PamException
     {
         user = System.getProperty("test.login");
         passwd = System.getProperty("test.passwd");
