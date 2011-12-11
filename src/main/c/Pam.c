@@ -11,8 +11,6 @@
 #include <unistd.h>
 #include <sys/types.h>
 
-#define COPY_STRING(s) (s) ? strdup(s) : NULL
-
 #define pr_debug(args...) do { \
     if (debug) \
         printf(args); \
@@ -46,51 +44,44 @@ static void *libpam_misc;
 static int PAM_conv(int num_messages, const struct pam_message **messages,
     struct pam_response **resp, void *appdata_ptr)
 {
+    /*
+     * Note that this function is NOT suitable for anything other than
+     * authentication purposes... We only enter the password once.
+     */
     int i = 0;
+    int password_entered = 0;
     const struct pam_message *msg;
     struct pam_response *reply;
     const char *prompt;
+    int msg_style;
 
-    struct pam_response *replies = calloc(num_messages,
-        sizeof(struct pam_response));
+    struct pam_response *replies;
+
+    replies = calloc(num_messages, sizeof(struct pam_response));
     if (!replies)
         return PAM_CONV_ERR;
 
+    memset(replies, 0, sizeof(*replies));
+
     for (i = 0; i < num_messages; i++) {
         msg = messages[i];
+        msg_style = msg->msg_style;
         prompt = msg->msg;
         reply = &replies[i];
 
-        pr_debug("***Message from PAM is: |%s|\n", prompt);
-        pr_debug("***Msg_style to PAM is: |%d|\n", msg->msg_style);
-
-        //SecurId requires this syntax.
-        if (!strcmp(prompt, "Enter PASSCODE: ")) {
-            pr_debug("***Sending password\n");
-            reply->resp = COPY_STRING(password);
+        switch (msg_style) {
+            case PAM_PROMPT_ECHO_OFF: case PAM_PROMPT_ECHO_ON:
+                if (password_entered) {
+                    free(replies);
+                    return PAM_CONV_ERR;
+                }
+                break;
+            default:
+                continue;
         }
 
-        if (!strcmp(prompt, "Password: ")) {
-            pr_debug("***Sending password\n");
-            reply->resp = COPY_STRING(password);
-        }
-
-        //Mac OS X
-        if (!strcmp(prompt, "Password:")) {
-            pr_debug("***Sending password\n");
-            reply->resp = COPY_STRING(password);
-        }
-
-        // HP-UX
-        if (!strcmp(prompt, "System Password:")) {
-            pr_debug("***Sending password\n");
-            reply->resp = COPY_STRING(password);
-        }
-
-        // If none of the above matches, make sure the printf() does not
-        // crash because replies[i].resp is NULL
-        if (reply->resp != NULL)
-            pr_debug("***Response to PAM is: |%s|\n", reply->resp);
+        reply->resp = password ? strdup(password) : NULL;
+        password_entered = 1;
     }
 
     *resp = replies;
@@ -150,10 +141,6 @@ JNIEXPORT jint JNICALL Java_net_sf_jpam_Pam_authenticate(JNIEnv *pEnv,
     service_name = (*pEnv)->GetStringUTFChars(pEnv, pServiceName, NULL);
     username = (*pEnv)->GetStringUTFChars(pEnv, pUsername, NULL);
     password = (*pEnv)->GetStringUTFChars(pEnv, pPassword, NULL);
-
-    pr_debug("service_name is %s\n", service_name);
-    pr_debug("password is %s\n", password);
-    pr_debug("username is %s\n", username);
 
     /* Get a handle to a PAM instance */
     retval = pam_start(service_name, username, &PAM_converse, &pamh);
