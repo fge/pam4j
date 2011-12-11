@@ -49,10 +49,12 @@ clean:
 
 # Linux x86
 libjpam.x86: Pam.c
-	gcc -fPIC -Wall -g -c -I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/linux Pam.c
-	gcc -g -shared -fPIC -o libjpam.so Pam.o -lpam -lpam_misc -ldl
+	gcc -fPIC -Wall -g -c -I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/linux \
+	    Pam.c PamHandle.c
+	gcc -g -shared -fPIC -o libjpam.so Pam.o PamHandle.o -lpam -lpam_misc -ldl
 
 # Linux x86_64
 libjpam.x86_64: Pam.c
-	gcc -fPIC -Wall -g -c -I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/linux Pam.c
-	gcc -g -shared -fPIC -o libjpam.so Pam.o -lpam -lpam_misc -ldl	    
+	gcc -fPIC -Wall -g -c -I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/linux \
+	    Pam.c PamHandle.c
+	gcc -g -shared -fPIC -o libjpam.so Pam.o PamHandle.o -lpam -lpam_misc -ldl

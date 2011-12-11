@@ -1,12 +1,14 @@
 package net.sf.jpam;
 
+import org.eel.kitchen.pam.PamHandle;
 import org.eel.kitchen.pam.PamReturnValue;
+import org.eel.kitchen.pam.PamService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.io.File;
-import java.util.EnumSet;
 
 import static org.testng.Assert.*;
 
@@ -15,6 +17,17 @@ public class PamTest
     extends AbstractPamTest
 {
     private static final Logger LOG = LoggerFactory.getLogger(PamTest.class);
+
+    private PamService service;
+
+    @Override
+    @BeforeClass
+    public void setUp()
+        throws PamException
+    {
+        super.setUp();
+        service = Pam.getService();
+    }
 
     @Test
     public void testSharedLibraryInstalledInLibraryPath()
@@ -39,35 +52,31 @@ public class PamTest
     public void testJNIWorking()
         throws PamException
     {
-        final Pam pam = new Pam();
-        assertTrue(pam.isSharedLibraryWorking());
+        assertTrue(Pam.isSharedLibraryWorking());
     }
 
     @Test
     public void testUserAuthenticated()
         throws PamException
     {
-        final Pam pam = new Pam();
-        assertEquals(pam.authenticate(user, passwd),
-            PamReturnValue.PAM_SUCCESS);
+        final PamHandle handle = service.getHandle(user, passwd);
+        assertEquals(handle.authenticate(), PamReturnValue.PAM_SUCCESS);
     }
 
     @Test
     public void testUserWithBadCredentialsNotAuthenticated()
         throws PamException
     {
-        final Pam pam = new Pam();
-        assertNotEquals(pam.authenticate(user, badPasswd),
-            PamReturnValue.PAM_SUCCESS);
+        final PamHandle handle = service.getHandle(user, badPasswd);
+        assertNotEquals(handle.authenticate(), PamReturnValue.PAM_SUCCESS);
     }
 
     @Test
     public void testUserWithNullCredentials()
         throws PamException
     {
-        final Pam pam = new Pam();
         try {
-            pam.authenticate(user, null);
+            service.getHandle(user, null);
             fail("No exception thrown");
         } catch (PamException e) {
             assertEquals(e.getMessage(), "credentials are null");
@@ -75,25 +84,11 @@ public class PamTest
     }
 
     @Test
-    public void testUserWithEmptyCredentials()
-        throws PamException
-    {
-        final EnumSet<PamReturnValue> set
-            = EnumSet.of(PamReturnValue.PAM_USER_UNKNOWN,
-                PamReturnValue.PAM_AUTH_ERR);
-
-        final Pam pam = new Pam();
-        final PamReturnValue retval = pam.authenticate(user, "");
-        assertTrue(set.contains(retval));
-    }
-
-    @Test
     public void testUserWithNullUsername()
         throws PamException
     {
-        final Pam pam = new Pam();
         try {
-            pam.authenticate(null, "whatever");
+            service.getHandle(null, "whatever");
             fail("No exception thrown");
         } catch (PamException e) {
             assertEquals(e.getMessage(), "user name is null");
@@ -104,20 +99,16 @@ public class PamTest
     public void testUserWithEmptyUsername()
         throws PamException
     {
-        final EnumSet<PamReturnValue> set
-            = EnumSet.of(PamReturnValue.PAM_PERM_DENIED,
-            PamReturnValue.PAM_AUTH_ERR);
-
-        final Pam pam = new Pam();
-        final PamReturnValue retval = pam.authenticate(user, "");
-        assertTrue(set.contains(retval));
+        final PamHandle handle = service.getHandle("", "");
+        final PamReturnValue retval = handle.authenticate();
+        assertEquals(retval, PamReturnValue.PAM_USER_UNKNOWN);
     }
 
     @Test
     public void testNullService()
     {
         try {
-            new Pam(null);
+            Pam.getService(null);
             fail("No exception thrown");
         } catch (PamException e) {
             assertEquals(e.getMessage(), "service name is null");
@@ -128,7 +119,7 @@ public class PamTest
     public void testEmptyServiceName()
     {
         try {
-            new Pam("");
+            Pam.getService("");
             fail("No exception thrown");
         } catch (PamException e) {
             assertEquals(e.getMessage(), "service name is empty");

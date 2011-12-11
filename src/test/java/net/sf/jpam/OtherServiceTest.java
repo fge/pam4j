@@ -1,6 +1,8 @@
 package net.sf.jpam;
 
+import org.eel.kitchen.pam.PamHandle;
 import org.eel.kitchen.pam.PamReturnValue;
+import org.eel.kitchen.pam.PamService;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -9,7 +11,7 @@ import static org.testng.Assert.*;
 public class OtherServiceTest
     extends AbstractPamTest
 {
-    private Pam pam;
+    private PamService service;
 
     @Override
     @BeforeClass
@@ -17,22 +19,22 @@ public class OtherServiceTest
         throws PamException
     {
         super.setUp();
-        pam = new Pam("other");
+        service = Pam.getService("other");
     }
 
     @Test
     public void testUserAuthenticated()
         throws PamException
     {
-        final PamReturnValue retval = pam.authenticate(user, passwd);
-        assertEquals(retval, PamReturnValue.PAM_AUTH_ERR);
+        final PamHandle handle = service.getHandle(user, passwd);
+        assertEquals(handle.authenticate(), PamReturnValue.PAM_AUTH_ERR);
     }
 
     @Test
     public void testUserWithNullCredentials()
     {
         try {
-            pam.authenticate(user, null);
+            service.getHandle(user, null);
             fail("No exception thrown");
         } catch (PamException e) {
             assertEquals(e.getMessage(), "credentials are null");
@@ -40,18 +42,10 @@ public class OtherServiceTest
     }
 
     @Test
-    public void testUserWithEmptyCredentials()
-        throws PamException
-    {
-        final PamReturnValue retval = pam.authenticate(user, "");
-        assertEquals(retval, PamReturnValue.PAM_AUTH_ERR);
-    }
-
-    @Test
     public void testUserWithNullUsername()
     {
         try {
-            pam.authenticate(null, null);
+            service.getHandle(null, null);
             fail("No exception thrown");
         } catch (PamException e) {
             assertEquals(e.getMessage(), "user name is null");
@@ -62,7 +56,7 @@ public class OtherServiceTest
     public void testUserWithEmptyUsername()
         throws PamException
     {
-        final PamReturnValue retval = pam.authenticate("", passwd);
-        assertEquals(retval, PamReturnValue.PAM_AUTH_ERR);
+        final PamHandle handle = service.getHandle("", passwd);
+        assertEquals(handle.authenticate(), PamReturnValue.PAM_AUTH_ERR);
     }
 }

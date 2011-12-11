@@ -1,6 +1,8 @@
 package net.sf.jpam;
 
+import org.eel.kitchen.pam.PamHandle;
 import org.eel.kitchen.pam.PamReturnValue;
+import org.eel.kitchen.pam.PamService;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -10,7 +12,7 @@ public class LoginTest
     extends AbstractPamTest
 {
 
-    private Pam pam;
+    private PamService service;
 
     @Override
     @BeforeClass
@@ -18,22 +20,22 @@ public class LoginTest
         throws PamException
     {
         super.setUp();
-        pam = new Pam("login");
+        service = Pam.getService("login");
     }
 
     @Test
     public void testUserAuthenticated()
         throws PamException
     {
-        assertEquals(pam.authenticate(user, passwd),
-            PamReturnValue.PAM_SUCCESS);
+        final PamHandle handle = service.getHandle(user, passwd);
+        assertEquals(handle.authenticate(), PamReturnValue.PAM_SUCCESS);
     }
 
     @Test
     public void testUserWithBadCredentialsNotAuthenticated()
         throws PamException
     {
-        assertNotEquals(pam.authenticate(user, badPasswd),
-            PamReturnValue.PAM_SUCCESS);
+        final PamHandle handle = service.getHandle(user, badPasswd);
+        assertNotEquals(handle.authenticate(), PamReturnValue.PAM_SUCCESS);
     }
 }

@@ -16,22 +16,12 @@
 
 package net.sf.jpam;
 
-import org.eel.kitchen.pam.PamReturnValue;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.eel.kitchen.pam.PamService;
 
-public class Pam
+public final class Pam
 {
-    private static final Logger LOG = LoggerFactory.getLogger(Pam.class);
     private static final String JPAM_SHARED_LIBRARY_NAME = "jpam";
-    private String serviceName;
 
-
-    /**
-     * The default service name of "net-sf-pam".
-     * <p/>
-     * This service is expected to be configured in /etc/pam.d
-     */
     public static final String DEFAULT_SERVICE_NAME
         = "net-sf-" + JPAM_SHARED_LIBRARY_NAME;
 
@@ -39,91 +29,31 @@ public class Pam
         System.loadLibrary(JPAM_SHARED_LIBRARY_NAME);
     }
 
-
-    public Pam()
-        throws PamException
+    private Pam()
     {
-        this(DEFAULT_SERVICE_NAME);
     }
 
-    public Pam(final String serviceName)
-        throws PamException
-    {
-        if (serviceName == null)
-            throw new PamException("service name is null");
-        if (serviceName.isEmpty())
-            throw new PamException("service name is empty");
-        this.serviceName = serviceName;
-    }
+    static native boolean isSharedLibraryWorking();
 
-    /**
-     * A simple way to check that JNI is installed and properly works
-     *
-     * @return true if working
-     */
-    native boolean isSharedLibraryWorking();
-
-    /**
-     * The {@link #isSharedLibraryWorking()} native method callsback to this method to make sure all is well.
-     */
-    private void callback()
+    private static void callback()
     {
         //noop
     }
 
-    public PamReturnValue authenticate(final String username,
-        final String credentials)
-        throws PamException
-    {
-        if (username == null)
-            throw new PamException("user name is null");
-        if (credentials == null)
-            throw new PamException("credentials are null");
-
-        synchronized (Pam.class) {
-            final int id = authenticate(serviceName, username, credentials,
-                LOG.isDebugEnabled());
-            return PamReturnValue.fromId(id);
-        }
-    }
-
-
-    public static void main(final String... args)
-        throws PamException
-    {
-        final Pam pam = new Pam();
-        final PamReturnValue retval = pam.authenticate(args[0], args[1]);
-        System.out.println("Response: " + retval);
-    }
-
-    /**
-     * Authenticates a user.
-     *
-     * Warning: Any calls to this method should be synchronized on the class.
-     * The underlying PAM mechanism is not threadsafe.
-     *
-     * @param serviceName the pam.d config file to use
-     * @param username    the username to be authenticated
-     * @param credentials the credentials to be authenticated
-     * @param debug       if true, debugging information will be emitted
-     * @return an integer, which can be converted to a {@link PamReturnValue} using {@link PamReturnValue#fromId(int)}
-     */
-    private native int authenticate(String serviceName, String username,
-        String credentials, boolean debug);
-
-    /**
-     * @return the system dependent name of the shared library the Pam class is expecting.
-     */
     public static String getLibraryName()
     {
         return System.mapLibraryName(JPAM_SHARED_LIBRARY_NAME);
     }
 
-    /**
-     * @return the servicename this PAM object is using
-     */
-    public String getServiceName()
+    public static PamService getService()
+        throws PamException
     {
-        return serviceName;
+        return getService(DEFAULT_SERVICE_NAME);
+    }
+
+    public static PamService getService(final String service)
+        throws PamException
+    {
+        return new PamService(service);
     }
 }
