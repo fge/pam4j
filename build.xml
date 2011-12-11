@@ -13,9 +13,9 @@
     <!-- Load local environment overrides -->
     <property environment="env"/>
     <!-- OS and Architecture specific properties -->
-    <property file="${os}.properties"/>
+    <property file="ant/${os}.properties"/>
     <!-- Default properties -->
-    <property file="build.properties"/>
+    <property file="ant/build.properties"/>
 
 
     <artifact:pom file="pom.xml" id="maven.project"/>
