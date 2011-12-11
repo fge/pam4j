@@ -17,7 +17,7 @@ public enum PamReturnValue
     PAM_USER_UNKNOWN("User not known to the underlying authentication module"),
     PAM_MAXTRIES("An authentication service has maintained a retry count which "
         + "has been reached. No further retries should be attempted"),
-    PAM_NEW_AUTHTOK_REQD("New authentication token required This is normally "
+    PAM_NEW_AUTHTOK_REQD("New authentication token required. This is normally "
         + "returned if the machine security policies require that the password "
         + "should be changed because the password is NULL or it has aged"),
     PAM_ACCT_EXPIRED("User account has expired"),
