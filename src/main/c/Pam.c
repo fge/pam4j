@@ -13,6 +13,11 @@
 
 #define COPY_STRING(s) (s) ? strdup(s) : NULL
 
+#define pr_debug(args...) do { \
+    if (debug) \
+        printf(args); \
+} while (0)
+
 /* DEFINE STATIC EXTERNAL STRUCTURES AND VARIABLES SO THAT
    THEY ONLY HAVE SCOPE WITHIN THE METHODS AND FUNCTIONS OF
    THIS SOURCE FILE */
@@ -21,8 +26,8 @@ static const char *username;
 static const char *password;
 static jboolean debug;
 
-static int PAM_conv(int, const struct pam_message **, struct pam_response**,
-    void*);
+static int PAM_conv(int, const struct pam_message **, struct pam_response **,
+    void *);
 
 static struct pam_conv PAM_converse = {
     .conv = PAM_conv,
@@ -31,8 +36,8 @@ static struct pam_conv PAM_converse = {
 
 // We use these to hold handles to the libs we
 // dlopen in JNI_OnLoad
-static void* libpam;
-static void* libpam_misc;
+static void *libpam;
+static void *libpam_misc;
 
 /*************************************************
 ** PAM Conversation function                    **
@@ -56,42 +61,36 @@ static int PAM_conv(int num_messages, const struct pam_message **messages,
         prompt = msg->msg;
         reply = &replies[i];
 
-        if (debug) {
-            printf("***Message from PAM is: |%s|\n", prompt);
-            printf("***Msg_style to PAM is: |%d|\n", msg->msg_style);
-        }
+        pr_debug("***Message from PAM is: |%s|\n", prompt);
+        pr_debug("***Msg_style to PAM is: |%d|\n", msg->msg_style);
 
         //SecurId requires this syntax.
         if (!strcmp(prompt, "Enter PASSCODE: ")) {
-            if (debug)
-                printf("***Sending password\n");
+            pr_debug("***Sending password\n");
             reply->resp = COPY_STRING(password);
         }
 
         if (!strcmp(prompt, "Password: ")) {
-            if (debug)
-                printf("***Sending password\n");
+            pr_debug("***Sending password\n");
             reply->resp = COPY_STRING(password);
         }
 
         //Mac OS X
         if (! strcmp(prompt, "Password:")) {
-            if (debug)
-                printf("***Sending password\n");
+            pr_debug("***Sending password\n");
             reply->resp = COPY_STRING(password);
         }
 
         // HP-UX
         if (!strcmp(prompt, "System Password:")) {
-            if (debug)
-                printf("***Sending password\n");
+            pr_debug("***Sending password\n");
             reply->resp = COPY_STRING(password);
         }
 
         // If none of the above matches, make sure the printf() does not
         // crash because replies[i].resp is NULL
-        if (debug && reply->resp != NULL)
-            printf("***Response to PAM is: |%s|\n", reply->resp);
+        if (reply->resp != NULL)
+            pr_debug("***Response to PAM is: |%s|\n", reply->resp);
     }
 
     *resp = replies;
@@ -135,11 +134,6 @@ JNIEXPORT jboolean JNICALL Java_net_sf_jpam_Pam_isSharedLibraryWorking(
     Java_net_sf_jpam_Pam_nativeMethod(env, obj);
     return JNI_TRUE;
 }
-
-#define pr_debug(args...) do { \
-    if (debug) \
-        printf(args); \
-} while (0)
 
 /*
  * Class:     net_sf_jpam_Pam
