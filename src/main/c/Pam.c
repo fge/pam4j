@@ -136,6 +136,11 @@ JNIEXPORT jboolean JNICALL Java_net_sf_jpam_Pam_isSharedLibraryWorking(
     return JNI_TRUE;
 }
 
+#define pr_debug(args...) do { \
+    if (debug) \
+        printf(args); \
+} while (0)
+
 /*
  * Class:     net_sf_jpam_Pam
  * Method:    authenticate
@@ -152,58 +157,47 @@ JNIEXPORT jint JNICALL Java_net_sf_jpam_Pam_authenticate(JNIEnv *pEnv,
     username = (*pEnv)->GetStringUTFChars(pEnv, pUsername, NULL);
     password = (*pEnv)->GetStringUTFChars(pEnv, pPassword, NULL);
 
-    if (debug) {
-        printf("service_name is %s\n", service_name);
-        printf("password is %s\n", password);
-        printf("username is %s\n", username);
-    }
+    pr_debug("service_name is %s\n", service_name);
+    pr_debug("password is %s\n", password);
+    pr_debug("username is %s\n", username);
 
     /* Get a handle to a PAM instance */
-	if (debug)
-        printf("Trying to get a handle to the PAM service...\n");
+    pr_debug("Trying to get a handle to the PAM service...\n");
 
     retval = pam_start(service_name, username, &PAM_converse, &pamh);
 
     if (retval != PAM_SUCCESS) {
-        if (debug)
-            printf("...call to create service handle failed with error: %d\n",
-                retval);
+        pr_debug("...call to create service handle failed with error: %d\n",
+            retval);
         goto out_nohandle;
     }
 
     /* Is the user really a user? */
-    if (debug) {
-        printf("...service handle was created.\n");
-        printf("Trying to see if the user is a valid system user...\n");
-    }
+    pr_debug("...service handle was created.\n");
+    pr_debug("Trying to see if the user is a valid system user...\n");
 
     pam_set_item(pamh, PAM_AUTHTOK, password);
     retval = pam_authenticate(pamh, 0);
 
     /* Is user permitted access? */
     if (retval != PAM_SUCCESS) {
-        if (debug) {
-            if (retval == PAM_USER_UNKNOWN)
-                printf("...failed to find user %s with error: %d\n",
-                    username, retval);
-            else
-                printf("...failed to authenticate with error: %d\n", retval);
-        }
+        if (retval == PAM_USER_UNKNOWN)
+            pr_debug("...failed to find user %s with error: %d\n", username,
+                retval);
+        else
+            pr_debug("...failed to authenticate with error: %d\n", retval);
         goto out_free;
     }
 
-    if (debug) {
-        printf("...user %s is a real user.\n",username);
-        printf("Trying to pass info to the pam_acct_mgmt function...\n");
-    }
+    pr_debug("...user %s is a real user.\n",username);
+    pr_debug("Trying to pass info to the pam_acct_mgmt function...\n");
+
     retval = pam_acct_mgmt(pamh, 0);
 
-    if (debug) {
-        if (retval == PAM_SUCCESS)
-            printf("...user %s is permitted access.\n",username);
-        else {
-            printf("...call returned with error: %d\n",retval);
-        }
+    if (retval == PAM_SUCCESS)
+        pr_debug("...user %s is permitted access.\n",username);
+    else {
+        pr_debug("...call returned with error: %d\n",retval);
     }
 
 out_free:
