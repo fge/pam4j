@@ -22,7 +22,6 @@
 static const char *service_name;
 static const char *username;
 static const char *password;
-static jboolean debug;
 
 static int PAM_conv(int, const struct pam_message **, struct pam_response **,
     void *);
@@ -52,7 +51,6 @@ static int PAM_conv(int num_messages, const struct pam_message **messages,
     int password_entered = 0;
     const struct pam_message *msg;
     struct pam_response *reply;
-    const char *prompt;
     int msg_style;
 
     struct pam_response *replies;
@@ -66,8 +64,6 @@ static int PAM_conv(int num_messages, const struct pam_message **messages,
     for (i = 0; i < num_messages; i++) {
         msg = messages[i];
         msg_style = msg->msg_style;
-        prompt = msg->msg;
-        reply = &replies[i];
 
         switch (msg_style) {
             case PAM_PROMPT_ECHO_OFF: case PAM_PROMPT_ECHO_ON:
@@ -80,6 +76,7 @@ static int PAM_conv(int num_messages, const struct pam_message **messages,
                 continue;
         }
 
+        reply = &replies[i];
         reply->resp = password ? strdup(password) : NULL;
         password_entered = 1;
     }
