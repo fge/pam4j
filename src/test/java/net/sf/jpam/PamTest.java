@@ -1,10 +1,12 @@
 package net.sf.jpam;
 
+import org.eel.kitchen.pam.PamReturnValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
 
 import java.io.File;
+import java.util.EnumSet;
 
 import static org.testng.Assert.*;
 
@@ -44,14 +46,16 @@ public class PamTest
     public void testUserAuthenticated()
     {
         final Pam pam = new Pam();
-        assertTrue(pam.authenticateSuccessful(user1Name, user1Credentials));
+        assertEquals(pam.authenticate(user1Name, user1Credentials),
+            PamReturnValue.PAM_SUCCESS);
     }
 
     @Test
     public void testUserWithBadCredentialsNotAuthenticated()
     {
         final Pam pam = new Pam();
-        assertFalse(pam.authenticateSuccessful(user1Name, user1BadCredentials));
+        assertNotEquals(pam.authenticate(user1Name, user1BadCredentials),
+            PamReturnValue.PAM_SUCCESS);
     }
 
     @Test(
@@ -65,11 +69,14 @@ public class PamTest
     @Test
     public void testUserWithEmptyCredentials()
     {
+        final EnumSet<PamReturnValue> set
+            = EnumSet.of(PamReturnValue.PAM_USER_UNKNOWN,
+                PamReturnValue.PAM_AUTH_ERR);
+
         final Pam pam = new Pam();
         final PamReturnValue pamReturnValue
             = pam.authenticate(user1Credentials, "");
-        assertTrue(pamReturnValue.equals(PamReturnValue.PAM_USER_UNKNOWN)
-            || pamReturnValue.equals(PamReturnValue.PAM_AUTH_ERR));
+        assertTrue(set.contains(pamReturnValue));
     }
 
     @Test(
@@ -83,10 +90,13 @@ public class PamTest
     @Test
     public void testUserWithEmptyUsername()
     {
+        final EnumSet<PamReturnValue> set
+            = EnumSet.of(PamReturnValue.PAM_PERM_DENIED,
+            PamReturnValue.PAM_AUTH_ERR);
+
         final Pam pam = new Pam();
         final PamReturnValue pamReturnValue = pam.authenticate(user1Name, "");
-        assertTrue(pamReturnValue.equals(PamReturnValue.PAM_PERM_DENIED)
-            || pamReturnValue.equals(PamReturnValue.PAM_AUTH_ERR));
+        assertTrue(set.contains(pamReturnValue));
     }
 
     @Test(

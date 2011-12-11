@@ -2,6 +2,7 @@ package net.sf.jpam;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import org.eel.kitchen.pam.PamReturnValue;
 
 import static org.testng.Assert.*;
 
@@ -23,11 +24,12 @@ public class OtherServiceTest
     {
         final PamReturnValue returnValue = pam.authenticate(user1Name,
             user1Credentials);
-        assertTrue(PamReturnValue.PAM_AUTH_ERR.equals(returnValue));
+        assertEquals(returnValue, PamReturnValue.PAM_AUTH_ERR);
     }
 
     @Test(
-        expectedExceptions = NullPointerException.class)
+        expectedExceptions = NullPointerException.class
+    )
     public void testUserWithNullCredentials()
     {
         pam.authenticate(user1Credentials, null);
@@ -38,7 +40,7 @@ public class OtherServiceTest
     {
         final PamReturnValue pamReturnValue = pam.authenticate(user1Credentials,
             "");
-        assertTrue(pamReturnValue.equals(PamReturnValue.PAM_AUTH_ERR));
+        assertEquals(pamReturnValue, PamReturnValue.PAM_AUTH_ERR);
     }
 
     @Test(
@@ -52,6 +54,6 @@ public class OtherServiceTest
     public void testUserWithEmptyUsername()
     {
         final PamReturnValue pamReturnValue = pam.authenticate(user1Name, "");
-        assertTrue(pamReturnValue.equals(PamReturnValue.PAM_AUTH_ERR));
+        assertEquals(pamReturnValue ,PamReturnValue.PAM_AUTH_ERR);
     }
 }

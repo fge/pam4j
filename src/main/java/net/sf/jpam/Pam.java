@@ -18,22 +18,8 @@ package net.sf.jpam;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.eel.kitchen.pam.PamReturnValue;
 
-/**
- * The PAM bridging class. Most of the work is done here.
- * <p/>
- * To see debugging output for this class and native code, set the installed logging toolkit level
- * for this class to DEBUG or equivalent. The debugging output for the native code will
- * be sent to <code>STDOUT</code>.
- * <p/>
- * This class may be called directly, or by using JAAS, via the {@link net.sf.jpam.jaas.JpamLoginModule}.
- *
- * @author <a href="mailto:gregluck@users.sourceforge.net">Greg Luck</a>
- * @author David Lutterkort, RedHat
- * @author Ken Huffman
- * @version $Id$
- *
- */
 public class Pam {
     private static final Logger LOG = LoggerFactory.getLogger(Pam.class);
     private static final String JPAM_SHARED_LIBRARY_NAME = "jpam";
@@ -91,34 +77,6 @@ public class Pam {
         //noop
     }
 
-    /**
-     * Authenticates a user.
-     * <p/>
-     * This method is threadsafe.
-     * <p/>
-     * If the logging toolkit is set to DEBUG, the shared library will emit debug
-     * information to the console.
-     *
-     * @param username    the username to be authenticated
-     * @param credentials the credentials to use in the authentication .e.g a password
-     * @return true if the <code>PamReturnValue</code> is {@link PamReturnValue#PAM_SUCCESS}
-     */
-    public boolean authenticateSuccessful(String username, String credentials) {
-        PamReturnValue success = PamReturnValue.PAM_SUCCESS;
-        PamReturnValue actual = authenticate(username, credentials);
-        return actual.equals(success);
-    }
-
-    /**
-     * Sames as <code>authenticateSuccessful</code>, except a {@link PamReturnValue} is returned
-     * <p/>
-     * This method is threadsafe.
-     * @param username
-     * @param credentials
-     * @return a PAM specific return value
-     * @throws NullPointerException if any of the parameters are null
-     * @see #authenticateSuccessful(String, String)
-     */
     public PamReturnValue authenticate(String username, String credentials) throws NullPointerException {
         if (serviceName == null) {
             throw new NullPointerException("Service name is null");
@@ -128,7 +86,7 @@ public class Pam {
             throw new NullPointerException("Credentials are null");
         }
         synchronized (Pam.class) {
-            PamReturnValue pamReturnValue
+            final PamReturnValue pamReturnValue
                 = PamReturnValue.fromId(authenticate(serviceName, username,
                     credentials, LOG.isDebugEnabled()));
             LOG.debug("retval: " + pamReturnValue);

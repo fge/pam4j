@@ -1,5 +1,6 @@
 package net.sf.jpam;
 
+import org.eel.kitchen.pam.PamReturnValue;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -22,12 +23,14 @@ public class LoginTest
     @Test
     public void testUserAuthenticated()
     {
-        assertTrue(pam.authenticateSuccessful(user1Name, user1Credentials));
+        assertEquals(pam.authenticate(user1Name, user1Credentials),
+            PamReturnValue.PAM_SUCCESS);
     }
 
     @Test
     public void testUserWithBadCredentialsNotAuthenticated()
     {
-        assertFalse(pam.authenticateSuccessful(user1Name, user1BadCredentials));
+        assertNotEquals(pam.authenticate(user1Name, user1BadCredentials),
+            PamReturnValue.PAM_SUCCESS);
     }
 }

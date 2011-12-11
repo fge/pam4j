@@ -1,5 +1,6 @@
 package net.sf.jpam;
 
+import org.eel.kitchen.pam.PamReturnValue;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
@@ -14,20 +15,23 @@ public class SecurIdTest
     public void testUserAuthenticated()
     {
         final Pam pam = new Pam(SECURID_SERVICE);
-        assertTrue(pam.authenticateSuccessful(user1Name, "655635"));
+        assertEquals(pam.authenticate(user1Name, "655635"),
+            PamReturnValue.PAM_SUCCESS);
     }
 
     @Test
     public void testUserWithBadCredentialsNotAuthenticated()
     {
         final Pam pam = new Pam(SECURID_SERVICE);
-        assertFalse(pam.authenticateSuccessful(user1Name, user1BadCredentials));
+        assertNotEquals(pam.authenticate(user1Name, user1BadCredentials),
+            PamReturnValue.PAM_SUCCESS);
     }
 
     @Test
     public void testUserWithUnkownUserName()
     {
         final Pam pam = new Pam(SECURID_SERVICE);
-        assertFalse(pam.authenticateSuccessful("zzzunknown", user1Credentials));
+        assertNotEquals(pam.authenticate("zzzunknown", user1Credentials),
+            PamReturnValue.PAM_SUCCESS);
     }
 }
