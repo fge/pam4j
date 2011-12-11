@@ -40,7 +40,7 @@
 #
 # Requirements: Requires /etc/shadow be made readable by the user executing java
 #
-auth       required   /lib/security/pam_unix_auth.so
-account    required   /lib/security/pam_unix_acct.so
-password   required   /lib/security/pam_unix_passwd.so
-session    required   /lib/security/pam_unix_session.so
+auth       required   pam_unix.so
+account    required   pam_unix.so
+password   required   pam_unix.so
+session    required   pam_unix.so

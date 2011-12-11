@@ -16,8 +16,6 @@
 package net.sf.jpam;
 
 import junit.framework.TestCase;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Performs tests on the Pam class.
@@ -33,8 +31,6 @@ import org.slf4j.LoggerFactory;
  * @version $Id$
  */
 public class AbstractPamTest extends TestCase {
-    private static final Logger LOG
-        = LoggerFactory.getLogger(AbstractPamTest.class);
     /**
      * user 1 name
      */
@@ -47,18 +43,6 @@ public class AbstractPamTest extends TestCase {
      * user 1 bad credentials
      */
     protected String user1BadCredentials = "test01bad";
-    /**
-     * user 2 name
-     */
-    protected String user2Name = "test2";
-    /**
-     * user 2 credentials
-     */
-    protected String user2Credentials = "test02";
-    /**
-     * user 2 bad credentials
-     */
-    protected String user2BadCredentials = "test02bad";
 
 
     /**

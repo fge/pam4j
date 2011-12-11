@@ -131,6 +131,7 @@ public class Pam {
             PamReturnValue pamReturnValue
                 = PamReturnValue.fromId(authenticate(serviceName, username,
                     credentials, LOG.isDebugEnabled()));
+            LOG.debug("retval: " + pamReturnValue);
             return pamReturnValue;
         }
     }
