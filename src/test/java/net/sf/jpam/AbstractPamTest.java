@@ -15,7 +15,7 @@
  */
 package net.sf.jpam;
 
-import junit.framework.TestCase;
+import org.testng.annotations.BeforeClass;
 
 /**
  * Performs tests on the Pam class.
@@ -30,25 +30,20 @@ import junit.framework.TestCase;
  * @author <a href="mailto:gregluck@users.sourceforge.net">Greg Luck</a>
  * @version $Id$
  */
-public class AbstractPamTest extends TestCase {
-    /**
-     * user 1 name
-     */
-    protected String user1Name = "test";
-    /**
-     * user 1 credentials
-     */
-    protected String user1Credentials = "test01";
-    /**
-     * user 1 bad credentials
-     */
-    protected String user1BadCredentials = "test01bad";
+public class AbstractPamTest
+{
+    protected String user1Name;
+    protected String user1Credentials;
+    protected String user1BadCredentials;
 
-
-    /**
-     * An empty test to keep IntelliJ Test Runner happy
-     */
-    public void testPlaceHolder() {
-        //
+    @BeforeClass
+    public void setUp()
+    {
+        user1Name = System.getProperty("test.login");
+        user1Credentials = System.getProperty("test.passwd");
+        if (user1Name == null || user1Credentials == null)
+            throw new IllegalStateException("Please define test.login and"
+                + " test.passwd before running tests");
+        user1BadCredentials = user1Credentials + "x";
     }
 }
