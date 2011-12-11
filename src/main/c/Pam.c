@@ -192,7 +192,7 @@ JNIEXPORT void JNICALL Java_net_sf_jpam_Pam_nativeMethod(JNIEnv *env, jobject ob
 JNIEXPORT jint JNICALL JNI_OnLoad (JavaVM * vm, void * reserved) {
   libpam = dlopen("libpam.so", RTLD_GLOBAL | RTLD_LAZY); 
   libpam_misc = dlopen("libpam_misc.so", RTLD_GLOBAL | RTLD_LAZY);
-  return JNI_VERSION_1_4;
+  return JNI_VERSION_1_6;
 }
 
 JNIEXPORT void JNICALL JNI_OnUnload(JavaVM *vm, void *reserved) {
