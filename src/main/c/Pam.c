@@ -107,9 +107,8 @@ static jboolean     debug;
 static int PAM_conv (int, const struct pam_message**,
                      struct pam_response**, void*);
 static struct pam_conv PAM_converse = {
-//	misc_conv,
- 	PAM_conv,
-	NULL
+    .conv = PAM_conv,
+    .appdata_ptr = NULL
 };
 
 // We use these to hold handles to the libs we
@@ -121,55 +120,64 @@ static void* libpam_misc;
 ** PAM Conversation function                    **
 *************************************************/
 
-static int PAM_conv (int num_msg, const struct pam_message **msg,
-                     struct pam_response **resp, void *appdata_ptr) {
-   int replies = 0;
-   struct pam_response *reply = NULL;
+static int PAM_conv(int num_messages, const struct pam_message **messages,
+    struct pam_response **resp, void *appdata_ptr)
+{
+    int i = 0;
+    const struct pam_message *msg;
+    struct pam_response *reply;
+    const char *prompt;
 
-   reply = (struct pam_response *) malloc(sizeof(struct pam_response) * num_msg);
-   if (!reply) return PAM_CONV_ERR;
+    struct pam_response *replies = calloc(num_messages,
+        sizeof(struct pam_response));
+    if (!replies)
+        return PAM_CONV_ERR;
 
-   for (replies = 0; replies < num_msg; replies++) {
-    if (debug) {
-          printf("***Message from PAM is: |%s|\n", msg[replies]->msg);
-          printf("***Msg_style to PAM is: |%d|\n", msg[replies]->msg_style);
-      }
+    for (i = 0; i < num_messages; i++) {
+        msg = messages[i];
+        prompt = msg->msg;
+        reply = &replies[i];
 
-      //SecurId requires this syntax.
-      if (! strcmp(msg[replies]->msg,"Enter PASSCODE: ")) {
-        if (debug)
-            printf("***Sending password\n");
-         reply[replies].resp = COPY_STRING(password);
-      }
+        if (debug) {
+            printf("***Message from PAM is: |%s|\n", prompt);
+            printf("***Msg_style to PAM is: |%d|\n", msg->msg_style);
+        }
 
-      if (! strcmp(msg[replies]->msg,"Password: ")) {
-        if (debug)
-            printf("***Sending password\n");
-         reply[replies].resp = COPY_STRING(password);
-      }
+        //SecurId requires this syntax.
+        if (!strcmp(prompt, "Enter PASSCODE: ")) {
+            if (debug)
+                printf("***Sending password\n");
+            reply->resp = COPY_STRING(password);
+        }
 
-      //Mac OS X
-      if (! strcmp(msg[replies]->msg,"Password:")) {
-        if (debug)
-            printf("***Sending password\n");
-         reply[replies].resp = COPY_STRING(password);
-      }
+        if (!strcmp(prompt, "Password: ")) {
+            if (debug)
+                printf("***Sending password\n");
+            reply->resp = COPY_STRING(password);
+        }
 
-      // HP-UX
-      if (! strcmp(msg[replies]->msg,"System Password:")) {
-        if (debug)
-            printf("***Sending password\n");
-         reply[replies].resp = COPY_STRING(password);
-      }
+        //Mac OS X
+        if (! strcmp(prompt, "Password:")) {
+            if (debug)
+                printf("***Sending password\n");
+            reply->resp = COPY_STRING(password);
+        }
 
-      // If none of the above matches, make sure the printf() does not
-      // crash because reply[replies].resp is NULL
-      if (debug && (reply[replies].resp != NULL)) {
-        printf("***Response to PAM is: |%s|\n", reply[replies].resp);
-      }
-   }
-   *resp = reply;
-   return PAM_SUCCESS;
+        // HP-UX
+        if (!strcmp(prompt, "System Password:")) {
+            if (debug)
+                printf("***Sending password\n");
+            reply->resp = COPY_STRING(password);
+        }
+
+        // If none of the above matches, make sure the printf() does not
+        // crash because replies[i].resp is NULL
+        if (debug && reply->resp != NULL)
+            printf("***Response to PAM is: |%s|\n", reply->resp);
+    }
+
+    *resp = replies;
+    return PAM_SUCCESS;
 }
 
 JNIEXPORT void JNICALL Java_net_sf_jpam_Pam_nativeMethod(JNIEnv *env, jobject obj) {
