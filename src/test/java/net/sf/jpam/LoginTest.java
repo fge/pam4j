@@ -23,14 +23,14 @@ public class LoginTest
     @Test
     public void testUserAuthenticated()
     {
-        assertEquals(pam.authenticate(user1Name, user1Credentials),
+        assertEquals(pam.authenticate(user, passwd),
             PamReturnValue.PAM_SUCCESS);
     }
 
     @Test
     public void testUserWithBadCredentialsNotAuthenticated()
     {
-        assertNotEquals(pam.authenticate(user1Name, user1BadCredentials),
+        assertNotEquals(pam.authenticate(user, badPasswd),
             PamReturnValue.PAM_SUCCESS);
     }
 }

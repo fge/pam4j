@@ -1,8 +1,8 @@
 package net.sf.jpam;
 
+import org.eel.kitchen.pam.PamReturnValue;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.eel.kitchen.pam.PamReturnValue;
 
 import static org.testng.Assert.*;
 
@@ -22,9 +22,8 @@ public class OtherServiceTest
     @Test
     public void testUserAuthenticated()
     {
-        final PamReturnValue returnValue = pam.authenticate(user1Name,
-            user1Credentials);
-        assertEquals(returnValue, PamReturnValue.PAM_AUTH_ERR);
+        final PamReturnValue retval = pam.authenticate(user, passwd);
+        assertEquals(retval, PamReturnValue.PAM_AUTH_ERR);
     }
 
     @Test(
@@ -32,28 +31,28 @@ public class OtherServiceTest
     )
     public void testUserWithNullCredentials()
     {
-        pam.authenticate(user1Credentials, null);
+        pam.authenticate(passwd, null);
     }
 
     @Test
     public void testUserWithEmptyCredentials()
     {
-        final PamReturnValue pamReturnValue = pam.authenticate(user1Credentials,
+        final PamReturnValue retval = pam.authenticate(passwd,
             "");
-        assertEquals(pamReturnValue, PamReturnValue.PAM_AUTH_ERR);
+        assertEquals(retval, PamReturnValue.PAM_AUTH_ERR);
     }
 
     @Test(
         expectedExceptions = NullPointerException.class)
     public void testUserWithNullUsername()
     {
-        pam.authenticate(user1Name, null);
+        pam.authenticate(user, null);
     }
 
     @Test
     public void testUserWithEmptyUsername()
     {
-        final PamReturnValue pamReturnValue = pam.authenticate(user1Name, "");
-        assertEquals(pamReturnValue ,PamReturnValue.PAM_AUTH_ERR);
+        final PamReturnValue retval = pam.authenticate(user, "");
+        assertEquals(retval, PamReturnValue.PAM_AUTH_ERR);
     }
 }

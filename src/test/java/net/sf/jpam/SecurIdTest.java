@@ -15,7 +15,7 @@ public class SecurIdTest
     public void testUserAuthenticated()
     {
         final Pam pam = new Pam(SECURID_SERVICE);
-        assertEquals(pam.authenticate(user1Name, "655635"),
+        assertEquals(pam.authenticate(user, "655635"),
             PamReturnValue.PAM_SUCCESS);
     }
 
@@ -23,7 +23,7 @@ public class SecurIdTest
     public void testUserWithBadCredentialsNotAuthenticated()
     {
         final Pam pam = new Pam(SECURID_SERVICE);
-        assertNotEquals(pam.authenticate(user1Name, user1BadCredentials),
+        assertNotEquals(pam.authenticate(user, badPasswd),
             PamReturnValue.PAM_SUCCESS);
     }
 
@@ -31,7 +31,7 @@ public class SecurIdTest
     public void testUserWithUnkownUserName()
     {
         final Pam pam = new Pam(SECURID_SERVICE);
-        assertNotEquals(pam.authenticate("zzzunknown", user1Credentials),
+        assertNotEquals(pam.authenticate("zzzunknown", passwd),
             PamReturnValue.PAM_SUCCESS);
     }
 }

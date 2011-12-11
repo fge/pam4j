@@ -46,7 +46,7 @@ public class PamTest
     public void testUserAuthenticated()
     {
         final Pam pam = new Pam();
-        assertEquals(pam.authenticate(user1Name, user1Credentials),
+        assertEquals(pam.authenticate(user, passwd),
             PamReturnValue.PAM_SUCCESS);
     }
 
@@ -54,7 +54,7 @@ public class PamTest
     public void testUserWithBadCredentialsNotAuthenticated()
     {
         final Pam pam = new Pam();
-        assertNotEquals(pam.authenticate(user1Name, user1BadCredentials),
+        assertNotEquals(pam.authenticate(user, badPasswd),
             PamReturnValue.PAM_SUCCESS);
     }
 
@@ -63,7 +63,7 @@ public class PamTest
     )
     public void testUserWithNullCredentials()
     {
-        new Pam().authenticate(user1Credentials, null);
+        new Pam().authenticate(passwd, null);
     }
 
     @Test
@@ -74,9 +74,8 @@ public class PamTest
                 PamReturnValue.PAM_AUTH_ERR);
 
         final Pam pam = new Pam();
-        final PamReturnValue pamReturnValue
-            = pam.authenticate(user1Credentials, "");
-        assertTrue(set.contains(pamReturnValue));
+        final PamReturnValue retval = pam.authenticate(passwd, "");
+        assertTrue(set.contains(retval ));
     }
 
     @Test(
@@ -84,7 +83,7 @@ public class PamTest
     )
     public void testUserWithNullUsername()
     {
-        new Pam().authenticate(user1Name, null);
+        new Pam().authenticate(user, null);
     }
 
     @Test
@@ -95,8 +94,8 @@ public class PamTest
             PamReturnValue.PAM_AUTH_ERR);
 
         final Pam pam = new Pam();
-        final PamReturnValue pamReturnValue = pam.authenticate(user1Name, "");
-        assertTrue(set.contains(pamReturnValue));
+        final PamReturnValue retval = pam.authenticate(user, "");
+        assertTrue(set.contains(retval));
     }
 
     @Test(

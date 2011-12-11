@@ -15,7 +15,7 @@ public class DigiPassTest
     public void testUserAuthenticated()
     {
         final Pam pam = new Pam(RADIUS_SERVICE);
-        assertEquals(pam.authenticate(user1Name, "1234745549"),
+        assertEquals(pam.authenticate(user, "1234745549"),
             PamReturnValue.PAM_SUCCESS);
     }
 
@@ -23,7 +23,7 @@ public class DigiPassTest
     public void testUserWithBadCredentialsNotAuthenticated()
     {
         final Pam pam = new Pam(RADIUS_SERVICE);
-        assertNotEquals(pam.authenticate(user1Name, user1BadCredentials),
+        assertNotEquals(pam.authenticate(user, badPasswd),
             PamReturnValue.PAM_SUCCESS);
     }
 
@@ -31,7 +31,7 @@ public class DigiPassTest
     public void testUserWithUnkownUserName()
     {
         final Pam pam = new Pam(RADIUS_SERVICE);
-        assertNotEquals(pam.authenticate("zzzunknown", user1Credentials),
+        assertNotEquals(pam.authenticate("zzzunknown", passwd),
             PamReturnValue.PAM_SUCCESS);
     }
 }
