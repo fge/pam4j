@@ -8,6 +8,10 @@
 
 #include <security/pam_appl.h>
 
+#if 0
+#include <security/pam_misc.h>
+#endif
+
 #include <unistd.h>
 #include <sys/types.h>
 
@@ -20,10 +24,21 @@ static const char *service_name;
 static const char *username;
 static const char *password;
 
+/*
+ * Needed: pam's misc_conv() function will wait for a passwd in stdin... We
+ * want non interactive stuff here.
+ *
+ * TODO: look in native code how this is done. It probably detects the presence
+ * of a tty device or something, and if this is the case, we'd better not
+ * reinvent the wheel and use what PAM has to offer. Who knows, PAM may even
+ * provide a "conversation switch" function or something.
+ */
+
 static int PAM_conv(int, const struct pam_message **, struct pam_response **,
     void *);
 
 static struct pam_conv PAM_converse = {
+//    .conv = misc_conv,
     .conv = PAM_conv,
     .appdata_ptr = NULL
 };
@@ -60,6 +75,7 @@ static int PAM_conv(int num_messages, const struct pam_message **messages,
         switch (msg_style) {
             case PAM_PROMPT_ECHO_OFF: case PAM_PROMPT_ECHO_ON:
                 if (password_entered) {
+                    // FIXME: this does not free individual entries!!!
                     free(replies);
                     return PAM_CONV_ERR;
                 }
@@ -89,6 +105,13 @@ JNIEXPORT jint JNICALL Java_org_eel_kitchen_pam_PamHandle_authenticate(
     pam_handle_t *pamh = NULL;
     int retval;
 
+    /*
+     * TODO: handle allocation failures, and deal with OOM
+     *
+     * ->GetStringUTFChars() will return NULL if allocation fails, AND throw
+     * an OOM. We probably want to return PAM_CONV_ERR instead. Find out how
+     * to do that, and of course, free what is necessary.
+     */
     service_name = (*pEnv)->GetStringUTFChars(pEnv, pServiceName, NULL);
     username = (*pEnv)->GetStringUTFChars(pEnv, pUsername, NULL);
     password = (*pEnv)->GetStringUTFChars(pEnv, pPassword, NULL);
