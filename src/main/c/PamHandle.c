@@ -16,8 +16,10 @@
 #include <sys/types.h>
 
 #define pr_debug(args...) do { \
-    if (debug) \
+    if (debug) { \
         printf(args); \
+        fflush(stdout); \
+    } \
 } while (0)
 
 static const char *service_name;
