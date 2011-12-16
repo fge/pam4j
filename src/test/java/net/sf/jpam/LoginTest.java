@@ -14,12 +14,10 @@ public class LoginTest
 
     private PamService service;
 
-    @Override
     @BeforeClass
-    public void setUp()
+    public void setUp2()
         throws PamException
     {
-        super.setUp();
         service = Pam.getService("login");
     }
 
