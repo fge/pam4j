@@ -72,13 +72,9 @@
 
     <target name="generate-c-headers">
         <mkdir dir="${generated.src.c.dir}"/>
-        <javah destdir="${generated.src.c.dir}"
-            class="org.eel.kitchen.pam.PamHandle">
-            <classpath>
-                <pathelement location="${build.classes.dir}"/>
-            </classpath>
-        </javah>
-        <javah destdir="${generated.src.c.dir}" class="net.sf.jpam.Pam">
+        <javah destdir="${generated.src.c.dir}">
+            <class name="org.eel.kitchen.pam.PamHandle"/>
+            <class name="net.sf.jpam.Pam"/>
             <classpath>
                 <pathelement location="${build.classes.dir}"/>
             </classpath>
