@@ -33,11 +33,6 @@ public final class Pam
     {
     }
 
-    public static String getLibraryName()
-    {
-        return System.mapLibraryName(JPAM_SHARED_LIBRARY_NAME);
-    }
-
     public static PamService getService()
         throws PamException
     {

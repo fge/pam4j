@@ -25,8 +25,6 @@ import org.slf4j.LoggerFactory;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.io.File;
-
 import static org.testng.Assert.*;
 
 
@@ -42,25 +40,6 @@ public class PamTest
         throws PamException
     {
         service = Pam.getService();
-    }
-
-    @Test
-    public void testSharedLibraryInstalledInLibraryPath()
-    {
-        final String libraryPath = System.getProperty("java.library.path");
-        final String pathSeparator = System.getProperty("path.separator");
-        final String libraryName = Pam.getLibraryName();
-        final String[] pathElements = libraryPath.split(pathSeparator);
-        boolean found = false;
-        for (final String pathElement : pathElements) {
-            final File sharedLibraryFile = new File(
-                pathElement + File.separator + libraryName);
-            if (sharedLibraryFile.exists()) {
-                found = true;
-                LOG.info("Library " + libraryName + " found in " + pathElement);
-            }
-        }
-        assertTrue(found);
     }
 
     @Test
