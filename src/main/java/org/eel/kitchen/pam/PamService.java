@@ -26,6 +26,19 @@ public final class PamService
     private static final Logger logger
         = LoggerFactory.getLogger(PamService.class);
 
+    private static final String SONAME = "jpam";
+
+    public static final PamService DEFAULT_SERVICE;
+
+    static {
+        System.loadLibrary(SONAME);
+        try {
+            DEFAULT_SERVICE = new PamService("net-sf-" + SONAME);
+        } catch (PamException e) {
+            throw new ExceptionInInitializerError(e);
+        }
+    }
+
     private final String service;
 
     public PamService(final String service)

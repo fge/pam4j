@@ -25,10 +25,6 @@ public final class Pam
     public static final String DEFAULT_SERVICE_NAME
         = "net-sf-" + JPAM_SHARED_LIBRARY_NAME;
 
-    static {
-        System.loadLibrary(JPAM_SHARED_LIBRARY_NAME);
-    }
-
     private Pam()
     {
     }

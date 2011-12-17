@@ -39,7 +39,7 @@ public class PamTest
     public void setUp2()
         throws PamException
     {
-        service = Pam.getService();
+        service = PamService.DEFAULT_SERVICE;
     }
 
     @Test
@@ -95,7 +95,7 @@ public class PamTest
     public void testNullService()
     {
         try {
-            Pam.getService(null);
+            new PamService(null);
             fail("No exception thrown");
         } catch (PamException e) {
             assertEquals(e.getMessage(), "service name is null");
@@ -106,7 +106,7 @@ public class PamTest
     public void testEmptyServiceName()
     {
         try {
-            Pam.getService("");
+            new PamService("");
             fail("No exception thrown");
         } catch (PamException e) {
             assertEquals(e.getMessage(), "service name is empty");

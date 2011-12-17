@@ -35,7 +35,7 @@ public class LoginTest
     public void setUp2()
         throws PamException
     {
-        service = Pam.getService("login");
+        service = new PamService("login");
     }
 
     @Test

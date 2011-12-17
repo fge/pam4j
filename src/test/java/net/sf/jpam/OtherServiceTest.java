@@ -34,7 +34,7 @@ public class OtherServiceTest
     public void setUp2()
         throws PamException
     {
-        service = Pam.getService("other");
+        service = new PamService("other");
     }
 
     @Test
