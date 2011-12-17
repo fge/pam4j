@@ -15,21 +15,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "org_eel_kitchen_pam_PamHandle.h"
-#include <dlfcn.h>
 #include <jni.h>
-#include <ctype.h>
-#include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include <security/pam_appl.h>
 
 #if 0
 #include <security/pam_misc.h>
 #endif
-
-#include <unistd.h>
-#include <sys/types.h>
 
 #define pr_debug(args...) do { \
     if (debug) { \
