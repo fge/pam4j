@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.jpam;
+package org.eel.kitchen.pam;
 
 import org.testng.annotations.BeforeClass;
 

@@ -15,12 +15,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.sf.jpam;
+package org.eel.kitchen.pam;
 
-import org.eel.kitchen.pam.PamException;
-import org.eel.kitchen.pam.PamHandle;
-import org.eel.kitchen.pam.PamReturnValue;
-import org.eel.kitchen.pam.PamService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.BeforeClass;
