@@ -33,13 +33,6 @@ public final class Pam
     {
     }
 
-    static native boolean isSharedLibraryWorking();
-
-    private static void callback()
-    {
-        //noop
-    }
-
     public static String getLibraryName()
     {
         return System.mapLibraryName(JPAM_SHARED_LIBRARY_NAME);

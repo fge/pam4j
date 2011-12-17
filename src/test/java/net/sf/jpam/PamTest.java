@@ -64,13 +64,6 @@ public class PamTest
     }
 
     @Test
-    public void testJNIWorking()
-        throws PamException
-    {
-        assertTrue(Pam.isSharedLibraryWorking());
-    }
-
-    @Test
     public void testUserAuthenticated()
         throws PamException
     {
