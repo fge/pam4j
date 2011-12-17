@@ -17,7 +17,6 @@
 
 package org.eel.kitchen.pam;
 
-import net.sf.jpam.PamException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

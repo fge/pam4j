@@ -1,4 +1,4 @@
-package net.sf.jpam;
+package org.eel.kitchen.pam;
 
 public class PamException
     extends Exception

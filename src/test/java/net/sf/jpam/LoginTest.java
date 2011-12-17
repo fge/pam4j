@@ -17,6 +17,7 @@
 
 package net.sf.jpam;
 
+import org.eel.kitchen.pam.PamException;
 import org.eel.kitchen.pam.PamHandle;
 import org.eel.kitchen.pam.PamReturnValue;
 import org.eel.kitchen.pam.PamService;
