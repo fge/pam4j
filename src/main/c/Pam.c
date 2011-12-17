@@ -27,6 +27,9 @@
 #include <unistd.h>
 #include <sys/types.h>
 
+JNIEXPORT void JNICALL Java_net_sf_jpam_Pam_nativeMethod(JNIEnv *env,
+    jclass cls);
+
 static void *libpam;
 static void *libpam_misc;
 

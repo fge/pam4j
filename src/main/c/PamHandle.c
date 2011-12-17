@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "net_sf_jpam_Pam.h"
+#include "org_eel_kitchen_pam_PamHandle.h"
 #include <dlfcn.h>
 #include <jni.h>
 #include <ctype.h>
@@ -124,11 +124,13 @@ JNIEXPORT jint JNICALL Java_org_eel_kitchen_pam_PamHandle_authenticate(
     int retval;
 
     /*
-     * TODO: handle allocation failures, and deal with OOM
+     * TODO: unclear, see what's what
      *
-     * ->GetStringUTFChars() will return NULL if allocation fails, AND throw
-     * an OOM. We probably want to return PAM_CONV_ERR instead. Find out how
-     * to do that, and of course, free what is necessary.
+     * With my first tests, it appears that GetStringUTFChars() makes the JVM
+     * crash if memory cannot be allocated... But an array copy was made. See
+     * what happens if the JVM decides NOT to make a copy. Right now it is
+     * assumed that allocations succeed. And the JNI spec says
+     * GetStringUTFChars() does NOT throw an OOM on failure.
      */
     service_name = (*pEnv)->GetStringUTFChars(pEnv, pServiceName, NULL);
     username = (*pEnv)->GetStringUTFChars(pEnv, pUsername, NULL);
@@ -163,7 +165,7 @@ out_free:
     /* Clean up our handles and variables */
     if (pam_end(pamh, retval) != PAM_SUCCESS) {
         pamh = NULL;
-        pr_debug("cs_password error: failed to release handle\n");
+        pr_debug("Fuchs! Failed to release PAM handle\n");
     }
 
 out_nohandle:
