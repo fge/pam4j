@@ -1,51 +1,36 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>net.sf.jpam</groupId>
-    <artifactId>jpam</artifactId>
+    <groupId>org.kitchen-eel</groupId>
+    <artifactId>pam4j</artifactId>
     <packaging>jar</packaging>
-    <version>1.1</version>
-    <name>JPam</name>
-    <description>
-        <![CDATA[Jpam is a Java-PAM bridge.  PAM, or Pluggable Authentication Modules, is a standard security architecture used on Linux, Solaris, HP-UX, Mac OS X and other Unix systems.]]>
-    </description>
-    <url>http://jpam.sf.net</url>
-    <inceptionYear>2004</inceptionYear>
-    <developers>
-        <developer>
-            <id>gregluck</id>
-            <name>Greg Luck</name>
-            <email>gregluck at users.sourceforge.net</email>
-            <url>http://gregluck.com</url>
-            <roles>
-                <role>Maintainer</role>
-                <role>Developer</role>
-            </roles>
-            <timezone>+10</timezone>
-            <properties>
-                <skype>gregrluck</skype>
-                <yahoo>gregrluck</yahoo>
-            </properties>
-        </developer>
-    </developers>
-
-    <contributors>
-        <contributor>
-            <name>David Lutterkort</name>
-            <email/>
-            <url/>
-            <organization>RedHat</organization>
-            <organizationUrl>http://redhat.com</organizationUrl>
-            <roles>
-                <role>Contributed patches</role>
-            </roles>
-            <timezone>05</timezone>
-            <properties>
-                <contribution>Dynamic linking and RPM packaging</contribution>
-            </properties>
-        </contributor>
-    </contributors>
+    <version>0.1</version>
+    <name>Pam4J</name>
+    <description>A Java PAM implementation with the goal of allowing PAM client access, as well as implementing PAM modules in Java</description>
+    <url>https://github.com/fge/pam4j</url>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>javadoc</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
     <dependencies>
         <dependency>
@@ -67,56 +52,23 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
+    <scm>
+        <url>git@github.com:fge/pam4j</url>
+        <connection>scm:git:git@github.com:fge/pam4j</connection>
+        <developerConnection>scm:git:git@github.com:fge/pam4j</developerConnection>
+    </scm>
     <licenses>
         <license>
-            <name>The Apache Software License, Version 2.0</name>
-            <url>http://jpam.sourceforge.net/LICENSE.txt</url>
-            <distribution>repo</distribution>
-            <comments>The license is the standard wording from the Apache license, but with
-                Greg Luck as copyright
-                owner.
-            </comments>
+            <name>LGPLv3 or later</name>
+            <url>http://www.gnu.org/licenses/lgpl.html</url>
         </license>
     </licenses>
-    <scm>
-        <connection>scm:svn:https://jpam.svn.sourceforge.net/svnroot/jpam</connection>
-        <developerConnection>
-            scm:svn:https://username@jpam.svn.sourceforge.net/svnroot/jpam
-        </developerConnection>
-        <tag/>
-        <url>http://svn.sourceforge.net/viewcvs.cgi/jpam/</url>
-    </scm>
-
-    <build>
-        <plugins>
-            <!-- javadoc -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.0</version>
-            </plugin>
-            <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <configuration>
-                    <descriptors>
-                        <descriptor>src/main/assembly/bin.xml</descriptor>
-                    </descriptors>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <excludes>
-                        <exclude>**/**</exclude>
-                        <exclude>**/TestSquare.java</exclude>
-                        <exclude>**/constructs/web/**</exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
-
-        </plugins>
-    </build>
+    <developers>
+        <developer>
+            <name>Francis Galiegue</name>
+            <roles>
+                <role>Initial developer</role>
+            </roles>
+        </developer>
+    </developers>
 </project>
