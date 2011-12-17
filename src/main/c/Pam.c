@@ -15,36 +15,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "net_sf_jpam_Pam.h"
-#include <dlfcn.h>
 #include <jni.h>
-#include <ctype.h>
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-
-#include <security/pam_appl.h>
-
-#include <unistd.h>
-#include <sys/types.h>
 
 JNIEXPORT void JNICALL Java_net_sf_jpam_Pam_nativeMethod(JNIEnv *env,
     jclass cls);
-
-static void *libpam;
-static void *libpam_misc;
-
-JNIEXPORT jint JNICALL JNI_OnLoad (JavaVM *vm, void *reserved)
-{
-    libpam = dlopen("libpam.so", RTLD_GLOBAL | RTLD_LAZY);
-    libpam_misc = dlopen("libpam_misc.so", RTLD_GLOBAL | RTLD_LAZY);
-    return JNI_VERSION_1_6;
-}
-
-JNIEXPORT void JNICALL JNI_OnUnload(JavaVM *vm, void *reserved)
-{
-    dlclose(libpam);
-    dlclose(libpam_misc);
-}
 
 JNIEXPORT void JNICALL Java_net_sf_jpam_Pam_nativeMethod(JNIEnv *env,
     jclass cls)
