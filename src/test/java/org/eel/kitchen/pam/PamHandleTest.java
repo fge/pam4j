@@ -24,21 +24,21 @@ import java.util.UUID;
 
 import static org.testng.Assert.*;
 
-public final class PamHandle2Test
+public final class PamHandleTest
     extends AbstractPamTest
 {
     @Test
     public void testNullOrEmptyService()
     {
         try {
-            new PamHandle2(null, null);
+            new PamHandle(null, null);
             fail("No exception thrown");
         } catch (PamException e) {
             assertEquals(e.getMessage(), "service is null or empty");
         }
 
         try {
-            new PamHandle2("", null);
+            new PamHandle("", null);
             fail("No exception thrown");
         } catch (PamException e) {
             assertEquals(e.getMessage(), "service is null or empty");
@@ -49,7 +49,7 @@ public final class PamHandle2Test
     public void testNullUser()
     {
         try {
-            new PamHandle2("login", null);
+            new PamHandle("login", null);
             fail("No exception thrown");
         } catch (PamException e) {
             assertEquals(e.getMessage(), "user name is null");
@@ -60,7 +60,7 @@ public final class PamHandle2Test
     public void testSetupOnly()
         throws IOException
     {
-        final PamHandle2 handle = new PamHandle2("login", "fge");
+        final PamHandle handle = new PamHandle("login", "fge");
         handle.close();
         assertTrue(true);
     }
@@ -69,7 +69,7 @@ public final class PamHandle2Test
     public void testSuccessfulAuth()
         throws IOException
     {
-        final PamHandle2 handle = new PamHandle2("login", user);
+        final PamHandle handle = new PamHandle("login", user);
         final PamReturnValue expected = handle.authenticate(passwd);
         handle.close();
         assertEquals(expected, PamReturnValue.PAM_SUCCESS);
@@ -79,7 +79,7 @@ public final class PamHandle2Test
     public void testFailedAuth()
         throws IOException
     {
-        final PamHandle2 handle = new PamHandle2("login", user);
+        final PamHandle handle = new PamHandle("login", user);
         final PamReturnValue expected = handle.authenticate(badPasswd);
         handle.close();
         assertEquals(expected, PamReturnValue.PAM_AUTH_ERR);
@@ -90,7 +90,7 @@ public final class PamHandle2Test
         throws IOException
     {
         final String dummyUser = UUID.randomUUID().toString();
-        final PamHandle2 handle = new PamHandle2("pam4j", dummyUser);
+        final PamHandle handle = new PamHandle("pam4j", dummyUser);
         final PamReturnValue expected = handle.authenticate("whatever");
         handle.close();
         assertEquals(expected, PamReturnValue.PAM_USER_UNKNOWN);

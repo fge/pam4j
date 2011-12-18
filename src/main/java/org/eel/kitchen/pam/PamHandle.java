@@ -20,39 +20,107 @@ package org.eel.kitchen.pam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.Closeable;
+import java.io.IOException;
+
 public final class PamHandle
+    implements Closeable
 {
     private static final Logger logger
         = LoggerFactory.getLogger(PamHandle.class);
 
-    private final String service;
-    private final String user;
-    private final String passwd;
+    static {
+        System.loadLibrary("pam4j");
+    }
+    /**
+     * This is the pam_handle_t * as a long. It is accessed natively ONLY,
+     * so DO NOT EVER affect it!
+     */
+    private long _handleRef;
 
-    PamHandle(final String service, final String user, final String passwd)
+    /**
+     * Status of last operation. Necessary since pam_end() requires it to
+     * clean up the handler correctly. It is accessed natively in {@link
+     * #destroyHandle()}.
+     */
+    private int _lastStatus;
+
+    /**
+     * Has the handler been closed correctly? Detected in, yes, {@link
+     * #finalize()}...
+     */
+    private boolean closeOK = false;
+
+    private final String user;
+
+    /**
+     * Create a new PAM handle
+     *
+     * @param service the service name
+     * @param user the user name
+     * @throws PamException service name is null or empty, user name is empty,
+     * or PAM initialization (via {@link #createHandle(String, String)}) fails
+     */
+    PamHandle(final String service, final String user)
         throws PamException
     {
-        this.service = service;
+        if (service == null || service.isEmpty())
+            throw new PamException("service is null or empty");
 
         if (user == null)
             throw new PamException("user name is null");
 
         this.user = user;
 
-        if (passwd == null)
-            throw new PamException("credentials are null");
+        _lastStatus = createHandle(service, user);
 
-        this.passwd = passwd;
+        final PamReturnValue retval = PamReturnValue.fromId(_lastStatus);
+
+        if (retval != PamReturnValue.PAM_SUCCESS)
+            throw new PamException("failed to initialize handle: " + retval);
     }
 
-    public synchronized PamReturnValue authenticate()
-        throws PamException
+    /**
+     * Native method to create a {@code pam_handle_t}. Note that it WILL NOT
+     * fail if the service does not exist.
+     *
+     * @param service the name of a service
+     * @param user the username to user
+     * @return a constant to be parsed by {@link PamReturnValue#fromId(int)}
+     */
+    private native int createHandle(final String service, final String user);
+
+    /**
+     * Native method to destroy our PAM handle.
+     *
+     * @return the status of the operation
+     */
+    private native int destroyHandle();
+
+    private native int auth(final String passwd);
+
+    public synchronized PamReturnValue authenticate(final String passwd)
     {
-        final int id = authenticate(service, user, passwd,
-            logger.isDebugEnabled());
-        return PamReturnValue.fromId(id);
+        _lastStatus = auth(passwd);
+        return PamReturnValue.fromId(_lastStatus);
     }
 
-    private native int authenticate(final String service, final String user,
-        final String passwd, final boolean debug);
+    /**
+     * Closes this stream and releases any system resources associated
+     * with it. If the stream is already closed then invoking this
+     * method has no effect.
+     *
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    public void close()
+        throws IOException
+    {
+        if (closeOK)
+            return;
+        final PamReturnValue retval = PamReturnValue.fromId(destroyHandle());
+        closeOK = true;
+        if (retval != PamReturnValue.PAM_SUCCESS)
+            throw new IOException("failed to release handle: " + retval);
+    }
 }

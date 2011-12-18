@@ -52,9 +52,9 @@ public final class PamService
         this.service = service;
     }
 
-    public PamHandle getHandle(final String user, final String passwd)
+    public PamHandle getHandle(final String user)
         throws PamException
     {
-        return new PamHandle(service, user, passwd);
+        return new PamHandle(service, user);
     }
 }

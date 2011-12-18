@@ -27,15 +27,9 @@
 #endif
 
 #define pr_debug(args...) do { \
-    if (debug) { \
-        printf(args); \
-        fflush(stdout); \
-    } \
+    printf(args); \
+    fflush(stdout); \
 } while (0)
-
-static const char *service_name;
-static const char *username;
-static const char *password;
 
 /*
  * Needed: pam's misc_conv() function will wait for a passwd in stdin... We
@@ -47,138 +41,172 @@ static const char *password;
  * provide a "conversation switch" function or something.
  */
 
-static int PAM_conv(int, const struct pam_message **, struct pam_response **,
+static int custom_conv(int, const struct pam_message **, struct pam_response **,
     void *);
 
-static struct pam_conv PAM_converse = {
-//    .conv = misc_conv,
-    .conv = PAM_conv,
-    .appdata_ptr = NULL
-};
-
-/*************************************************
-** PAM Conversation function                    **
-*************************************************/
-
-static int PAM_conv(int num_messages, const struct pam_message **messages,
+static int custom_conv(int num_messages, const struct pam_message **messages,
     struct pam_response **resp, void *appdata_ptr)
 {
-    /*
-     * Note that this function is NOT suitable for anything other than
-     * authentication purposes... We only enter the password once.
-     */
-    int i = 0;
+    int i;
     int password_entered = 0;
-    const struct pam_message *msg;
-    struct pam_response *reply;
+    char *passwd;
     int msg_style;
-
-    struct pam_response *replies;
-
-    printf("pam_conv start\n");
-    fflush(stdout);
+    const struct pam_message *msg;
+    struct pam_response *replies, *reply;
 
     replies = calloc(num_messages, sizeof(struct pam_response));
     if (!replies)
         return PAM_CONV_ERR;
 
-    memset(replies, 0, sizeof(*replies));
+    passwd = strdup((const char *)appdata_ptr);
+    if (!passwd) {
+        free(replies);
+        return PAM_CONV_ERR;
+    }
 
-    for (i = 0; i < num_messages; i++) {
+    memset(replies, 0, sizeof(*replies));
+    reply = replies;
+
+    pr_debug("Entering pam_conv\n");
+    for (i = 0; i < num_messages; reply++, i++) {
         msg = messages[i];
         msg_style = msg->msg_style;
 
         switch (msg_style) {
             case PAM_PROMPT_ECHO_OFF: case PAM_PROMPT_ECHO_ON:
-                if (password_entered) {
-                    // FIXME: this does not free individual entries!!!
-                    free(replies);
-                    return PAM_CONV_ERR;
-                }
-                break;
-            default:
-                continue;
+                if (password_entered)
+                    pr_debug("Eh? Entering password more than once?\n");
+                replies->resp = passwd;
+                password_entered = 1;
         }
-
-        printf("pam_conv: passwd entered\n");
-        fflush(stdout);
-        reply = &replies[i];
-        reply->resp = password ? strdup(password) : NULL;
-        password_entered = 1;
     }
 
+    pr_debug("Password entered: %d\n", password_entered);
+    pr_debug("Exiting pam_conv\n");
+
     *resp = replies;
-    printf("pam_conv end\n");
-    fflush(stdout);
     return PAM_SUCCESS;
 }
 
 /*
- * Class:     net_sf_jpam_Pam
+ * Class:     org_eel_kitchen_pam_PamHandle
  * Method:    authenticate
- * Signature: (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Z)I
+ * Signature: (Ljava/lang/String;)I
  */
-JNIEXPORT jint JNICALL Java_org_eel_kitchen_pam_PamHandle_authenticate(
-    JNIEnv *pEnv, jobject pObj, jstring pServiceName, jstring pUsername,
-    jstring pPassword, jboolean debug)
+JNIEXPORT jint JNICALL Java_org_eel_kitchen_pam_PamHandle_auth(JNIEnv *env,
+    jobject instance, jstring jpasswd)
 {
-    pam_handle_t *pamh = NULL;
+    jclass class;
+    jfieldID handleRef;
+    pam_handle_t *handle;
+    const char *passwd;
     int retval;
+    struct pam_conv conv;
+
+    class = (*env)->GetObjectClass(env, instance);
+    handleRef = (*env)->GetFieldID(env, class, "_handleRef", "J");
+
+    if (!handleRef) {
+        pr_debug("Fuchs! Missing refs in object instance!");
+        return PAM_SYSTEM_ERR;
+    }
+
+    handle = (pam_handle_t *) (*env)->GetLongField(env, instance, handleRef);
+    pr_debug("auth: handle %p\n", handle);
+
+    passwd = (*env)->GetStringUTFChars(env, jpasswd, NULL);
+
+    conv.conv = custom_conv;
+    conv.appdata_ptr = (void *) passwd;
+
+    retval = pam_set_item(handle, PAM_CONV, &conv);
+    if (retval != PAM_SUCCESS) {
+        pr_debug("Ick! Cannot set PAM_CONV!\n");
+        goto out;
+    }
+
+    retval = pam_authenticate(handle, 0);
+out:
+    (*env)->ReleaseStringUTFChars(env, jpasswd, passwd);
+    return retval;
+}
+
+/*
+ * Class:     org_eel_kitchen_pam_PamHandle
+ * Method:    createHandle
+ * Signature: (Ljava/lang/String;Ljava/lang/String;)I
+ */
+JNIEXPORT jint JNICALL Java_org_eel_kitchen_pam_PamHandle_createHandle(
+    JNIEnv *env, jobject instance, jstring jservice, jstring juser)
+{
+    jclass class;
+    jfieldID handleRef;
+    const char *service;
+    const char *user;
+    pam_handle_t *handle;
+    int retval;
+    struct pam_conv conv = {
+        .conv = custom_conv,
+        .appdata_ptr = NULL
+    };
 
     /*
-     * TODO: unclear, see what's what
-     *
-     * With my first tests, it appears that GetStringUTFChars() makes the JVM
-     * crash if memory cannot be allocated... But an array copy was made. See
-     * what happens if the JVM decides NOT to make a copy. Right now it is
-     * assumed that allocations succeed. And the JNI spec says
-     * GetStringUTFChars() does NOT throw an OOM on failure.
+     * Get the class of the instance, and grab the PAM handle reference
      */
-    service_name = (*pEnv)->GetStringUTFChars(pEnv, pServiceName, NULL);
-    username = (*pEnv)->GetStringUTFChars(pEnv, pUsername, NULL);
-    password = (*pEnv)->GetStringUTFChars(pEnv, pPassword, NULL);
+    class = (*env)->GetObjectClass(env, instance);
+    handleRef = (*env)->GetFieldID(env, class, "_handleRef", "J");
 
-    /* Get a handle to a PAM instance */
-    pr_debug("pam_start\n");
-    retval = pam_start(service_name, username, &PAM_converse, &pamh);
-
-    if (retval != PAM_SUCCESS) {
-        pr_debug("pam_start failed for service %s: %s\n", service_name,
-            pam_strerror(NULL, retval));
-        goto out_nohandle;
+    if (!handleRef) {
+        pr_debug("Fuchs! missing fields in object instance!");
+        return PAM_SYSTEM_ERR;
     }
 
-    pr_debug("pam_set_item\n");
-    pam_set_item(pamh, PAM_AUTHTOK, password);
-    pr_debug("pam_authenticate\n");
-    retval = pam_authenticate(pamh, 0);
+    service = (*env)->GetStringUTFChars(env, jservice, NULL);
+    user = (*env)->GetStringUTFChars(env, juser, NULL);
 
-    /* Is user permitted access? */
-    if (retval != PAM_SUCCESS) {
-        pr_debug("failed to authenticate user %s: %s\n", username,
-            pam_strerror(NULL, retval));
-        goto out_free;
+    retval = pam_start(service, user, &conv, &handle);
+
+    if (retval == PAM_SUCCESS) {
+        (*env)->SetLongField(env, instance, handleRef, (long) handle);
+        pr_debug("create: handle %p\n", handle);
     }
 
-    pr_debug("pam_acct_mgmt\n");
-    retval = pam_acct_mgmt(pamh, 0);
+    (*env)->ReleaseStringUTFChars(env, jservice, service);
+    (*env)->ReleaseStringUTFChars(env, juser, user);
 
-    if (retval != PAM_SUCCESS)
-        pr_debug("failed to setup account for user %s: %s\n", username,
-            pam_strerror(NULL, retval));
+    return (jint) retval;
+}
 
-out_free:
-    /* Clean up our handles and variables */
-    if (pam_end(pamh, retval) != PAM_SUCCESS) {
-        pamh = NULL;
-        pr_debug("Fuchs! Failed to release PAM handle\n");
+/*
+ * Class:     org_eel_kitchen_pam_PamHandle
+ * Method:    destroyHandle
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_org_eel_kitchen_pam_PamHandle_destroyHandle(
+    JNIEnv *env, jobject instance)
+{
+    jclass class;
+    jfieldID handleRef;
+    jfieldID statusRef;
+    pam_handle_t *handle;
+    int status;
+
+    /*
+     * Get the class of the instance, and grab the PAM handle and status
+     */
+    class = (*env)->GetObjectClass(env, instance);
+    handleRef = (*env)->GetFieldID(env, class, "_handleRef", "J");
+    statusRef = (*env)->GetFieldID(env, class, "_lastStatus", "I");
+
+    if (!(handleRef && statusRef)) {
+        pr_debug("Fuchs! Missing fields in object instance!");
+        return PAM_SYSTEM_ERR;
     }
 
-out_nohandle:
-    (*pEnv)->ReleaseStringUTFChars(pEnv, pServiceName, service_name);
-    (*pEnv)->ReleaseStringUTFChars(pEnv, pUsername, username);
-    (*pEnv)->ReleaseStringUTFChars(pEnv, pPassword, password);
+    handle = (pam_handle_t *) (*env)->GetLongField(env, instance, handleRef);
+    pr_debug("destroy: handle %p\n", handle);
 
-    pr_debug("pam: end\n");
-    return retval;
+    status = (*env)->GetIntField(env, instance, statusRef);
+
+    return (jint) pam_end(handle, status);
 }
