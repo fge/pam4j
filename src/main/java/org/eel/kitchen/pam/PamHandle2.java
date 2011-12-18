@@ -32,22 +32,35 @@ public final class PamHandle2
     static {
         System.loadLibrary("pam4j");
     }
-    /*
-     * This is the pam_handle_t * as a long. It is updated by getHandleRef(),
+    /**
+     * This is the pam_handle_t * as a long. It is accessed natively ONLY,
      * so DO NOT EVER affect it!
      */
     private long _handleRef;
 
-    /*
+    /**
      * Status of last operation. Necessary since pam_end() requires it to
-     * clean up the handler correctly.
+     * clean up the handler correctly. It is accessed natively in {@link
+     * #destroyHandle()}.
      */
     private int _lastStatus;
 
+    /**
+     * Has the handler been closed correctly? Detected in, yes, {@link
+     * #finalize()}...
+     */
     private boolean closeOK = false;
 
     private final String user;
 
+    /**
+     * Create a new PAM handle
+     *
+     * @param service the service name
+     * @param user the user name
+     * @throws PamException service name is null or empty, user name is empty,
+     * or PAM initialization (via {@link #createHandle(String, String)}) fails
+     */
     PamHandle2(final String service, final String user)
         throws PamException
     {
@@ -64,12 +77,24 @@ public final class PamHandle2
         final PamReturnValue retval = PamReturnValue.fromId(_lastStatus);
 
         if (retval != PamReturnValue.PAM_SUCCESS)
-            throw new PamException("failed to initialize handle: "
-                + retval);
+            throw new PamException("failed to initialize handle: " + retval);
     }
 
+    /**
+     * Native method to create a {@code pam_handle_t}. Note that it WILL NOT
+     * fail if the service does not exist.
+     *
+     * @param service the name of a service
+     * @param user the username to user
+     * @return a constant to be parsed by {@link PamReturnValue#fromId(int)}
+     */
     private native int createHandle(final String service, final String user);
 
+    /**
+     * Native method to destroy our PAM handle.
+     *
+     * @return the status of the operation
+     */
     private native int destroyHandle();
 
     /**
@@ -85,8 +110,10 @@ public final class PamHandle2
     {
         if (closeOK)
             return;
-        destroyHandle();
+        final PamReturnValue retval = PamReturnValue.fromId(destroyHandle());
         closeOK = true;
+        if (retval != PamReturnValue.PAM_SUCCESS)
+            throw new IOException("failed to release handle: " + retval);
     }
 
     /**
