@@ -75,6 +75,9 @@ static int PAM_conv(int num_messages, const struct pam_message **messages,
 
     struct pam_response *replies;
 
+    printf("pam_conv start\n");
+    fflush(stdout);
+
     replies = calloc(num_messages, sizeof(struct pam_response));
     if (!replies)
         return PAM_CONV_ERR;
@@ -97,12 +100,16 @@ static int PAM_conv(int num_messages, const struct pam_message **messages,
                 continue;
         }
 
+        printf("pam_conv: passwd entered\n");
+        fflush(stdout);
         reply = &replies[i];
         reply->resp = password ? strdup(password) : NULL;
         password_entered = 1;
     }
 
     *resp = replies;
+    printf("pam_conv end\n");
+    fflush(stdout);
     return PAM_SUCCESS;
 }
 
@@ -132,6 +139,7 @@ JNIEXPORT jint JNICALL Java_org_eel_kitchen_pam_PamHandle_authenticate(
     password = (*pEnv)->GetStringUTFChars(pEnv, pPassword, NULL);
 
     /* Get a handle to a PAM instance */
+    pr_debug("pam_start\n");
     retval = pam_start(service_name, username, &PAM_converse, &pamh);
 
     if (retval != PAM_SUCCESS) {
@@ -140,7 +148,9 @@ JNIEXPORT jint JNICALL Java_org_eel_kitchen_pam_PamHandle_authenticate(
         goto out_nohandle;
     }
 
+    pr_debug("pam_set_item\n");
     pam_set_item(pamh, PAM_AUTHTOK, password);
+    pr_debug("pam_authenticate\n");
     retval = pam_authenticate(pamh, 0);
 
     /* Is user permitted access? */
@@ -150,6 +160,7 @@ JNIEXPORT jint JNICALL Java_org_eel_kitchen_pam_PamHandle_authenticate(
         goto out_free;
     }
 
+    pr_debug("pam_acct_mgmt\n");
     retval = pam_acct_mgmt(pamh, 0);
 
     if (retval != PAM_SUCCESS)
@@ -168,5 +179,6 @@ out_nohandle:
     (*pEnv)->ReleaseStringUTFChars(pEnv, pUsername, username);
     (*pEnv)->ReleaseStringUTFChars(pEnv, pPassword, password);
 
+    pr_debug("pam: end\n");
     return retval;
 }
