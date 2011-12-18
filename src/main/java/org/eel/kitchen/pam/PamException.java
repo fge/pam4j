@@ -17,8 +17,10 @@
 
 package org.eel.kitchen.pam;
 
+import java.io.IOException;
+
 public class PamException
-    extends Exception
+    extends IOException
 {
     public PamException(final String message)
     {
