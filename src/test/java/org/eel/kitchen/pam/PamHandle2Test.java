@@ -20,10 +20,12 @@ package org.eel.kitchen.pam;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
+import java.util.UUID;
 
 import static org.testng.Assert.*;
 
 public final class PamHandle2Test
+    extends AbstractPamTest
 {
     @Test
     public void testNullOrEmptyService()
@@ -61,5 +63,36 @@ public final class PamHandle2Test
         final PamHandle2 handle = new PamHandle2("login", "fge");
         handle.close();
         assertTrue(true);
+    }
+
+    @Test
+    public void testSuccessfulAuth()
+        throws IOException
+    {
+        final PamHandle2 handle = new PamHandle2("login", user);
+        final PamReturnValue expected = handle.authenticate(passwd);
+        handle.close();
+        assertEquals(expected, PamReturnValue.PAM_SUCCESS);
+    }
+
+    @Test
+    public void testFailedAuth()
+        throws IOException
+    {
+        final PamHandle2 handle = new PamHandle2("login", user);
+        final PamReturnValue expected = handle.authenticate(badPasswd);
+        handle.close();
+        assertEquals(expected, PamReturnValue.PAM_AUTH_ERR);
+    }
+
+    @Test
+    public void testUnknownUser()
+        throws IOException
+    {
+        final String dummyUser = UUID.randomUUID().toString();
+        final PamHandle2 handle = new PamHandle2("pam4j", dummyUser);
+        final PamReturnValue expected = handle.authenticate("whatever");
+        handle.close();
+        assertEquals(expected, PamReturnValue.PAM_USER_UNKNOWN);
     }
 }
