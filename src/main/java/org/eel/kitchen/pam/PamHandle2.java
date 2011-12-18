@@ -51,6 +51,9 @@ public final class PamHandle2
     PamHandle2(final String service, final String user)
         throws PamException
     {
+        if (service == null || service.isEmpty())
+            throw new PamException("service is null or empty");
+
         if (user == null)
             throw new PamException("user name is null");
 

@@ -21,13 +21,42 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 public final class PamHandle2Test
 {
     @Test
+    public void testNullOrEmptyService()
+    {
+        try {
+            new PamHandle2(null, null);
+            fail("No exception thrown");
+        } catch (PamException e) {
+            assertEquals(e.getMessage(), "service is null or empty");
+        }
+
+        try {
+            new PamHandle2("", null);
+            fail("No exception thrown");
+        } catch (PamException e) {
+            assertEquals(e.getMessage(), "service is null or empty");
+        }
+    }
+
+    @Test
+    public void testNullUser()
+    {
+        try {
+            new PamHandle2("login", null);
+            fail("No exception thrown");
+        } catch (PamException e) {
+            assertEquals(e.getMessage(), "user name is null");
+        }
+    }
+
+    @Test
     public void testSetupOnly()
-        throws PamException, IOException
+        throws IOException
     {
         final PamHandle2 handle = new PamHandle2("login", "fge");
         handle.close();
