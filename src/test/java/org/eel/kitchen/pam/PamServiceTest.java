@@ -17,58 +17,32 @@
 
 package org.eel.kitchen.pam;
 
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
 
-public class OtherServiceTest
-    extends AbstractPamTest
+
+public class PamServiceTest
 {
-    private PamService service;
-
-    @BeforeClass
-    public void setUp2()
-        throws PamException
-    {
-        service = new PamService("other");
-    }
-
     @Test
-    public void testUserAuthenticated()
-        throws PamException
-    {
-        final PamHandle handle = service.getHandle(user, passwd);
-        assertEquals(handle.authenticate(), PamReturnValue.PAM_AUTH_ERR);
-    }
-
-    @Test
-    public void testUserWithNullCredentials()
+    public void testNullService()
     {
         try {
-            service.getHandle(user, null);
+            new PamService(null);
             fail("No exception thrown");
         } catch (PamException e) {
-            assertEquals(e.getMessage(), "credentials are null");
+            assertEquals(e.getMessage(), "service name is null");
         }
     }
 
     @Test
-    public void testUserWithNullUsername()
+    public void testEmptyServiceName()
     {
         try {
-            service.getHandle(null, null);
+            new PamService("");
             fail("No exception thrown");
         } catch (PamException e) {
-            assertEquals(e.getMessage(), "user name is null");
+            assertEquals(e.getMessage(), "service name is empty");
         }
-    }
-
-    @Test
-    public void testUserWithEmptyUsername()
-        throws PamException
-    {
-        final PamHandle handle = service.getHandle("", passwd);
-        assertEquals(handle.authenticate(), PamReturnValue.PAM_AUTH_ERR);
     }
 }
