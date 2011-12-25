@@ -90,18 +90,19 @@ public final class PamHandle
      */
     private native int createHandle(final String service, final String user);
 
+    private native int auth(final long handle, final String passwd);
+
     /**
      * Native method to destroy our PAM handle.
      *
      * @return the status of the operation
      */
-    private native int destroyHandle();
+    private native int destroyHandle(final long handle, final int status);
 
-    private native int auth(final String passwd);
 
     public synchronized PamReturnValue authenticate(final String passwd)
     {
-        _lastStatus = auth(passwd);
+        _lastStatus = auth(_handleRef, passwd);
         return PamReturnValue.fromId(_lastStatus);
     }
 
@@ -118,7 +119,8 @@ public final class PamHandle
     {
         if (closeOK)
             return;
-        final PamReturnValue retval = PamReturnValue.fromId(destroyHandle());
+        final PamReturnValue retval
+            = PamReturnValue.fromId(destroyHandle(_handleRef, _lastStatus));
         closeOK = true;
         if (retval != PamReturnValue.PAM_SUCCESS)
             throw new IOException("failed to release handle: " + retval);

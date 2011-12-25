@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "org_eel_kitchen_pam_PamHandle.h"
+#include "PamHandle.h"
 #include <jni.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -30,6 +30,8 @@
     printf(args); \
     fflush(stdout); \
 } while (0)
+
+static jfieldID handleRef = NULL;
 
 /*
  * Needed: pam's misc_conv() function will wait for a passwd in stdin... We
@@ -89,29 +91,57 @@ static int custom_conv(int num_messages, const struct pam_message **messages,
 }
 
 /*
- * Class:     org_eel_kitchen_pam_PamHandle
- * Method:    authenticate
- * Signature: (Ljava/lang/String;)I
+ * Create our PAM handle. This function is also in charge of initializing
+ * handleRef.
+ */
+JNIEXPORT jint JNICALL Java_org_eel_kitchen_pam_PamHandle_createHandle(
+    JNIEnv *env, jobject instance, jstring jservice, jstring juser)
+{
+    const char *service;
+    const char *user;
+    pam_handle_t *handle;
+    int retval;
+    struct pam_conv conv = {
+        .conv = custom_conv,
+        .appdata_ptr = NULL
+    };
+
+    if (!handleRef) {
+        jclass class = (*env)->GetObjectClass(env, instance);
+        handleRef = (*env)->GetFieldID(env, class, "_handleRef", "J");
+        if (!handleRef) {
+            pr_debug("Fuchs! missing fields in object instance!");
+            return PAM_SYSTEM_ERR;
+        }
+    }
+
+    service = (*env)->GetStringUTFChars(env, jservice, NULL);
+    user = (*env)->GetStringUTFChars(env, juser, NULL);
+
+    retval = pam_start(service, user, &conv, &handle);
+
+    if (retval == PAM_SUCCESS) {
+        (*env)->SetLongField(env, instance, handleRef, (long) handle);
+        pr_debug("create: handle %p\n", handle);
+    }
+
+    (*env)->ReleaseStringUTFChars(env, jservice, service);
+    (*env)->ReleaseStringUTFChars(env, juser, user);
+
+    return (jint) retval;
+}
+/*
+ * Authenticate ourselves.
  */
 JNIEXPORT jint JNICALL Java_org_eel_kitchen_pam_PamHandle_auth(JNIEnv *env,
-    jobject instance, jstring jpasswd)
+    jobject instance, jlong jhandle, jstring jpasswd)
 {
-    jclass class;
-    jfieldID handleRef;
     pam_handle_t *handle;
     const char *passwd;
     int retval;
     struct pam_conv conv;
 
-    class = (*env)->GetObjectClass(env, instance);
-    handleRef = (*env)->GetFieldID(env, class, "_handleRef", "J");
-
-    if (!handleRef) {
-        pr_debug("Fuchs! Missing refs in object instance!");
-        return PAM_SYSTEM_ERR;
-    }
-
-    handle = (pam_handle_t *) (*env)->GetLongField(env, instance, handleRef);
+    handle = (pam_handle_t *) jhandle;
     pr_debug("auth: handle %p\n", handle);
 
     passwd = (*env)->GetStringUTFChars(env, jpasswd, NULL);
@@ -132,81 +162,14 @@ out:
 }
 
 /*
- * Class:     org_eel_kitchen_pam_PamHandle
- * Method:    createHandle
- * Signature: (Ljava/lang/String;Ljava/lang/String;)I
- */
-JNIEXPORT jint JNICALL Java_org_eel_kitchen_pam_PamHandle_createHandle(
-    JNIEnv *env, jobject instance, jstring jservice, jstring juser)
-{
-    jclass class;
-    jfieldID handleRef;
-    const char *service;
-    const char *user;
-    pam_handle_t *handle;
-    int retval;
-    struct pam_conv conv = {
-        .conv = custom_conv,
-        .appdata_ptr = NULL
-    };
-
-    /*
-     * Get the class of the instance, and grab the PAM handle reference
-     */
-    class = (*env)->GetObjectClass(env, instance);
-    handleRef = (*env)->GetFieldID(env, class, "_handleRef", "J");
-
-    if (!handleRef) {
-        pr_debug("Fuchs! missing fields in object instance!");
-        return PAM_SYSTEM_ERR;
-    }
-
-    service = (*env)->GetStringUTFChars(env, jservice, NULL);
-    user = (*env)->GetStringUTFChars(env, juser, NULL);
-
-    retval = pam_start(service, user, &conv, &handle);
-
-    if (retval == PAM_SUCCESS) {
-        (*env)->SetLongField(env, instance, handleRef, (long) handle);
-        pr_debug("create: handle %p\n", handle);
-    }
-
-    (*env)->ReleaseStringUTFChars(env, jservice, service);
-    (*env)->ReleaseStringUTFChars(env, juser, user);
-
-    return (jint) retval;
-}
-
-/*
- * Class:     org_eel_kitchen_pam_PamHandle
- * Method:    destroyHandle
- * Signature: ()I
+ * Destroy our handle.
  */
 JNIEXPORT jint JNICALL Java_org_eel_kitchen_pam_PamHandle_destroyHandle(
-    JNIEnv *env, jobject instance)
+    JNIEnv *env, jobject instance, jlong jhandle, jint jstatus)
 {
-    jclass class;
-    jfieldID handleRef;
-    jfieldID statusRef;
-    pam_handle_t *handle;
-    int status;
+    pam_handle_t *handle = (pam_handle_t *) jhandle;
 
-    /*
-     * Get the class of the instance, and grab the PAM handle and status
-     */
-    class = (*env)->GetObjectClass(env, instance);
-    handleRef = (*env)->GetFieldID(env, class, "_handleRef", "J");
-    statusRef = (*env)->GetFieldID(env, class, "_lastStatus", "I");
-
-    if (!(handleRef && statusRef)) {
-        pr_debug("Fuchs! Missing fields in object instance!");
-        return PAM_SYSTEM_ERR;
-    }
-
-    handle = (pam_handle_t *) (*env)->GetLongField(env, instance, handleRef);
     pr_debug("destroy: handle %p\n", handle);
 
-    status = (*env)->GetIntField(env, instance, statusRef);
-
-    return (jint) pam_end(handle, status);
+    return (jint) pam_end(handle, (int) jstatus);
 }
