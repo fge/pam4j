@@ -60,7 +60,7 @@ public final class PamHandleTest
     public void testSetupOnly()
         throws IOException
     {
-        final PamHandle handle = new PamHandle("login", "fge");
+        final PamHandle handle = new PamHandle("login", user);
         handle.close();
         assertTrue(true);
     }
