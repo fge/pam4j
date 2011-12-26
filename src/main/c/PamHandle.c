@@ -70,7 +70,6 @@ static int custom_conv(int num_messages, const struct pam_message **messages,
         return PAM_CONV_ERR;
     }
 
-    memset(replies, 0, sizeof(*replies));
     reply = replies;
 
     debug(env, "entering pam_conv");
