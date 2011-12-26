@@ -12,6 +12,8 @@ JNIEXPORT void JNICALL Java_org_eel_kitchen_pam_PamHandle_initLog(JNIEnv *env,
 
 void debug(JNIEnv *env, const char *msg);
 
+void doDebug(JNIEnv *env, const char *fmt, ...);
+
 #ifdef __cplusplus
 }
 #endif

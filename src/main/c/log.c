@@ -1,4 +1,6 @@
 #include "log.h"
+#include <stdio.h>
+#include <stdarg.h>
 
 static struct {
     jobject loggerRef;
@@ -42,6 +44,26 @@ void debug(JNIEnv *env, const char *msg)
     jstring jmsg;
     jobject obj = jlogdata.loggerRef;
     jmethodID method = jlogdata.debug;
+
+    jmsg = (*env)->NewStringUTF(env, msg);
+
+    if (jmsg)
+        (*env)->CallVoidMethod(env, obj, method, jmsg);
+}
+
+#define MAX_MSG_SIZE 2048
+
+void doDebug(JNIEnv *env, const char *fmt, ...)
+{
+    char msg[MAX_MSG_SIZE];
+    jstring jmsg;
+    jobject obj = jlogdata.loggerRef;
+    jmethodID method = jlogdata.debug;
+
+    va_list args;
+    va_start(args, fmt);
+    vsnprintf(msg, MAX_MSG_SIZE, fmt, args);
+    va_end(args);
 
     jmsg = (*env)->NewStringUTF(env, msg);
 
