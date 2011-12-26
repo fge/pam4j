@@ -76,6 +76,7 @@
             <class name="org.eel.kitchen.pam.PamHandle"/>
             <classpath>
                 <pathelement location="${build.classes.dir}"/>
+                <path refid="project.class.path"/>
             </classpath>
         </javah>
     </target>
