@@ -29,9 +29,13 @@ public final class PamHandle
     private static final Logger logger
         = LoggerFactory.getLogger(PamHandle.class);
 
+    private static native void initLog(final Logger logger);
+
     static {
         System.loadLibrary("pam4j");
+        initLog(logger);
     }
+
     /**
      * This is the pam_handle_t * as a long. It is accessed natively ONLY,
      * so DO NOT EVER affect it!

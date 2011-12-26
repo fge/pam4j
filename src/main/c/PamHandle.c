@@ -14,7 +14,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "PamHandle.h"
 #include <jni.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -22,9 +21,8 @@
 
 #include <security/pam_appl.h>
 
-#if 0
-#include <security/pam_misc.h>
-#endif
+#include "PamHandle.h"
+#include "log.h"
 
 #define pr_debug(args...) do { \
     printf(args); \
@@ -105,6 +103,8 @@ JNIEXPORT jint JNICALL Java_org_eel_kitchen_pam_PamHandle_createHandle(
         .conv = custom_conv,
         .appdata_ptr = NULL
     };
+
+    debug(env, "Creating handle");
 
     if (!handleRef) {
         jclass class = (*env)->GetObjectClass(env, instance);
