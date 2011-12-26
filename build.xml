@@ -182,4 +182,20 @@
             <doctitle><![CDATA[<h1>${name}</h1>]]></doctitle>
         </javadoc>
     </target>
+
+    <target name="cmake" depends="compile-src">
+        <exec executable="cmake" dir="${src.c.dir}" failonerror="true">
+            <arg value="."/>
+        </exec>
+    </target>
+
+    <target name="make" depends="cmake">
+        <exec executable="make" dir="${src.c.dir}" failonerror="true"/>
+    </target>
+
+    <target name="install-shared" depends="make">
+        <mkdir dir="${generated.src.c.dir}"/>
+        <copy file="${src.c.dir}/libpam4j.so" todir="${generated.src.c.dir}"
+            overwrite="true" failonerror="true"/>
+    </target>
 </project>
