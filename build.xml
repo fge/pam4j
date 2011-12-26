@@ -1,4 +1,4 @@
-<project name="pam4j" default="build" xmlns:artifact="urn:maven-artifact-ant">
+<project name="pam4j" default="compile" xmlns:artifact="urn:maven-artifact-ant">
 
     <!-- Load Maven antlib and make pom.xml available as maven.project -->
     <typedef resource="org/apache/maven/artifact/ant/antlib.xml"
@@ -8,12 +8,6 @@
         </classpath>
     </typedef>
 
-    <property name="os" value="${os.name}_${os.arch}"/>
-
-    <!-- Load local environment overrides -->
-    <property environment="env"/>
-    <!-- OS and Architecture specific properties -->
-    <property file="ant/${os}.properties"/>
     <!-- Default properties -->
     <property file="ant/build.properties"/>
 
@@ -42,24 +36,9 @@
         <delete dir="${build.dir}"/>
     </target>
 
-    <!-- Top level target -->
-    <target name="build" depends="clean, test, dist-tgz"
-        description="Builds a clean distribution"/>
-
     <!-- compiles -->
     <target name="compile" depends="compile-src, compile-tests"
         description="Performs a compile"/>
-
-    <target name="shared-object" depends="compile, generate-c-headers"
-        description="Creates the shared library">
-
-        <copy todir="${generated.src.c.dir}">
-            <fileset dir="${src.c.dir}" includes="*"/>
-        </copy>
-        <exec dir="${generated.src.c.dir}" executable="make" failonerror="true">
-            <arg value="${make.target}"/>
-        </exec>
-    </target>
 
     <!-- Compiles the source classes -->
     <target name="compile-src" description="compile src files">
@@ -70,7 +49,7 @@
         </javac>
     </target>
 
-    <target name="generate-c-headers">
+    <target name="generate-c-headers" depends="compile-src">
         <mkdir dir="${generated.src.c.dir}"/>
         <javah destdir="${generated.src.c.dir}" force="true">
             <class name="org.eel.kitchen.pam.PamHandle"/>
@@ -90,97 +69,6 @@
                 <path refid="project.class.path"/>
             </classpath>
         </javac>
-    </target>
-
-
-    <target name="test" depends="compile-tests, install-shared-object">
-        <mkdir dir="${test.results.dir}"/>
-
-        <junit printSummary="true" fork="true" dir="${basedir}">
-            <classpath>
-                <path location="${test.classes.dir}"/>
-                <path location="${build.classes.dir}"/>
-                <path refid="project.class.path"/>
-            </classpath>
-            <formatter type="xml"/>
-            <formatter type="plain" usefile="false"/>
-            <batchtest todir="${test.results.dir}">
-                <fileset dir="${test.classes.dir}">
-                    <include name="**/*Test.class"/>
-                    <exclude name="**/Abstract*"/>
-                </fileset>
-            </batchtest>
-        </junit>
-    </target>
-
-    <!-- assumes we have permission -->
-    <target name="install-shared-object" depends="shared-object"
-        description="Installs the shared object. Does not install config">
-        <echo message="Installing shared object named: ${shared.library.name} to ${native.java.library.path}"/>
-        <copy todir="${native.java.library.path}">
-            <fileset dir="${generated.src.c.dir}"
-                includes="${shared.library.name}"/>
-        </copy>
-    </target>
-
-    <!-- Builds a jar file containing the application  -->
-    <target name="dist-jar" depends="compile"
-        description="Builds the application jar">
-        <mkdir dir="${dist.dir}"/>
-        <jar destfile="${build.dir}/${name}-${version}.jar">
-            <fileset dir="${build.classes.dir}"/>
-            <fileset dir="${basedir}" includes="LICENSE.txt"/>
-        </jar>
-    </target>
-
-    <!-- Builds a src release tar-ball -->
-    <target name="dist-src" depends="dist-jar, zip-javadoc"
-        description="Builds a source distribution">
-        <zip destfile="${build.dir}/${name}-${version}-src.zip">
-            <zipfileset dir="${src.dir}" prefix="${name}-${version}">
-                <exclude name="build/**"/>
-                <exclude name="jpam.iws"/>
-                <exclude name="src/site/**"/>
-            </zipfileset>
-        </zip>
-    </target>
-
-    <!-- Builds a release tar-ball for the os this target is executed on -->
-    <target name="dist-tgz" depends="test, dist-jar, zip-javadoc, dist-src"
-        description="Builds a distribution for this os">
-        <tar destfile="${dist.dir}/${name}-${version}.tgz"
-            compression="gzip">
-            <tarfileset dir="${build.dir}" prefix="${name}-${version}">
-                <include name="${name}-${version}.jar"/>
-                <include name="${name}-${version}-src.zip"/>
-                <include name="${name}-${version}-${javadoc.zip}"/>
-            </tarfileset>
-            <tarfileset dir="${generated.src.c.dir}"
-                prefix="${name}-${version}">
-                <include name="${shared.library.name}"/>
-            </tarfileset>
-            <tarfileset dir="${src.config.dir}/${os}"
-                prefix="${name}-${version}"/>
-        </tar>
-    </target>
-
-    <!-- Create zip file for javadocs -->
-    <target name="zip-javadoc" depends="javadoc"
-        description="Creates a zip file for javadocs">
-        <zip destfile="${build.dir}/${name}-${version}-${javadoc.zip}">
-            <zipfileset dir="${build.javadoc.dir}" prefix="docs/"/>
-        </zip>
-    </target>
-
-    <!-- Produce the javadocs -->
-    <target name="javadoc" description="Creates the javadocs">
-
-        <mkdir dir="${build.javadoc.dir}"/>
-        <javadoc sourcepath="${src.java.dir}" destdir="${build.javadoc.dir}"
-            packagenames="net.sf.*" use="true">
-            <classpath refid="project.class.path"/>
-            <doctitle><![CDATA[<h1>${name}</h1>]]></doctitle>
-        </javadoc>
     </target>
 
     <target name="cmake" depends="compile-src">
