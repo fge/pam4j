@@ -104,15 +104,9 @@ JNIEXPORT jint JNICALL Java_org_eel_kitchen_pam_PamHandle_createHandle(
         .appdata_ptr = NULL
     };
 
-    debug(env, "Creating handle");
-
     if (!handleRef) {
         jclass class = (*env)->GetObjectClass(env, instance);
         handleRef = (*env)->GetFieldID(env, class, "_handleRef", "J");
-        if (!handleRef) {
-            pr_debug("Fuchs! missing fields in object instance!");
-            return PAM_SYSTEM_ERR;
-        }
     }
 
     service = (*env)->GetStringUTFChars(env, jservice, NULL);
@@ -120,15 +114,13 @@ JNIEXPORT jint JNICALL Java_org_eel_kitchen_pam_PamHandle_createHandle(
 
     retval = pam_start(service, user, &conv, &handle);
 
-    if (retval == PAM_SUCCESS) {
+    if (retval == PAM_SUCCESS)
         (*env)->SetLongField(env, instance, handleRef, (long) handle);
-        pr_debug("create: handle %p\n", handle);
-        debug(env, "create: handle %p", handle);
-    }
 
     (*env)->ReleaseStringUTFChars(env, jservice, service);
     (*env)->ReleaseStringUTFChars(env, juser, user);
 
+    debug(env, "pam_start() result: %d", retval);
     return (jint) retval;
 }
 /*
@@ -143,7 +135,6 @@ JNIEXPORT jint JNICALL Java_org_eel_kitchen_pam_PamHandle_auth(JNIEnv *env,
     struct pam_conv conv;
 
     handle = (pam_handle_t *) jhandle;
-    pr_debug("auth: handle %p\n", handle);
 
     passwd = (*env)->GetStringUTFChars(env, jpasswd, NULL);
 
@@ -152,14 +143,15 @@ JNIEXPORT jint JNICALL Java_org_eel_kitchen_pam_PamHandle_auth(JNIEnv *env,
 
     retval = pam_set_item(handle, PAM_CONV, &conv);
     if (retval != PAM_SUCCESS) {
-        pr_debug("Ick! Cannot set PAM_CONV!\n");
+        error(env, "Ick! Cannot set PAM_CONV!");
         goto out;
     }
 
     retval = pam_authenticate(handle, 0);
+    debug(env, "pam_authenticate() result: %d", retval);
 out:
     (*env)->ReleaseStringUTFChars(env, jpasswd, passwd);
-    return retval;
+    return (jint) retval;
 }
 
 /*
@@ -170,7 +162,7 @@ JNIEXPORT jint JNICALL Java_org_eel_kitchen_pam_PamHandle_destroyHandle(
 {
     pam_handle_t *handle = (pam_handle_t *) jhandle;
 
-    pr_debug("destroy: handle %p\n", handle);
+    debug(env, "destroy handle @%p", handle);
 
     return (jint) pam_end(handle, (int) jstatus);
 }

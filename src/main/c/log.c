@@ -65,3 +65,30 @@ void debug(JNIEnv *env, const char *fmt, ...)
     va_end(args);
 }
 
+void info(JNIEnv *env, const char *fmt, ...)
+{
+    va_list args;
+
+    va_start(args, fmt);
+    doLog(env, jlogdata.info, fmt, args);
+    va_end(args);
+}
+
+void warn(JNIEnv *env, const char *fmt, ...)
+{
+    va_list args;
+
+    va_start(args, fmt);
+    doLog(env, jlogdata.warn, fmt, args);
+    va_end(args);
+}
+
+void error(JNIEnv *env, const char *fmt, ...)
+{
+    va_list args;
+
+    va_start(args, fmt);
+    doLog(env, jlogdata.error, fmt, args);
+    va_end(args);
+}
+
