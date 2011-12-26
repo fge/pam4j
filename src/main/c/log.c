@@ -11,6 +11,23 @@ static struct {
 } jlogdata;
 
 #define LOG_METHOD_SIGNATURE "(Ljava/lang/String;)V"
+#define MAX_MSG_SIZE 2048
+
+static void doLog(JNIEnv *env, jmethodID method, const char *fmt, va_list args);
+
+static void doLog(JNIEnv *env, jmethodID method, const char *fmt, va_list args)
+{
+    char msg[MAX_MSG_SIZE];
+    jstring jmsg;
+    jobject obj = jlogdata.loggerRef;
+
+    vsnprintf(msg, MAX_MSG_SIZE, fmt, args);
+
+    jmsg = (*env)->NewStringUTF(env, msg);
+
+    if (jmsg)
+        (*env)->CallVoidMethod(env, obj, method, jmsg);
+}
 
 JNIEXPORT void JNICALL Java_org_eel_kitchen_pam_PamHandle_initLog(JNIEnv *env,
     jclass cls, jobject jlogger)
@@ -39,34 +56,12 @@ JNIEXPORT void JNICALL Java_org_eel_kitchen_pam_PamHandle_initLog(JNIEnv *env,
         LOG_METHOD_SIGNATURE);
 }
 
-void debug(JNIEnv *env, const char *msg)
+void debug(JNIEnv *env, const char *fmt, ...)
 {
-    jstring jmsg;
-    jobject obj = jlogdata.loggerRef;
-    jmethodID method = jlogdata.debug;
-
-    jmsg = (*env)->NewStringUTF(env, msg);
-
-    if (jmsg)
-        (*env)->CallVoidMethod(env, obj, method, jmsg);
-}
-
-#define MAX_MSG_SIZE 2048
-
-void doDebug(JNIEnv *env, const char *fmt, ...)
-{
-    char msg[MAX_MSG_SIZE];
-    jstring jmsg;
-    jobject obj = jlogdata.loggerRef;
-    jmethodID method = jlogdata.debug;
-
     va_list args;
+
     va_start(args, fmt);
-    vsnprintf(msg, MAX_MSG_SIZE, fmt, args);
+    doLog(env, jlogdata.debug, fmt, args);
     va_end(args);
-
-    jmsg = (*env)->NewStringUTF(env, msg);
-
-    if (jmsg)
-        (*env)->CallVoidMethod(env, obj, method, jmsg);
 }
+

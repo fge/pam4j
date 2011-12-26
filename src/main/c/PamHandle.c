@@ -123,7 +123,7 @@ JNIEXPORT jint JNICALL Java_org_eel_kitchen_pam_PamHandle_createHandle(
     if (retval == PAM_SUCCESS) {
         (*env)->SetLongField(env, instance, handleRef, (long) handle);
         pr_debug("create: handle %p\n", handle);
-        doDebug(env, "create: handle %p", handle);
+        debug(env, "create: handle %p", handle);
     }
 
     (*env)->ReleaseStringUTFChars(env, jservice, service);

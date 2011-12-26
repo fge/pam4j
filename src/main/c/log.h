@@ -10,9 +10,7 @@ extern "C" {
 JNIEXPORT void JNICALL Java_org_eel_kitchen_pam_PamHandle_initLog(JNIEnv *env,
     jclass cls, jobject jlogger);
 
-void debug(JNIEnv *env, const char *msg);
-
-void doDebug(JNIEnv *env, const char *fmt, ...);
+void debug(JNIEnv *env, const char *fmt, ...);
 
 #ifdef __cplusplus
 }
