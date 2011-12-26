@@ -24,12 +24,12 @@
 #include "PamHandle.h"
 #include "log.h"
 
-#define pr_debug(args...) do { \
-    printf(args); \
-    fflush(stdout); \
-} while (0)
-
 static jfieldID handleRef = NULL;
+
+struct conv_data {
+    JNIEnv *env;
+    const char *passwd;
+};
 
 /*
  * Needed: pam's misc_conv() function will wait for a passwd in stdin... We
@@ -49,6 +49,8 @@ static int custom_conv(int num_messages, const struct pam_message **messages,
 {
     int i;
     int password_entered = 0;
+    struct conv_data *convdata;
+    JNIEnv *env;
     char *passwd;
     int msg_style;
     const struct pam_message *msg;
@@ -58,7 +60,11 @@ static int custom_conv(int num_messages, const struct pam_message **messages,
     if (!replies)
         return PAM_CONV_ERR;
 
-    passwd = strdup((const char *)appdata_ptr);
+    convdata = (struct conv_data *)appdata_ptr;
+
+    env = convdata->env;
+    passwd = strdup(convdata->passwd);
+
     if (!passwd) {
         free(replies);
         return PAM_CONV_ERR;
@@ -67,7 +73,7 @@ static int custom_conv(int num_messages, const struct pam_message **messages,
     memset(replies, 0, sizeof(*replies));
     reply = replies;
 
-    pr_debug("Entering pam_conv\n");
+    debug(env, "entering pam_conv");
     for (i = 0; i < num_messages; reply++, i++) {
         msg = messages[i];
         msg_style = msg->msg_style;
@@ -75,14 +81,14 @@ static int custom_conv(int num_messages, const struct pam_message **messages,
         switch (msg_style) {
             case PAM_PROMPT_ECHO_OFF: case PAM_PROMPT_ECHO_ON:
                 if (password_entered)
-                    pr_debug("Eh? Entering password more than once?\n");
+                    debug(env, "eh? Entering password more than once?");
                 replies->resp = passwd;
                 password_entered = 1;
         }
     }
 
-    pr_debug("Password entered: %d\n", password_entered);
-    pr_debug("Exiting pam_conv\n");
+    debug(env, "password entered: %d", password_entered);
+    debug(env, "exiting pam_conv");
 
     *resp = replies;
     return PAM_SUCCESS;
@@ -123,6 +129,7 @@ JNIEXPORT jint JNICALL Java_org_eel_kitchen_pam_PamHandle_createHandle(
     debug(env, "pam_start() result: %d", retval);
     return (jint) retval;
 }
+
 /*
  * Authenticate ourselves.
  */
@@ -132,14 +139,17 @@ JNIEXPORT jint JNICALL Java_org_eel_kitchen_pam_PamHandle_auth(JNIEnv *env,
     pam_handle_t *handle;
     const char *passwd;
     int retval;
+    struct conv_data convdata;
     struct pam_conv conv;
 
     handle = (pam_handle_t *) jhandle;
 
+    convdata.env = env;
     passwd = (*env)->GetStringUTFChars(env, jpasswd, NULL);
+    convdata.passwd = passwd;
 
     conv.conv = custom_conv;
-    conv.appdata_ptr = (void *) passwd;
+    conv.appdata_ptr = (void *) &convdata;
 
     retval = pam_set_item(handle, PAM_CONV, &conv);
     if (retval != PAM_SUCCESS) {
